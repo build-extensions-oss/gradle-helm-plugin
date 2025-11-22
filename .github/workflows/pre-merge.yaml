@@ -3,7 +3,7 @@ name: Pre Merge Checks
 on:
   push:
     branches:
-      - "**"      # run on push to ANY branch (assuming only maintainer controls that)
+      - "master"      # run on master branch only - no need to start the job automatically otherwise
   pull_request:
     branches:
       - "**"      # run on PRs targeting ANY branch (assuming we check the Gradle wrapper first)
