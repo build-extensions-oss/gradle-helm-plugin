@@ -11,11 +11,7 @@ allprojects {
     repositories {
         mavenCentral()
     }
-    dependencyLocking {
-        lockAllConfigurations()
-    }
 }
-
 
 subprojects {
     plugins.withId("io.gitlab.arturbosch.detekt") {

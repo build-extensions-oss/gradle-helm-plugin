@@ -6,6 +6,7 @@ plugins {
     id("maven-publish")
     alias(libs.plugins.detekt)
     alias(libs.plugins.binaryCompatibilityValidator)
+    id("kotlin-convention") // keep shared logic here
 }
 
 val functionalTest by sourceSets.creating
