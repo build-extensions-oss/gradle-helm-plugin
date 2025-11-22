@@ -3,8 +3,10 @@ name: Pre Merge Checks
 on:
   push:
     branches:
-      - master
+      - "**"      # run on push to ANY branch (assuming only maintainer controls that)
   pull_request:
+    branches:
+      - "**"      # run on PRs targeting ANY branch (assuming we check the Gradle wrapper first)
   workflow_dispatch:
 
 permissions:
