@@ -22,7 +22,7 @@ dependencies {
 gradlePlugin {
     plugins {
         create("helmReleasesPlugin") {
-            id = "com.github.gradle-cloud.helm-releases"
+            id = project.extra["plugin.prefix"].toString() + ".helm-releases"
             displayName = "Helm Releases"
             implementationClass = "com.citi.gradle.plugins.helm.release.HelmReleasesPlugin"
             description = "Extension for Gradle Helm Plugin. Supports charts installation/uninstallation."

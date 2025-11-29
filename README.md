@@ -34,17 +34,17 @@
 
 ## Quick Start
 
-Add `com.github.gradle-cloud.helm` to your Gradle project:
+Add `io.github.gradle-cloud.helm` to your Gradle project:
 
 ```gradle
 plugins {
-    id 'com.github.gradle-cloud.helm' version '2.2.0'
+    id 'io.github.gradle-cloud.helm' version '2.2.0'
 }
 ```
 
 ```gradle
 plugins {
-    id("com.github.gradle-cloud.helm") version "2.2.0"
+    id("io.github.gradle-cloud.helm") version "2.2.0"
 }
 ```
 

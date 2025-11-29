@@ -33,14 +33,14 @@ dependencies {
 gradlePlugin {
     plugins {
         create("helmCommandsPlugin") {
-            id = "com.github.gradle-cloud.helm-commands"
+            id = project.extra["plugin.prefix"].toString() + ".helm-commands"
             displayName = "Helm Commands"
             implementationClass = "com.citi.gradle.plugins.helm.command.HelmCommandsPlugin"
             description = "Wrapper for common helm commands"
             tags.addAll("helm", "helm commands", "kubernetes", "k8s", "cloud")
         }
         create("helmPlugin") {
-            id = "com.github.gradle-cloud.helm"
+            id = project.extra["plugin.prefix"].toString() + ".helm"
             displayName = "Helm"
             implementationClass = "com.citi.gradle.plugins.helm.HelmPlugin"
             description = "Gradle plugin to help preparing Helm Charts. Supports charts packaging, linting, dependencies update, etc."
