@@ -56,3 +56,7 @@ gradlePlugin {
 apiValidation {
     ignoredPackages.add("com.citi.gradle.plugins.helm.dsl.internal")
 }
+
+tasks.withType<Test> {
+    testLogging { exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
+}
