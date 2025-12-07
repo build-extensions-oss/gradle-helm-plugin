@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.release.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.release.rules
 
-import com.citi.gradle.plugins.helm.HELM_DEFAULT_RELEASE_TARGET
-import com.citi.gradle.plugins.helm.release.dsl.HelmReleaseTarget
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_DEFAULT_RELEASE_TARGET
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseTarget
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Rule
 

@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.release.spek
+package io.github.build.extensions.oss.gradle.plugins.helm.release.spek
 
 import assertk.assertThat
 import assertk.assertions.prop

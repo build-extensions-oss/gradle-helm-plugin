@@ -1,12 +1,12 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
 import org.gradle.api.file.Directory
 import org.gradle.api.provider.Provider
 import org.slf4j.LoggerFactory
-import com.citi.gradle.plugins.helm.command.ConfigurableGlobalHelmOptions
-import com.citi.gradle.plugins.helm.command.GlobalHelmOptions
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.HelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableGlobalHelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.GlobalHelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
 import org.unbrokendome.gradle.pluginutils.ifPresent
 
 

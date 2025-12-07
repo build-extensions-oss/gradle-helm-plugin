@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl
 
 import org.gradle.api.file.CopySpec
 import org.gradle.api.file.Directory
@@ -8,14 +8,14 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskDependency
-import com.citi.gradle.plugins.helm.HELM_MAIN_CHART_NAME
-import com.citi.gradle.plugins.helm.command.tasks.HelmPackage
-import com.citi.gradle.plugins.helm.model.ChartDescriptor
-import com.citi.gradle.plugins.helm.model.ChartDescriptorYaml
-import com.citi.gradle.plugins.helm.model.ChartModelDependencies
-import com.citi.gradle.plugins.helm.model.ChartRequirementsYaml
-import com.citi.gradle.plugins.helm.rules.DefaultRenderingRule
-import com.citi.gradle.plugins.helm.rules.packageTaskName
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_MAIN_CHART_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmPackage
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptor
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptorYaml
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartModelDependencies
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartRequirementsYaml
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.DefaultRenderingRule
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.packageTaskName
 import org.unbrokendome.gradle.pluginutils.property
 import org.unbrokendome.gradle.pluginutils.versionProvider
 import javax.inject.Inject

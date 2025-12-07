@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing
 
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
@@ -7,20 +7,20 @@ import org.gradle.api.internal.HasConvention
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.TaskDependency
 import org.gradle.internal.reflect.Instantiator
-import com.citi.gradle.plugins.helm.HELM_GROUP
-import com.citi.gradle.plugins.helm.HelmPlugin
-import com.citi.gradle.plugins.helm.command.HelmCommandsPlugin
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.dsl.internal.charts
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.publishing.dsl.HelmChartPublishConvention
-import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingExtension
-import com.citi.gradle.plugins.helm.publishing.dsl.createHelmChartPublishConvention
-import com.citi.gradle.plugins.helm.publishing.dsl.createHelmPublishingExtension
-import com.citi.gradle.plugins.helm.publishing.dsl.internal.repositories
-import com.citi.gradle.plugins.helm.publishing.rules.HelmPublishChartTaskRule
-import com.citi.gradle.plugins.helm.publishing.rules.HelmPublishChartToRepositoryTaskRule
-import com.citi.gradle.plugins.helm.publishing.rules.publishTaskName
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
+import io.github.build.extensions.oss.gradle.plugins.helm.HelmPlugin
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPlugin
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.charts
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmChartPublishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingExtension
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.createHelmChartPublishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.createHelmPublishingExtension
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.internal.repositories
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.rules.HelmPublishChartTaskRule
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.rules.HelmPublishChartToRepositoryTaskRule
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.rules.publishTaskName
 import javax.inject.Inject
 
 

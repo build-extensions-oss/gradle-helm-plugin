@@ -108,7 +108,7 @@ are also supported:
 [source,groovy,role="primary"]
 .Groovy
 ----
-import com.citi.gradle.plugins.helm.dsl.credentials.CertificateCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
 
 helm {
     repositories {
@@ -127,7 +127,7 @@ helm {
 [source,kotlin,role="secondary"]
 .Kotlin
 ----
-import com.citi.gradle.plugins.helm.dsl.credentials.CertificateCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
 
 helm {
     repositories {

@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.dsl.dependencies
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl.dependencies
 
 import org.gradle.api.Project
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.rules.chartPackageTaskName
-import com.citi.gradle.plugins.helm.rules.chartPackagedArtifactConfigurationName
-import com.citi.gradle.plugins.helm.rules.dependenciesConfigurationName
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.chartPackageTaskName
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.chartPackagedArtifactConfigurationName
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.dependenciesConfigurationName
 import javax.inject.Inject
 
 

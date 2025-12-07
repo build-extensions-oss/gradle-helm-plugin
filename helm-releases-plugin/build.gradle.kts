@@ -24,7 +24,7 @@ gradlePlugin {
         create("helmReleasesPlugin") {
             id = project.extra["plugin.prefix"].toString() + ".helm-releases"
             displayName = "Helm Releases"
-            implementationClass = "com.citi.gradle.plugins.helm.release.HelmReleasesPlugin"
+            implementationClass = "io.github.build.extensions.oss.gradle.plugins.helm.release.HelmReleasesPlugin"
             description = "Extension for Gradle Helm Plugin. Supports charts installation/uninstallation."
             tags.addAll("helm", "release", "install", "uninstall", "cloud", "kubernetes")
         }

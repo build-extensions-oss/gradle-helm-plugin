@@ -1,6 +1,6 @@
 @file:JvmName("HelmPluginConstants")
 
-package com.citi.gradle.plugins.helm
+package io.github.build.extensions.oss.gradle.plugins.helm
 
 
 /**

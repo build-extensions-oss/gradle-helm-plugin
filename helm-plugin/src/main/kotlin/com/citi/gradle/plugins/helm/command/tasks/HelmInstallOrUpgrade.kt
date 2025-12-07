@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
-import com.citi.gradle.plugins.helm.command.helmCommandSupport
-import com.citi.gradle.plugins.helm.model.ReleaseStatus
+import io.github.build.extensions.oss.gradle.plugins.helm.command.helmCommandSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ReleaseStatus
 import org.unbrokendome.gradle.pluginutils.property
 
 

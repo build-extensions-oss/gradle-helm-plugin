@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.model
+package io.github.build.extensions.oss.gradle.plugins.helm.model
 
 
 internal enum class ReleaseStatus(private val value: String) {

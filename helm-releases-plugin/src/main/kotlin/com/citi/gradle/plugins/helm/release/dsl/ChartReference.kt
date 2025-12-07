@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.release.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.release.dsl
 
 import org.gradle.api.Buildable
 import org.gradle.api.Project
@@ -6,7 +6,7 @@ import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.TaskDependency
-import com.citi.gradle.plugins.helm.rules.ChartDirArtifactRule
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.ChartDirArtifactRule
 
 
 interface ChartReference : Buildable {

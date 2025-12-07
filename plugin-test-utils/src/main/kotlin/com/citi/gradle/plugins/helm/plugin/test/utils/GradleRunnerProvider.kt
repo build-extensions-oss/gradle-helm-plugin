@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.plugin.test.utils
+package io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils
 
 import java.net.URI
 import org.gradle.testkit.runner.GradleRunner
 
 object GradleRunnerProvider {
-    private const val distributionUrlPrefixProperty = "com.citi.gradle.helm.plugin.distribution.url.prefix"
+    private const val distributionUrlPrefixProperty = "io.github.build.extensions.oss.gradle.helm.plugin.distribution.url.prefix"
     private const val defaultDistributionUrlPrefix = "https://services.gradle.org/distributions"
 
     fun createRunner(parameters: GradleRunnerParameters): GradleRunner {

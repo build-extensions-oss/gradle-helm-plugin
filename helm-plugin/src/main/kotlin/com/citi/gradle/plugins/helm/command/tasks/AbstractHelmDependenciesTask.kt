@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
@@ -7,10 +7,10 @@ import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
-import com.citi.gradle.plugins.helm.model.ChartDescriptor
-import com.citi.gradle.plugins.helm.model.ChartDescriptorYaml
-import com.citi.gradle.plugins.helm.model.ChartModelDependencies
-import com.citi.gradle.plugins.helm.model.ChartRequirementsYaml
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptor
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptorYaml
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartModelDependencies
+import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartRequirementsYaml
 
 
 @Suppress("LeakingThis")

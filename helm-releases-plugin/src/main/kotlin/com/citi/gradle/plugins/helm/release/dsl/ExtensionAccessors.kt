@@ -1,11 +1,11 @@
-package com.citi.gradle.plugins.helm.release.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.release.dsl
 
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.provider.Property
-import com.citi.gradle.plugins.helm.HELM_ACTIVE_RELEASE_TARGET_EXTENSION_NAME
-import com.citi.gradle.plugins.helm.HELM_RELEASES_EXTENSION_NAME
-import com.citi.gradle.plugins.helm.HELM_RELEASE_TARGETS_EXTENSION_NAME
-import com.citi.gradle.plugins.helm.dsl.HelmExtension
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_ACTIVE_RELEASE_TARGET_EXTENSION_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_RELEASES_EXTENSION_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_RELEASE_TARGETS_EXTENSION_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
 import org.unbrokendome.gradle.pluginutils.requiredExtension
 
 

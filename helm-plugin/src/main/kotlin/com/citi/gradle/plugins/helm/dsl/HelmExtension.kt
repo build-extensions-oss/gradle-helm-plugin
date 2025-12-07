@@ -1,12 +1,12 @@
-package com.citi.gradle.plugins.helm.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl
 
-import com.citi.gradle.plugins.helm.command.ConfigurableGlobalHelmOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmServerOptions
-import com.citi.gradle.plugins.helm.command.HelmExecProvider
-import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmServerOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableGlobalHelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmServerOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProvider
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmServerOptionsHolder
 import javax.inject.Inject
 import org.gradle.api.Action
 import org.gradle.api.Project

@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.util
+package io.github.build.extensions.oss.gradle.plugins.helm.util
 
 /**
  * Formats the given amount of bytes according to its order of magnitude.

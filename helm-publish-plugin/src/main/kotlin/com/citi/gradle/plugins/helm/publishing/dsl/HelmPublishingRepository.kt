@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.publishing.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl
 
 import org.gradle.api.Named
 import org.gradle.api.provider.Property
-import com.citi.gradle.plugins.helm.dsl.credentials.CredentialsContainer
-import com.citi.gradle.plugins.helm.publishing.publishers.PublisherParams
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CredentialsContainer
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.PublisherParams
 import java.net.URI
 
 

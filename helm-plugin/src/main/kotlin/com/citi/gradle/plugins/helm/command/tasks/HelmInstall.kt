@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Internal

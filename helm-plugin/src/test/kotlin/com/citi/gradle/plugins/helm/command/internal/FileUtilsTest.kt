@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
 import io.kotest.assertions.throwables.shouldThrowAny
 import io.kotest.matchers.collections.beEmpty

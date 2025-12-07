@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.gradle.api.Project
 import org.gradle.api.Task
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.Invocation
-import com.citi.gradle.plugins.helm.testutil.exec.eachInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.Invocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.eachInvocation
 
 
 class ValuesOptionsTests(vararg commands: String) : AbstractOptionsTests({

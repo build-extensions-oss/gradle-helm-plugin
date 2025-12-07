@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
-import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
 import java.time.Instant
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection

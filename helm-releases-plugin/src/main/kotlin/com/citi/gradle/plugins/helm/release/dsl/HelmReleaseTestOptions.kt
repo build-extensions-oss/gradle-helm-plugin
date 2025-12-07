@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.release.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.release.dsl
 
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
-import com.citi.gradle.plugins.helm.command.HelmServerOperationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmServerOperationOptions
 import org.unbrokendome.gradle.pluginutils.property
 import org.unbrokendome.gradle.pluginutils.withDefault
 import java.time.Duration

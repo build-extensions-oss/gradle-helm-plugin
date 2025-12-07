@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.tasks
 
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
@@ -11,10 +11,10 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.workers.WorkAction
 import org.gradle.workers.WorkParameters
 import org.gradle.workers.WorkerExecutor
-import com.citi.gradle.plugins.helm.HELM_GROUP
-import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
-import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryInternal
-import com.citi.gradle.plugins.helm.publishing.publishers.PublisherParams
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryInternal
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.PublisherParams
 import org.unbrokendome.gradle.pluginutils.property
 
 

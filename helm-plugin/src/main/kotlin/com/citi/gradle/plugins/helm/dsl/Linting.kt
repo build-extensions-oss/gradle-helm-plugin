@@ -1,12 +1,12 @@
-package com.citi.gradle.plugins.helm.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl
 
 import org.gradle.api.Action
 import org.gradle.api.Named
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.internal.mergeValues
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.mergeValues
 import javax.inject.Inject
 
 

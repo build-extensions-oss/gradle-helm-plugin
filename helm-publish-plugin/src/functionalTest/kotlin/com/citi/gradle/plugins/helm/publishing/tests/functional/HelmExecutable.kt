@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.tests.functional
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.tests.functional
 
 import java.io.File
 

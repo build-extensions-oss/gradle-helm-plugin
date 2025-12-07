@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.citi.gradle.plugins.helm.command.rules.DownloadClientPackageTaskRule
-import com.citi.gradle.plugins.helm.command.rules.ExtractClientTaskRule
+import io.github.build.extensions.oss.gradle.plugins.helm.command.rules.DownloadClientPackageTaskRule
+import io.github.build.extensions.oss.gradle.plugins.helm.command.rules.ExtractClientTaskRule
 import org.unbrokendome.gradle.pluginutils.dirProviderFromProjectProperty
 import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
 import java.net.URI

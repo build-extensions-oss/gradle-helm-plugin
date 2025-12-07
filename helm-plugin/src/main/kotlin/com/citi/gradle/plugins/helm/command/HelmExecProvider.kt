@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -8,7 +8,7 @@ import org.gradle.api.Project
 import org.gradle.process.ExecSpec
 import org.gradle.workers.WorkerExecutor
 import org.slf4j.LoggerFactory
-import com.citi.gradle.plugins.helm.command.internal.HelmOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmOptionsApplier
 
 
 /**

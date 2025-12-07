@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.HelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
 
 
 /**

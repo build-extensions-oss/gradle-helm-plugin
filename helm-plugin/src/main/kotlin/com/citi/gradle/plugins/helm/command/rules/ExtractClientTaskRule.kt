@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.command.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.command.rules
 
-import com.citi.gradle.plugins.helm.command.tasks.HelmDownloadClientPackage
-import com.citi.gradle.plugins.helm.command.tasks.HelmExtractClient
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmDownloadClientPackage
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmExtractClient
 import org.gradle.api.Project
 import org.gradle.api.Rule
 import org.gradle.api.file.Directory

@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.publishing.tests.functional
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.tests.functional
 
-import com.citi.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
-import com.citi.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
+import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
+import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
 import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.string.shouldNotContain
 import java.io.File
@@ -23,7 +23,7 @@ internal class OnlyHelmPublishPluginTest {
     }
 
     @ParameterizedTest
-    @MethodSource("com.citi.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
+    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
     fun helmPublishPluginCouldBeAppliedAloneButDontCreateAnyTask(parameters: DefaultGradleRunnerParameters) {
         // given
         val arguments = listOf("tasks", "--stacktrace")

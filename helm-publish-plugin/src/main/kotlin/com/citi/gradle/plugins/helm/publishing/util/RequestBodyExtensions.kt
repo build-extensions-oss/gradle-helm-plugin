@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.util
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.util
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

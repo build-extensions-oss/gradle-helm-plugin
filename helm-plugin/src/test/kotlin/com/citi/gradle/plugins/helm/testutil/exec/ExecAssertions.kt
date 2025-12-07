@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.testutil.exec
+package io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec
 
 import assertk.assertThat
 import assertk.assertions.hasSize

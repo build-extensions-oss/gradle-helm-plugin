@@ -1,8 +1,8 @@
-package com.citi.gradle.plugins.helm.dsl.credentials.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal
 
 import org.gradle.api.credentials.Credentials
-import com.citi.gradle.plugins.helm.dsl.credentials.CertificateCredentials
-import com.citi.gradle.plugins.helm.dsl.credentials.PasswordCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.PasswordCredentials
 import java.io.File
 import java.io.Serializable
 

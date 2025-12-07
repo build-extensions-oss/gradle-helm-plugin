@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import assertk.assertThat
 import assertk.assertions.each
@@ -8,12 +8,12 @@ import org.gradle.api.Project
 import org.spekframework.spek2.dsl.GroupBody
 import org.spekframework.spek2.dsl.LifecycleAware
 import org.spekframework.spek2.style.specification.describe
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.spek.afterEachSuccessfulTest
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.StatefulInvocation
-import com.citi.gradle.plugins.helm.testutil.exec.eachInvocation
-import com.citi.gradle.plugins.helm.testutil.exec.meetsExpectations
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.afterEachSuccessfulTest
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.StatefulInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.eachInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.meetsExpectations
 
 
 interface OptionsTestProvider {

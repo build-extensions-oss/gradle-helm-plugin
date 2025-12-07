@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Internal
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmServerOperationOptions
-import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
-import com.citi.gradle.plugins.helm.command.internal.HelmServerOperationOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmServerOperationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmServerOperationOptionsApplier
 import org.unbrokendome.gradle.pluginutils.property
 import java.time.Duration
 

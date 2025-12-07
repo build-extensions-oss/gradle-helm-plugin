@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.dsl.credentials
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials
 
 import org.gradle.api.credentials.Credentials
 import org.gradle.api.file.RegularFileProperty

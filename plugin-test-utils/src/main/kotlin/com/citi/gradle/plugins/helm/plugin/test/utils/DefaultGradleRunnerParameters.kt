@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.plugin.test.utils
+package io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils
 
 import java.util.stream.Stream
 import org.junit.jupiter.params.provider.Arguments

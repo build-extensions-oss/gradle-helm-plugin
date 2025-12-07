@@ -1,15 +1,15 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.slf4j.LoggerFactory
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.HelmInstallFromRepositoryOptions
-import com.citi.gradle.plugins.helm.command.HelmInstallationOptions
-import com.citi.gradle.plugins.helm.command.HelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmInstallFromRepositoryOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmInstallationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
 import org.unbrokendome.gradle.pluginutils.property
 import java.net.URI
 

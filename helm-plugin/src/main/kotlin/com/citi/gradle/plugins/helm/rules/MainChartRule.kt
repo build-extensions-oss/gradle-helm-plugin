@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
-import com.citi.gradle.plugins.helm.HELM_MAIN_CHART_NAME
-import com.citi.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_MAIN_CHART_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.api.Rule

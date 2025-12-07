@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
 import org.gradle.api.Named
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
-import com.citi.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import org.unbrokendome.gradle.pluginutils.rules.AbstractPatternRuleOuterInner
 import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule
 import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern

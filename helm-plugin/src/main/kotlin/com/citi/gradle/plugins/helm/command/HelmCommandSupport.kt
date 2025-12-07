@@ -1,15 +1,15 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.gradle.workers.WorkerExecutor
 import org.json.JSONArray
 import org.json.JSONObject
-import com.citi.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmServerOptionsApplier
-import com.citi.gradle.plugins.helm.command.tasks.AbstractHelmCommandTask
-import com.citi.gradle.plugins.helm.model.Release
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmServerOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmCommandTask
+import io.github.build.extensions.oss.gradle.plugins.helm.model.Release
 
 
 /**

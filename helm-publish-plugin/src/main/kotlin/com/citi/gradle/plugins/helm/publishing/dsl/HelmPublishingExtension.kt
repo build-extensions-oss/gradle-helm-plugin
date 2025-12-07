@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.publishing.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl
 
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.internal.reflect.Instantiator
-import com.citi.gradle.plugins.helm.publishing.HELM_PUBLISHING_REPOSITORIES_EXTENSION_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.HELM_PUBLISHING_REPOSITORIES_EXTENSION_NAME
 import javax.inject.Inject
 
 

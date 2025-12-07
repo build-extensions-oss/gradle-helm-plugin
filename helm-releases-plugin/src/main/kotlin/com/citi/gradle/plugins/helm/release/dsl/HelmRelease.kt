@@ -1,14 +1,14 @@
-package com.citi.gradle.plugins.helm.release.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.release.dsl
 
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.internal.HelmInstallFromRepositoryOptionsHolder
-import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
-import com.citi.gradle.plugins.helm.command.internal.mergeValues
-import com.citi.gradle.plugins.helm.command.internal.setFrom
-import com.citi.gradle.plugins.helm.command.internal.withDefaults
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.rules.ChartDirArtifactRule
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmInstallFromRepositoryOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.mergeValues
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.setFrom
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.withDefaults
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.ChartDirArtifactRule
 import java.io.File
 import java.net.URI
 import java.util.concurrent.ConcurrentHashMap

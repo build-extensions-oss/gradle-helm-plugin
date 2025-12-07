@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
