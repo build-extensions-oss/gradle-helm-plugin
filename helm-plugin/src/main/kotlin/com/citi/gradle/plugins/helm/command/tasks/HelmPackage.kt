@@ -12,7 +12,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import com.citi.gradle.plugins.helm.model.ChartDescriptor
 import com.citi.gradle.plugins.helm.model.ChartDescriptorYaml
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

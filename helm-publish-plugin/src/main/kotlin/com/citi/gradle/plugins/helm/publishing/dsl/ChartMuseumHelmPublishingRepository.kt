@@ -7,7 +7,7 @@ import com.citi.gradle.plugins.helm.dsl.credentials.internal.toSerializable
 import com.citi.gradle.plugins.helm.publishing.publishers.AbstractHttpHelmChartPublisher
 import com.citi.gradle.plugins.helm.publishing.publishers.HelmChartPublisher
 import com.citi.gradle.plugins.helm.publishing.publishers.PublisherParams
-import org.unbrokendome.gradle.pluginutils.listProperty
+import build.extensions.oss.gradle.pluginutils.listProperty
 import java.net.URI
 import javax.inject.Inject
 

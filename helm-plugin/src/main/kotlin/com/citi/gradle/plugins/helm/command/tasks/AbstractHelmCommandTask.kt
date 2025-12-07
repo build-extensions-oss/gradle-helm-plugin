@@ -15,8 +15,8 @@ import com.citi.gradle.plugins.helm.command.GlobalHelmOptions
 import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
 import com.citi.gradle.plugins.helm.command.HelmExecSpec
 import com.citi.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.withDefault
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.withDefault
 import javax.inject.Inject
 
 

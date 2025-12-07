@@ -3,8 +3,8 @@ package com.citi.gradle.plugins.helm.publishing.dsl
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import com.citi.gradle.plugins.helm.dsl.HelmChart
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.requiredConventionPlugin
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.requiredConventionPlugin
 import javax.inject.Inject
 
 

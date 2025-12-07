@@ -9,7 +9,7 @@ import com.citi.gradle.plugins.helm.release.dsl.HelmReleaseTarget
 import com.citi.gradle.plugins.helm.release.dsl.shouldInclude
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.TaskContainer
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =

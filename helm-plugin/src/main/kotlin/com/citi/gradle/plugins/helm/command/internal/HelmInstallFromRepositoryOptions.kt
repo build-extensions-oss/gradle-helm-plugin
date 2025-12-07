@@ -10,7 +10,7 @@ import com.citi.gradle.plugins.helm.command.HelmExecSpec
 import com.citi.gradle.plugins.helm.command.HelmInstallFromRepositoryOptions
 import com.citi.gradle.plugins.helm.command.HelmInstallationOptions
 import com.citi.gradle.plugins.helm.command.HelmOptions
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.net.URI
 
 

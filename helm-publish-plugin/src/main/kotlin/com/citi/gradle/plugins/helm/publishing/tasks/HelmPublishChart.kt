@@ -15,7 +15,7 @@ import com.citi.gradle.plugins.helm.HELM_GROUP
 import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryInternal
 import com.citi.gradle.plugins.helm.publishing.publishers.PublisherParams
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

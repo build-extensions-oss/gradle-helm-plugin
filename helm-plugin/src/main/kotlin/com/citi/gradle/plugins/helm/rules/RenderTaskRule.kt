@@ -6,7 +6,7 @@ import com.citi.gradle.plugins.helm.command.tasks.HelmTemplate
 import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.dsl.HelmChartInternal
 import com.citi.gradle.plugins.helm.dsl.HelmRendering
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern = RuleNamePattern2.parse("helmRender<Chart>Chart<Rendering>Rendering")

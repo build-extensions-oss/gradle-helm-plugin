@@ -11,8 +11,8 @@ import com.citi.gradle.plugins.helm.command.ConfigurableHelmServerOptions
 import com.citi.gradle.plugins.helm.command.HelmExecSpec
 import com.citi.gradle.plugins.helm.command.HelmOptions
 import com.citi.gradle.plugins.helm.command.HelmServerOptions
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.withDefault
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.withDefault
 
 
 fun HelmServerOptions.withDefaults(

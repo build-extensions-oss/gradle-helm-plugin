@@ -16,8 +16,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.TaskDependency
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.durationProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.durationProviderFromProjectProperty
 
 
 class HelmCommandsPlugin

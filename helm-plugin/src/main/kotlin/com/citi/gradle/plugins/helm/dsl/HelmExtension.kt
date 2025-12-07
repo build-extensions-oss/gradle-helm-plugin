@@ -14,12 +14,12 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.dirProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.fileProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.listProperty
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.dirProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.listProperty
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 
 
 /**

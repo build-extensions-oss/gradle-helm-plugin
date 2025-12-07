@@ -4,8 +4,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import com.citi.gradle.plugins.helm.command.rules.DownloadClientPackageTaskRule
 import com.citi.gradle.plugins.helm.command.rules.ExtractClientTaskRule
-import org.unbrokendome.gradle.pluginutils.dirProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.dirProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 import java.net.URI
 
 

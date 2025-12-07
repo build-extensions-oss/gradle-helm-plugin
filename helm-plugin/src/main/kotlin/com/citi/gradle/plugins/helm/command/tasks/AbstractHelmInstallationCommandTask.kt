@@ -20,8 +20,8 @@ import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
 import com.citi.gradle.plugins.helm.command.internal.HelmInstallFromRepositoryOptionsApplier
 import com.citi.gradle.plugins.helm.command.internal.HelmInstallationOptionsApplier
 import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
-import org.unbrokendome.gradle.pluginutils.mapProperty
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.mapProperty
+import build.extensions.oss.gradle.pluginutils.property
 
 
 abstract class AbstractHelmInstallationCommandTask :

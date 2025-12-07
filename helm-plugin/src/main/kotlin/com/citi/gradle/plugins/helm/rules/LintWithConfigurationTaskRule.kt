@@ -7,7 +7,7 @@ import com.citi.gradle.plugins.helm.command.internal.mergeValues
 import com.citi.gradle.plugins.helm.command.tasks.HelmLint
 import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.dsl.Linting
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =

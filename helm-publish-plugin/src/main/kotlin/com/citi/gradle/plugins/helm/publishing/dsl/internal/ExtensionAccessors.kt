@@ -5,7 +5,7 @@ import com.citi.gradle.plugins.helm.publishing.HELM_PUBLISHING_EXTENSION_NAME
 import com.citi.gradle.plugins.helm.publishing.HELM_PUBLISHING_REPOSITORIES_EXTENSION_NAME
 import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingExtension
 import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryContainer
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

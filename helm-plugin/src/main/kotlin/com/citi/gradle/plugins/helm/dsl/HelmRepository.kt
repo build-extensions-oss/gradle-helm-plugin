@@ -9,7 +9,7 @@ import com.citi.gradle.plugins.helm.dsl.credentials.CredentialsContainer
 import com.citi.gradle.plugins.helm.dsl.credentials.internal.CredentialsContainerSupport
 import com.citi.gradle.plugins.helm.dsl.credentials.internal.CredentialsFactory
 import com.citi.gradle.plugins.helm.dsl.credentials.internal.DefaultCredentialsFactory
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.net.URI
 import javax.inject.Inject
 

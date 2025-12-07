@@ -3,7 +3,7 @@ package com.citi.gradle.plugins.helm.dsl.credentials
 import org.gradle.api.credentials.Credentials
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import javax.inject.Inject
 
 

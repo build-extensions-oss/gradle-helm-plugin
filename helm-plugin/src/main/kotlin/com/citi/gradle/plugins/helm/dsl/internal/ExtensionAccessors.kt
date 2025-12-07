@@ -12,7 +12,7 @@ import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.dsl.HelmExtension
 import com.citi.gradle.plugins.helm.dsl.HelmRepositoryHandler
 import com.citi.gradle.plugins.helm.dsl.Linting
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

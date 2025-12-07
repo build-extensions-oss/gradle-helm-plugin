@@ -6,7 +6,7 @@ import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.dsl.HelmChartInternal
 import com.citi.gradle.plugins.helm.dsl.dependencies.chartDependenciesConfigurationName
 import com.citi.gradle.plugins.helm.tasks.HelmCollectChartDependencies
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

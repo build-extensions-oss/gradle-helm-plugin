@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskContainer
 import com.citi.gradle.plugins.helm.HELM_GROUP
 import com.citi.gradle.plugins.helm.command.tasks.HelmStatus
 import com.citi.gradle.plugins.helm.release.dsl.HelmRelease
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

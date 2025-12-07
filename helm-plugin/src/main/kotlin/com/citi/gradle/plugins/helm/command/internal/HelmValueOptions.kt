@@ -14,7 +14,7 @@ import com.citi.gradle.plugins.helm.command.HelmExecSpec
 import com.citi.gradle.plugins.helm.command.HelmOptions
 import com.citi.gradle.plugins.helm.command.HelmValueOptions
 import org.gradle.api.file.ProjectLayout
-import org.unbrokendome.gradle.pluginutils.mapProperty
+import build.extensions.oss.gradle.pluginutils.mapProperty
 
 
 data class HelmValueOptionsHolder(

@@ -16,8 +16,8 @@ import com.citi.gradle.plugins.helm.model.ChartModelDependencies
 import com.citi.gradle.plugins.helm.model.ChartRequirementsYaml
 import com.citi.gradle.plugins.helm.rules.DefaultRenderingRule
 import com.citi.gradle.plugins.helm.rules.packageTaskName
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.versionProvider
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.versionProvider
 import javax.inject.Inject
 import org.gradle.api.Action
 import org.gradle.api.Buildable

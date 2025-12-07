@@ -6,9 +6,9 @@ import com.citi.gradle.plugins.helm.command.tasks.HelmAddRepository
 import com.citi.gradle.plugins.helm.dsl.HelmRepository
 import com.citi.gradle.plugins.helm.dsl.credentials.CertificateCredentials
 import com.citi.gradle.plugins.helm.dsl.credentials.PasswordCredentials
-import org.unbrokendome.gradle.pluginutils.ifPresent
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.ifPresent
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

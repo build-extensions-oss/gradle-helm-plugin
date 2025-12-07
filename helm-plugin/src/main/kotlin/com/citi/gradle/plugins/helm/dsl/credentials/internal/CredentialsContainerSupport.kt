@@ -7,7 +7,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import com.citi.gradle.plugins.helm.dsl.credentials.CredentialsContainer
 import com.citi.gradle.plugins.helm.dsl.credentials.PasswordCredentials
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

@@ -23,15 +23,15 @@ import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Task
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsItem
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsTask
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasExtension
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasTaskDependencies
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.isPresent
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.taskDependencies
-import org.unbrokendome.gradle.pluginutils.test.evaluate
-import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
-import org.unbrokendome.gradle.pluginutils.test.spek.setupGradleProject
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsItem
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsTask
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasExtension
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasTaskDependencies
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isPresent
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.taskDependencies
+import build.extensions.oss.gradle.pluginutils.test.evaluate
+import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
+import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
 
 
 object HelmPluginTest : Spek({

@@ -15,7 +15,8 @@ dependencies {
     implementation(libs.snakeyaml)
     implementation(libs.orgJson)
 
-    implementation(libs.unbrokenDomePluginUtils)
+    //implementation(libs.unbrokenDomePluginUtils)
+    implementation(files("C:\\Users\\igorm\\IdeaProjects\\gradle-plugin-utils\\gradle-plugin-utils\\build\\libs\\gradle-plugin-utils-0.0.1.jar"))
 
     testImplementation(libs.jsonPath)
     testImplementation(libs.jacksonDataBind)
@@ -24,7 +25,10 @@ dependencies {
     testImplementation(libs.okHttpMockWebServer)
 
     testImplementation(libs.coroutinesCore)
-    testImplementation(libs.unbrokenDomeTestUtils)
+
+    //testImplementation(libs.unbrokenDomeTestUtils)
+    testImplementation(files("C:\\Users\\igorm\\IdeaProjects\\gradle-plugin-utils\\gradle-plugin-test-utils\\build\\libs\\gradle-plugin-test-utils-0.0.1.jar"))
+
     testImplementation(libs.bundles.defaultTests)
     testRuntimeOnly(libs.junitEngine)
 }

@@ -46,10 +46,10 @@ import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.TaskDependency
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.fileProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.toUri
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.toUri
 
 
 class HelmPlugin

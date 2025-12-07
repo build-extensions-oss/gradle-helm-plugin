@@ -26,13 +26,13 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.SetProperty
 import org.slf4j.LoggerFactory
-import org.unbrokendome.gradle.pluginutils.andThen
-import org.unbrokendome.gradle.pluginutils.asFile
-import org.unbrokendome.gradle.pluginutils.capitalizeWords
-import org.unbrokendome.gradle.pluginutils.combine
-import org.unbrokendome.gradle.pluginutils.listProperty
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.setProperty
+import build.extensions.oss.gradle.pluginutils.andThen
+import build.extensions.oss.gradle.pluginutils.asFile
+import build.extensions.oss.gradle.pluginutils.capitalizeWords
+import build.extensions.oss.gradle.pluginutils.combine
+import build.extensions.oss.gradle.pluginutils.listProperty
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.setProperty
 
 
 /**

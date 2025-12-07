@@ -9,7 +9,7 @@ import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import com.citi.gradle.plugins.helm.publishing.dsl.publishConvention
 import com.citi.gradle.plugins.helm.rules.AbstractHelmChartTaskRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

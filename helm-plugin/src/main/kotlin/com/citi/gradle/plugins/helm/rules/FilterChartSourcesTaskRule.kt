@@ -7,7 +7,7 @@ import com.citi.gradle.plugins.helm.dsl.HelmChart
 import com.citi.gradle.plugins.helm.dsl.HelmChartInternal
 import com.citi.gradle.plugins.helm.dsl.setParent
 import com.citi.gradle.plugins.helm.tasks.HelmFilterSources
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern = RuleNamePattern.parse("helmFilter<Chart>ChartSources")

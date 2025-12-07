@@ -19,8 +19,8 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.SkipWhenEmpty
 import org.gradle.api.tasks.TaskAction
-import org.unbrokendome.gradle.pluginutils.ifPresent
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.ifPresent
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

@@ -7,8 +7,8 @@ import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import com.citi.gradle.plugins.helm.publishing.dsl.publishConvention
 import com.citi.gradle.plugins.helm.publishing.tasks.HelmPublishChart
 import com.citi.gradle.plugins.helm.rules.packagedArtifactConfigurationName
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule2
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =
