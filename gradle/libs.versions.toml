@@ -1,5 +1,5 @@
 [versions]
-dokka = "1.9.20"
+dokka = "2.1.0"
 spek = "2.0.19"
 gradleUtils = "0.5.1"
 okhttp = "4.12.0"
