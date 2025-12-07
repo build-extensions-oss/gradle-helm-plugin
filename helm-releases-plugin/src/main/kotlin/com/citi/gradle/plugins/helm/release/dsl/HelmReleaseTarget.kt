@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.release.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.release.dsl
 
 import org.gradle.api.Action
 import org.gradle.api.Named
@@ -10,11 +10,11 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Provider
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.internal.HelmInstallationOptionsHolder
-import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
-import com.citi.gradle.plugins.helm.release.tags.TagExpression
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmInstallationOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
+import io.github.build.extensions.oss.gradle.plugins.helm.release.tags.TagExpression
 import javax.inject.Inject
 
 

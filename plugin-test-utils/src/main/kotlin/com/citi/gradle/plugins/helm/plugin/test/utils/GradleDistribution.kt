@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.plugin.test.utils
+package io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils
 
 sealed interface GradleDistribution {
     companion object {

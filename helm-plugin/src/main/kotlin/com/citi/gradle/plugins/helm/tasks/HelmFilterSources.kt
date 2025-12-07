@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.tasks
 
-import com.citi.gradle.plugins.helm.HELM_GROUP
-import com.citi.gradle.plugins.helm.dsl.Filtering
-import com.citi.gradle.plugins.helm.dsl.createFiltering
-import com.citi.gradle.plugins.helm.util.filterYaml
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Filtering
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.createFiltering
+import io.github.build.extensions.oss.gradle.plugins.helm.util.filterYaml
 import org.gradle.api.Action
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.CopySpec

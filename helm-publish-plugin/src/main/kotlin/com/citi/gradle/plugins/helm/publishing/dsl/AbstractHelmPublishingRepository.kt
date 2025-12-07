@@ -1,12 +1,12 @@
-package com.citi.gradle.plugins.helm.publishing.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl
 
 import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
-import com.citi.gradle.plugins.helm.dsl.credentials.CredentialsContainer
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.CredentialsContainerSupport
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.CredentialsFactory
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.DefaultCredentialsFactory
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CredentialsContainer
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.CredentialsContainerSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.CredentialsFactory
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.DefaultCredentialsFactory
 import org.unbrokendome.gradle.pluginutils.property
 import java.net.URI
 

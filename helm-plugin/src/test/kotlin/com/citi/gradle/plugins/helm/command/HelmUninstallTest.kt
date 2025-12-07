@@ -1,15 +1,15 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import org.spekframework.spek2.dsl.LifecycleAware
 import org.spekframework.spek2.style.specification.describe
-import com.citi.gradle.plugins.helm.command.tasks.HelmUninstall
-import com.citi.gradle.plugins.helm.spek.ExecutionResultAwareSpek
-import com.citi.gradle.plugins.helm.spek.gradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.singleInvocation
-import com.citi.gradle.plugins.helm.testutil.exec.verifyNoInvocations
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUninstall
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.ExecutionResultAwareSpek
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.gradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.singleInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.verifyNoInvocations
 import org.unbrokendome.gradle.pluginutils.test.TaskOutcome
 import org.unbrokendome.gradle.pluginutils.test.execute
 import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin

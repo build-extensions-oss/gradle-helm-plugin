@@ -1,9 +1,9 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
-import com.citi.gradle.plugins.helm.command.tasks.AbstractHelmServerOperationCommandTask
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.Invocation
-import com.citi.gradle.plugins.helm.testutil.exec.eachInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmServerOperationCommandTask
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.Invocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.eachInvocation
 import java.time.Duration
 
 

@@ -1,6 +1,6 @@
-package com.citi.gradle.plugins.helm.dsl.credentials
+package io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials
 
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.toAction
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.toAction
 import groovy.lang.Closure
 import groovy.lang.Closure.DELEGATE_FIRST
 import groovy.lang.DelegatesTo

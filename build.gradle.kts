@@ -98,7 +98,7 @@ subprojects {
         }
 
         // have an option to disable Dokka task for local builds
-        if (project.findProperty("com.citi.gradle.helm.plugin.dokka.disabled") == "true") {
+        if (project.findProperty("io.github.build.extensions.oss.gradle.helm.plugin.dokka.disabled") == "true") {
             logger.info("Dokka tasks are disabled")
         } else {
             tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishPluginJavaDocsJar" }

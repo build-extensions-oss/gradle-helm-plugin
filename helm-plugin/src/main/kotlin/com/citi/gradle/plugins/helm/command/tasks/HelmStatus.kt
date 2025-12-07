@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -7,7 +7,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import org.unbrokendome.gradle.pluginutils.fileProviderFromProjectProperty
 import org.unbrokendome.gradle.pluginutils.property
 import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty

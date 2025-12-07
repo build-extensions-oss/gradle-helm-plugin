@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm
+package io.github.build.extensions.oss.gradle.plugins.helm
 
 import io.kotest.matchers.string.shouldContain
 import java.io.File

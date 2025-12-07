@@ -1,10 +1,10 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.spekframework.spek2.style.specification.describe
-import com.citi.gradle.plugins.helm.command.tasks.HelmTest
-import com.citi.gradle.plugins.helm.spek.ExecutionResultAwareSpek
-import com.citi.gradle.plugins.helm.spek.gradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.singleInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTest
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.ExecutionResultAwareSpek
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.gradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.singleInvocation
 import org.unbrokendome.gradle.pluginutils.test.execute
 import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
 import org.unbrokendome.gradle.pluginutils.test.spek.gradleTask

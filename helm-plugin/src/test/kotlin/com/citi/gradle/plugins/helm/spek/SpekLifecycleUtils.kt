@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.spek
+package io.github.build.extensions.oss.gradle.plugins.helm.spek
 
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.dsl.GroupBody

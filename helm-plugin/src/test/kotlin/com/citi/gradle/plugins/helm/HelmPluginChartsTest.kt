@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm
+package io.github.build.extensions.oss.gradle.plugins.helm
 
 import assertk.all
 import assertk.assertThat
@@ -14,17 +14,17 @@ import org.gradle.api.Task
 import org.gradle.kotlin.dsl.lint
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import com.citi.gradle.plugins.helm.command.tasks.HelmLint
-import com.citi.gradle.plugins.helm.command.tasks.HelmPackage
-import com.citi.gradle.plugins.helm.command.tasks.HelmUpdateDependencies
-import com.citi.gradle.plugins.helm.dsl.Filtering
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.dsl.Linting
-import com.citi.gradle.plugins.helm.dsl.internal.charts
-import com.citi.gradle.plugins.helm.dsl.internal.filtering
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.dsl.internal.lint
-import com.citi.gradle.plugins.helm.tasks.HelmFilterSources
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmLint
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmPackage
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateDependencies
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Filtering
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.charts
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.filtering
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.lint
+import io.github.build.extensions.oss.gradle.plugins.helm.tasks.HelmFilterSources
 import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsItem
 import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsTask
 import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.dirValue

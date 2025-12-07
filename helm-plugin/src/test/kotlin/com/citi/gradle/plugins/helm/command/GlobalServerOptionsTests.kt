@@ -1,11 +1,11 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import org.gradle.api.Project
-import com.citi.gradle.plugins.helm.command.GlobalServerOptionsTests.serverCommands
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.Invocation
-import com.citi.gradle.plugins.helm.testutil.exec.eachInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.command.GlobalServerOptionsTests.serverCommands
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.Invocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.eachInvocation
 
 
 object GlobalServerOptionsTests : AbstractOptionsTests({

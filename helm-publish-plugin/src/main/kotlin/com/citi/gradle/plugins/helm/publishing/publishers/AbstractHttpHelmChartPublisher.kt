@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.publishers
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers
 
 import okhttp3.Credentials
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -12,9 +12,9 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.tls.HandshakeCertificates
 import okhttp3.tls.HeldCertificate
 import org.slf4j.LoggerFactory
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.SerializableCertificateCredentials
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.SerializableCredentials
-import com.citi.gradle.plugins.helm.dsl.credentials.internal.SerializablePasswordCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.SerializableCertificateCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.SerializableCredentials
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.SerializablePasswordCredentials
 import java.io.File
 import java.net.URI
 

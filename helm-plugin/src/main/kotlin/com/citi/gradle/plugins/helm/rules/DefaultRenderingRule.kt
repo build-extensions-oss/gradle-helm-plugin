@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
 import org.gradle.api.NamedDomainObjectContainer
-import com.citi.gradle.plugins.helm.dsl.HelmRendering
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRendering
 import org.gradle.api.Rule
 
 

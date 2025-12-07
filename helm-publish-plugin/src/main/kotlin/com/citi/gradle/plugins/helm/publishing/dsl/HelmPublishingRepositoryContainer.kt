@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.dsl
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl
 
 import org.gradle.api.Action
 import org.gradle.api.PolymorphicDomainObjectContainer

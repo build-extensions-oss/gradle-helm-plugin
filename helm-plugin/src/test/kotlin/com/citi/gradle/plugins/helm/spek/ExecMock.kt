@@ -1,15 +1,15 @@
-package com.citi.gradle.plugins.helm.spek
+package io.github.build.extensions.oss.gradle.plugins.helm.spek
 
 import org.gradle.api.Project
 import org.spekframework.spek2.dsl.LifecycleAware
 import org.spekframework.spek2.lifecycle.CachingMode
 import org.spekframework.spek2.lifecycle.MemoizedValue
-import com.citi.gradle.plugins.helm.command.HelmCommandsPlugin
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.testutil.exec.DefaultExecutableGradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.ExecutableGradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.GradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.withStatefulVerification
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPlugin
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.DefaultExecutableGradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.ExecutableGradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.withStatefulVerification
 
 
 /**

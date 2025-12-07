@@ -1,7 +1,7 @@
-package com.citi.gradle.plugins.helm.publishing.tests.functional
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.tests.functional
 
-import com.citi.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
-import com.citi.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
+import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
+import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -37,7 +37,7 @@ internal class ArtifactoryPublishTest {
     }
 
     @ParameterizedTest
-    @MethodSource("com.citi.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
+    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
     fun helmPublishShouldCallArtifactoryWithCredentials(parameters: DefaultGradleRunnerParameters) {
         // given
         val destinationChartArchive =

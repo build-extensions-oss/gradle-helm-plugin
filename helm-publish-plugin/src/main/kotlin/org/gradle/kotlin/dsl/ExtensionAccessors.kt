@@ -2,8 +2,8 @@
 package org.gradle.kotlin.dsl
 
 import org.gradle.api.provider.Property
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.publishing.dsl.publishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.publishConvention
 
 
 /**

@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty

@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm
+package io.github.build.extensions.oss.gradle.plugins.helm
 
 import assertk.all
 import assertk.assertThat
@@ -9,15 +9,15 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isSuccess
 import assertk.assertions.prop
-import com.citi.gradle.plugins.helm.command.tasks.HelmAddRepository
-import com.citi.gradle.plugins.helm.command.tasks.HelmTemplate
-import com.citi.gradle.plugins.helm.dsl.Filtering
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.dsl.HelmExtension
-import com.citi.gradle.plugins.helm.dsl.HelmRepository
-import com.citi.gradle.plugins.helm.dsl.internal.charts
-import com.citi.gradle.plugins.helm.dsl.internal.helm
-import com.citi.gradle.plugins.helm.dsl.internal.repositories
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTemplate
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Filtering
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRepository
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.charts
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.repositories
 import java.net.URI
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Task

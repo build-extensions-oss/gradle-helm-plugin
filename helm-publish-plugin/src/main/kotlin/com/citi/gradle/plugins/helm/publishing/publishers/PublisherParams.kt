@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.publishing.publishers
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers
 
 import java.io.Serializable
 

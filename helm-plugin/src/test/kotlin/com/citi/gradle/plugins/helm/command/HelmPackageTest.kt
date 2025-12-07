@@ -1,14 +1,14 @@
-package com.citi.gradle.plugins.helm.command
+package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import assertk.all
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.prop
 import org.spekframework.spek2.style.specification.describe
-import com.citi.gradle.plugins.helm.command.tasks.HelmPackage
-import com.citi.gradle.plugins.helm.spek.ExecutionResultAwareSpek
-import com.citi.gradle.plugins.helm.spek.gradleExecMock
-import com.citi.gradle.plugins.helm.testutil.exec.singleInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmPackage
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.ExecutionResultAwareSpek
+import io.github.build.extensions.oss.gradle.plugins.helm.spek.gradleExecMock
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.singleInvocation
 import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.fileValue
 import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
 import org.unbrokendome.gradle.pluginutils.test.directory

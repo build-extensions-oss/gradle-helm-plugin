@@ -1,11 +1,11 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmServerOperationOptions
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.HelmInstallationOptions
-import com.citi.gradle.plugins.helm.command.HelmOptions
-import com.citi.gradle.plugins.helm.command.HelmServerOperationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmServerOperationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmInstallationOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmServerOperationOptions
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider

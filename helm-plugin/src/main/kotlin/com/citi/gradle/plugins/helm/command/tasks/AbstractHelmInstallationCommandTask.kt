@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.tasks
+package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import java.io.File
 import java.net.URI
@@ -14,12 +14,12 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.HelmExecProviderSupport
-import com.citi.gradle.plugins.helm.command.internal.HelmInstallFromRepositoryOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmInstallationOptionsApplier
-import com.citi.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmInstallFromRepositoryOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmInstallFromRepositoryOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmInstallationOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
 import org.unbrokendome.gradle.pluginutils.mapProperty
 import org.unbrokendome.gradle.pluginutils.property
 

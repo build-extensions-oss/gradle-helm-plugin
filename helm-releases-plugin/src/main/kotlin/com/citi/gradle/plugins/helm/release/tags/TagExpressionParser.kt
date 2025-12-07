@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.release.tags
+package io.github.build.extensions.oss.gradle.plugins.helm.release.tags
 
 import java.text.ParseException
 import java.util.Scanner

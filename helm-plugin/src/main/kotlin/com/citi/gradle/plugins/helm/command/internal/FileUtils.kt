@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
 import java.io.File
 import org.slf4j.Logger

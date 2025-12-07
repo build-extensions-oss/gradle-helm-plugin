@@ -1,13 +1,13 @@
-package com.citi.gradle.plugins.helm.release.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.release.rules
 
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.TaskContainer
-import com.citi.gradle.plugins.helm.command.internal.setFrom
-import com.citi.gradle.plugins.helm.command.tasks.HelmTest
-import com.citi.gradle.plugins.helm.release.dsl.HelmRelease
-import com.citi.gradle.plugins.helm.release.dsl.HelmReleaseInternal
-import com.citi.gradle.plugins.helm.release.dsl.HelmReleaseTarget
-import com.citi.gradle.plugins.helm.release.dsl.shouldInclude
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.setFrom
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTest
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmRelease
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseInternal
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseTarget
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.shouldInclude
 import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
 
 

@@ -1,4 +1,4 @@
-package com.citi.gradle.plugins.helm.command.internal
+package io.github.build.extensions.oss.gradle.plugins.helm.command.internal
 
 import groovy.lang.Closure
 import java.util.concurrent.Callable
@@ -9,10 +9,10 @@ import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Provider
 import org.gradle.api.resources.TextResource
 import org.slf4j.LoggerFactory
-import com.citi.gradle.plugins.helm.command.ConfigurableHelmValueOptions
-import com.citi.gradle.plugins.helm.command.HelmExecSpec
-import com.citi.gradle.plugins.helm.command.HelmOptions
-import com.citi.gradle.plugins.helm.command.HelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
+import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmValueOptions
 import org.gradle.api.file.ProjectLayout
 import org.unbrokendome.gradle.pluginutils.mapProperty
 

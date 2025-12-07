@@ -1,12 +1,12 @@
-package com.citi.gradle.plugins.helm.publishing.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.publishing.rules
 
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.TaskContainer
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
-import com.citi.gradle.plugins.helm.publishing.dsl.publishConvention
-import com.citi.gradle.plugins.helm.publishing.tasks.HelmPublishChart
-import com.citi.gradle.plugins.helm.rules.packagedArtifactConfigurationName
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.publishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.tasks.HelmPublishChart
+import io.github.build.extensions.oss.gradle.plugins.helm.rules.packagedArtifactConfigurationName
 import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule2
 import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
 

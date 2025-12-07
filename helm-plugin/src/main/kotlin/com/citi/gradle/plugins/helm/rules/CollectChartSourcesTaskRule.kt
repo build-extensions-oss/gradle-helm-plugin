@@ -1,11 +1,11 @@
-package com.citi.gradle.plugins.helm.rules
+package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.Sync
 import org.gradle.api.tasks.TaskContainer
-import com.citi.gradle.plugins.helm.HELM_GROUP
-import com.citi.gradle.plugins.helm.dsl.HelmChart
-import com.citi.gradle.plugins.helm.dsl.HelmChartInternal
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChartInternal
 import org.unbrokendome.gradle.pluginutils.asFile
 import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
 

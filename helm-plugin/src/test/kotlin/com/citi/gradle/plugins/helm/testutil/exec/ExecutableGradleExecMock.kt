@@ -1,6 +1,6 @@
-package com.citi.gradle.plugins.helm.testutil.exec
+package io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec
 
-import com.citi.gradle.plugins.helm.testutil.startsWith
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.startsWith
 import java.io.File
 import java.io.PrintWriter
 
