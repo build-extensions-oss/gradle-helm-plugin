@@ -4,9 +4,12 @@ name: Plugin publish
 # https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: read
+
 
 jobs:
   gradle:
@@ -62,6 +65,7 @@ jobs:
           ./gradlew publishPlugins \
           -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} \
           -Pgradle.publish.secret=${{ secrets.GRADLE_PUBLISH_SECRET }} \
+          -Pversion=${{ github.event.release.tag_name }} \
           --stacktrace \
           --info \
           --no-daemon \
