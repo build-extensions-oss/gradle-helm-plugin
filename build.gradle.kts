@@ -70,6 +70,10 @@ subprojects {
 
             useJUnitPlatform()
 
+            tasks.withType<Test> {
+                testLogging { exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
+            }
+
             testLogging.showStandardStreams = true
 
             // give tests a temporary directory below the build dir so

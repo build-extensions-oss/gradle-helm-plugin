@@ -16,7 +16,7 @@ dependencies {
     implementation(libs.orgJson)
 
     //implementation(libs.unbrokenDomePluginUtils)
-    implementation(files("C:\\Users\\igorm\\IdeaProjects\\gradle-plugin-utils\\gradle-plugin-utils\\build\\libs\\gradle-plugin-utils-0.0.1.jar"))
+    implementation(files("../../gradle-plugin-utils/gradle-plugin-utils/build/libs/gradle-plugin-utils-0.0.1.jar"))
 
     testImplementation(libs.jsonPath)
     testImplementation(libs.jacksonDataBind)
@@ -27,7 +27,7 @@ dependencies {
     testImplementation(libs.coroutinesCore)
 
     //testImplementation(libs.unbrokenDomeTestUtils)
-    testImplementation(files("C:\\Users\\igorm\\IdeaProjects\\gradle-plugin-utils\\gradle-plugin-test-utils\\build\\libs\\gradle-plugin-test-utils-0.0.1.jar"))
+    testImplementation(files("../../gradle-plugin-utils/gradle-plugin-test-utils/build/libs/gradle-plugin-test-utils-0.0.1.jar"))
 
     testImplementation(libs.bundles.defaultTests)
     testRuntimeOnly(libs.junitEngine)
@@ -55,8 +55,4 @@ gradlePlugin {
 
 apiValidation {
     ignoredPackages.add("com.citi.gradle.plugins.helm.dsl.internal")
-}
-
-tasks.withType<Test> {
-    testLogging { exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL }
 }
