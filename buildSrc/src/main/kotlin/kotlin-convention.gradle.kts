@@ -29,3 +29,7 @@ tasks.register("resolveAndLockAll") {
         }
     }
 }
+
+tasks.jar {
+    archiveVersion.set(project.version.toString())
+}
