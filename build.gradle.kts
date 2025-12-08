@@ -37,14 +37,6 @@ subprojects {
 
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
-        configurations.all {
-            resolutionStrategy.eachDependency {
-                if (requested.group == "org.jetbrains.kotlin") {
-                    useVersion(libs.versions.kotlin.get())
-                }
-            }
-        }
-
         dependencies {
             "testImplementation"(kotlin("stdlib"))
             "testImplementation"(kotlin("reflect"))
@@ -53,15 +45,19 @@ subprojects {
             "testImplementation"(libs.mockk)
             "testImplementation"(libs.spekDsl)
             "testRuntimeOnly"(libs.spekRunner)
+            "testRuntimeOnly"(libs.junitPlatform)
         }
 
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
+        configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension> {
+            jvmToolchain(17)
+            compilerOptions {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+            }
         }
 
         tasks.withType<JavaCompile> {
-            sourceCompatibility = "1.8"
-            targetCompatibility = "1.8"
+            sourceCompatibility = "11"
+            targetCompatibility = "11"
         }
 
         tasks.withType<Test> {
