@@ -12,9 +12,9 @@
 
   <p align="center">
     <a href="https://citi.github.io/gradle-helm-plugin/"><img src="https://img.shields.io/badge/read%20our%20documentation-0f1632"></a>
-    <a href="https://plugins.gradle.org/plugin/com.citi.helm/2.2.0"><img src="https://img.shields.io/gradle-plugin-portal/v/com.citi.helm?versionPrefix=2.2.0&colorA=0f1632&colorB=255be3" /></a>
-    <a href="./LICENSE"><img src="https://img.shields.io/github/license/citi/gradle-helm-plugin?label=license&colorA=0f1632&colorB=255be3" /></a>
-    <a href="https://img.shields.io/ossf-scorecard/github.com/Citi/gradle-helm-plugin?label=openssf+scorecard&style=flat"><img src="https://img.shields.io/ossf-scorecard/github.com/Citi/gradle-helm-plugin?label=openssf+scorecard&style=flat" /></a>
+    <a href="https://plugins.gradle.org/plugin/io.github.build.extensions.oss.helm"><img src="https://img.shields.io/gradle-plugin-portal/v/io.github.build.extensions.oss.helm?colorA=0f1632&colorB=255be3" /></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/github/license/build-extensions-oss/gradle-helm-plugin?label=license&colorA=0f1632&colorB=255be3" /></a>
+    <a href="https://img.shields.io/ossf-scorecard/github.com/build-extensions-oss/gradle-helm-plugin?label=openssf+scorecard&style=flat"><img src="https://img.shields.io/ossf-scorecard/github.com/Citi/gradle-helm-plugin?label=openssf+scorecard&style=flat" /></a>
   </p>
 </div>
 
@@ -38,13 +38,13 @@ Add `io.github.build.extensions.oss.helm` to your Gradle project:
 
 ```gradle
 plugins {
-    id 'io.github.build.extensions.oss.helm' version '2.2.0'
+    id 'io.github.build.extensions.oss.helm' version 'latest'
 }
 ```
 
 ```gradle
 plugins {
-    id("io.github.build.extensions.oss.helm") version "2.2.0"
+    id("io.github.build.extensions.oss.helm") version "latest"
 }
 ```
 
