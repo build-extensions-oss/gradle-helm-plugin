@@ -33,3 +33,6 @@ tasks.register("resolveAndLockAll") {
 tasks.jar {
     archiveVersion.set(project.version.toString())
 }
+
+// otherwise Gradle fails with 'Cannot publish artifacts as no version set.'
+project.version = rootProject.version.toString()
