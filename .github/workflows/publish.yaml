@@ -70,3 +70,4 @@ jobs:
           --info \
           --no-daemon \
           ${{ github.ref == 'refs/heads/master' && '--validate-only' || '' }}
+          -Pversion=${{ github.event.release.tag_name }}
