@@ -61,6 +61,7 @@ jobs:
         # 2. We physically publish from master branch only. From other branches we can validate workflow.
         #    Please note - 'Publishing' environment is allowed to be used only in main branches, however that can be bypassed by admins (as expected) for publication testing
         # 3. We disable Gradle daemon (it doesn't make any sense), print info logs and full stacktraces on CI
+        # 4. For all builds from branches we only validate that we can do so
         run: |
           ./gradlew publishPlugins \
           -Pgradle.publish.key=${{ secrets.GRADLE_PUBLISH_KEY }} \
@@ -69,5 +70,5 @@ jobs:
           --stacktrace \
           --info \
           --no-daemon \
-          ${{ github.ref == 'refs/heads/master' && '--validate-only' || '' }}
+          ${{ !startsWith(github.ref, 'refs/tags/') && '--validate-only' || '' }} \
           -Pversion=${{ github.event.release.tag_name }}
