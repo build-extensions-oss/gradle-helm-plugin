@@ -20,7 +20,7 @@ jobs:
     environment:
       # This job must only run in Publishing environment. It is protected from the majority of runs, which prevents Gradle secrets leakage
       name: Publishing
-      url: https://github.com/build.extensions.oss/gradle-helm-plugin/settings/environments/10298625189/edit
+      url: https://github.com/build-extensions-oss/gradle-helm-plugin/settings/environments/10298625189/edit
 
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
