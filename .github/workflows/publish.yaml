@@ -20,7 +20,7 @@ jobs:
     environment:
       # This job must only run in Publishing environment. It is protected from the majority of runs, which prevents Gradle secrets leakage
       name: Publishing
-      url: https://github.com/build.extensions.oss/gradle-helm-plugin/settings/environments/10298625189/edit
+      url: https://github.com/build-extensions-oss/gradle-helm-plugin/settings/environments/10298625189/edit
 
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
@@ -56,7 +56,7 @@ jobs:
       - name: Publish the project
         # Several items:
         # 1. Secrets are uploaded via https://docs.github.com/en/actions/security-guides/encrypted-secrets
-        #    Correct them on https://github.com/build.extensions.oss/gradle-helm-plugin/settings/environments/10298625189/edit
+        #    Correct them on https://github.com/build-extensions-oss/gradle-helm-plugin/settings/environments/10298625189/edit
         #    Note!!!: these secrets must be in Publishing environment only
         # 2. We physically publish from master branch only. From other branches we can validate workflow.
         #    Please note - 'Publishing' environment is allowed to be used only in main branches, however that can be bypassed by admins (as expected) for publication testing
