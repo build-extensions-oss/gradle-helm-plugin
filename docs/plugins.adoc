@@ -19,7 +19,7 @@ Use this if you want to use Helm CLI commands directly as tasks, without any of 
 .Groovy
 ----
 plugins {
-    id 'com.citi.helm-commands' version '{project-version}'
+    id 'io.github.build-extensions-oss.helm-commands' version '{project-version}'
 }
 ----
 
@@ -27,7 +27,7 @@ plugins {
 .Kotlin
 ----
 plugins {
-    id("com.citi.helm-commands") version "{project-version}"
+    id("io.github.build-extensions-oss.helm-commands") version "{project-version}"
 }
 ----
 
@@ -44,7 +44,7 @@ This is the main plugin of the suite. It enables a variety of extra DSL blocks i
 .Groovy
 ----
 plugins {
-    id 'com.citi.helm' version '{project-version}'
+    id 'io.github.build-extensions-oss.helm' version '{project-version}'
 }
 ----
 
@@ -52,7 +52,7 @@ plugins {
 .Kotlin
 ----
 plugins {
-    id("com.citi.helm") version "{project-version}"
+    id("io.github.build-extensions-oss.helm") version "{project-version}"
 }
 ----
 
@@ -67,7 +67,7 @@ It enables the `helm.publishing` DSL block and adds publishing tasks for each ch
 .Groovy
 ----
 plugins {
-    id 'com.citi.helm-publish' version '{project-version}'
+    id 'io.github.build-extensions-oss.helm-publish' version '{project-version}'
 }
 ----
 
@@ -75,7 +75,7 @@ plugins {
 .Kotlin
 ----
 plugins {
-    id("com.citi.helm-publish") version "{project-version}"
+    id("io.github.build-extensions-oss.helm-publish") version "{project-version}"
 }
 ----
 
@@ -91,7 +91,7 @@ It enables the `helm.releases` DSL block, where you can declare your releases us
 .Groovy
 ----
 plugins {
-    id 'com.citi.helm-releases' version '{project-version}'
+    id 'io.github.build-extensions-oss.helm-releases' version '{project-version}'
 }
 ----
 
@@ -99,6 +99,6 @@ plugins {
 .Kotlin
 ----
 plugins {
-    id("com.citi.helm-releases") version "{project-version}"
+    id("io.github.build-extensions-oss.helm-releases") version "{project-version}"
 }
 ----

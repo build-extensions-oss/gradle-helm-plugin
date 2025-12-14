@@ -1,6 +1,6 @@
 = Using Helm Commands
 
-The plugin `com.citi.helm-commands` allows you to use Helm commands directly, similar to what you would do
+The plugin `io.github.build-extensions-oss.helm-commands` allows you to use Helm commands directly, similar to what you would do
 with the Helm CLI. `helm-commands` is also implied by all the other plugins in the suite.
 
 For most Helm CLI commands, there is a corresponding Gradle task type (except for commands that do not really make
@@ -21,7 +21,7 @@ for a full list of available tasks.
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.*
 
 plugins {
-    id 'com.citi.helm-commands' version '<VERSION>'
+    id 'io.github.build-extensions-oss.helm-commands' version '<VERSION>'
 }
 
 task installMariaDb(type: HelmInstall) {

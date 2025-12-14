@@ -75,16 +75,10 @@ appreciated**.
 We welcome you to:
 
 - Fix typos or touch up documentation
-- Share your opinions on [existing issues](https://github.com/citi/gradle-helm-plugin/issues)
-- Help expand and improve our library by [opening a new issue](https://github.com/citi/gradle-helm-plugin/issues/new)
+- Share your opinions on [existing issues](https://github.com/build-extensions-oss/gradle-helm-plugin/issues)
+- Help expand and improve our library by [opening a new issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues/new)
 
-Please review our [community contribution guidelines](https://github.com/Citi/.github/blob/main/CONTRIBUTING.md)
-and [functional contribution guidelines](./CONTRIBUTING.md) to get started 👍
-
-## Code of Conduct
-
-We are committed to making open source an enjoyable and respectful experience for our community. See [
-`CODE_OF_CONDUCT`](https://github.com/Citi/.github/blob/main/CODE_OF_CONDUCT.md) for more information.
+Please review our [functional contribution guidelines](./CONTRIBUTING.md) to get started 👍
 
 ## License
 
@@ -94,5 +88,5 @@ more information.
 ## Contact
 
 If you have a query or require support with this
-project, [raise an issue](https://github.com/Citi/gradle-helm-plugin/issues). Otherwise, reach out to
+project, [raise an issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues). Otherwise, reach out to
 opensource@citi.com.
