@@ -53,7 +53,7 @@ with version [2.2.0](https://github.com/Citi/gradle-helm-plugin/releases/tag/2.2
 of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin). Therefore, first please use that version. All
 Java/Kotlin packages are the same, so the plugin should be fully compatible.
 
-Version `3.0.0` (under construction) is not backward compatible with older plugin versions, because:
+Version `3.1.0` (under construction) is not backward compatible with older plugin versions, because:
 
 * It has new Java/Kotlin packages that match this project.
 * It is compatible with Gradle 9 (and not with Gradle 7), and all old APIs have been removed.
