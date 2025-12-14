@@ -4,7 +4,7 @@ import java.io.Reader
 import java.io.StringReader
 import java.io.StringWriter
 import java.io.Writer
-import org.unbrokendome.gradle.pluginutils.io.DelegateReader
+import build.extensions.oss.gradle.pluginutils.io.DelegateReader
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.error.Mark
 import org.yaml.snakeyaml.error.YAMLException

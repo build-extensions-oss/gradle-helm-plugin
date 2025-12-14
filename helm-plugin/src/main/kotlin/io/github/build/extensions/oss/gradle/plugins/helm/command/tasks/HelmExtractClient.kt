@@ -12,9 +12,9 @@ import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import org.unbrokendome.gradle.pluginutils.SystemUtils
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.SystemUtils
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 
 
 /**

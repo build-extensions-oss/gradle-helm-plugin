@@ -8,8 +8,8 @@ import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 import io.github.build.extensions.oss.gradle.plugins.helm.util.withLockFile
-import org.unbrokendome.gradle.pluginutils.listProperty
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.listProperty
+import build.extensions.oss.gradle.pluginutils.property
 import java.time.Duration
 
 

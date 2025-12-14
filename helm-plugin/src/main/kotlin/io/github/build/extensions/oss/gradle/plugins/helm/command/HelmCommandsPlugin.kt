@@ -1,5 +1,7 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command
 
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.durationProviderFromProjectProperty
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_LINT_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.conventionsFrom
@@ -16,8 +18,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.TaskDependency
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.durationProviderFromProjectProperty
 
 
 class HelmCommandsPlugin

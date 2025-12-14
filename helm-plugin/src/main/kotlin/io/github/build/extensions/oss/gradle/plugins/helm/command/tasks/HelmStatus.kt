@@ -8,10 +8,10 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
-import org.unbrokendome.gradle.pluginutils.fileProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.withDefault
+import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.withDefault
 
 
 /**

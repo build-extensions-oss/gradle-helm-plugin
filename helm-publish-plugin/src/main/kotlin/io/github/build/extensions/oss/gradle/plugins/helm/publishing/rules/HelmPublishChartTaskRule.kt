@@ -9,7 +9,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.publishConvention
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.AbstractHelmChartTaskRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

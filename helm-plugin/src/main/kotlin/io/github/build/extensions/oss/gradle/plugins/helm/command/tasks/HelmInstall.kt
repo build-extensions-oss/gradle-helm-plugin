@@ -3,7 +3,7 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

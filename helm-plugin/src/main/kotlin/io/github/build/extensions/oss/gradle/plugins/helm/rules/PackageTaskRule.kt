@@ -4,7 +4,7 @@ import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.TaskContainer
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmPackage
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

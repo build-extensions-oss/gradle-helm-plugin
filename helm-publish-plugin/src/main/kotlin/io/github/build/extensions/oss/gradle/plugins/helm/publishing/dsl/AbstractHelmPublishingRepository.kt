@@ -7,7 +7,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.Creden
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.CredentialsContainerSupport
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.CredentialsFactory
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.internal.DefaultCredentialsFactory
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.net.URI
 
 

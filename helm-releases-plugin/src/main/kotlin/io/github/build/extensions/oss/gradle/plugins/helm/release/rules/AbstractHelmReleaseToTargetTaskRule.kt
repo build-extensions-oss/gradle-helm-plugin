@@ -5,8 +5,8 @@ import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmRelease
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseTarget
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule2
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 internal abstract class AbstractHelmReleaseToTargetTaskRule<T : Task>(

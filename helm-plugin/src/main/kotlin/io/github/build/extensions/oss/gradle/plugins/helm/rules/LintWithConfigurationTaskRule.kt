@@ -7,7 +7,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.merge
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmLint
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =

@@ -6,9 +6,9 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import io.github.build.extensions.oss.gradle.plugins.helm.command.rules.extractClientTaskName
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmExtractClient
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 import javax.inject.Inject
 
 

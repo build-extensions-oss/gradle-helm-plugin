@@ -12,7 +12,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.dependencies.ChartDependencyHandler
 import org.gradle.api.Action
 import org.gradle.api.plugins.ExtensionAware
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

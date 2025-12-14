@@ -25,20 +25,20 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.filtering
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.lint
 import io.github.build.extensions.oss.gradle.plugins.helm.tasks.HelmFilterSources
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsItem
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsTask
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.dirValue
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.doesNotContainItem
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasExtension
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasOnlyTaskDependency
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasTaskDependencies
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.isPresent
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.isPresentAndEmptyMap
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.taskDependencies
-import org.unbrokendome.gradle.pluginutils.test.directory
-import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
-import org.unbrokendome.gradle.pluginutils.test.spek.setupGradleProject
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsItem
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsTask
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.dirValue
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.doesNotContainItem
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasExtension
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasOnlyTaskDependency
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasTaskDependencies
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isPresent
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isPresentAndEmptyMap
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.taskDependencies
+import build.extensions.oss.gradle.pluginutils.test.directory
+import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
+import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
 
 
 object HelmPluginChartsTest : Spek({

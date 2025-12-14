@@ -7,7 +7,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableGl
 import io.github.build.extensions.oss.gradle.plugins.helm.command.GlobalHelmOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
-import org.unbrokendome.gradle.pluginutils.ifPresent
+import build.extensions.oss.gradle.pluginutils.ifPresent
 
 
 fun ConfigurableGlobalHelmOptions.conventionsFrom(source: GlobalHelmOptions) = apply {

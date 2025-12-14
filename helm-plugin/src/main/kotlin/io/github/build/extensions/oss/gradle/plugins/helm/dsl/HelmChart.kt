@@ -16,8 +16,8 @@ import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartModelDepend
 import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartRequirementsYaml
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.DefaultRenderingRule
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.packageTaskName
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.versionProvider
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.versionProvider
 import javax.inject.Inject
 import org.gradle.api.Action
 import org.gradle.api.Buildable

@@ -9,7 +9,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleas
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseInternal
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseTarget
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.shouldInclude
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =

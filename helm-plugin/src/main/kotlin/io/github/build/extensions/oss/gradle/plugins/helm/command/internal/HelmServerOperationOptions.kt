@@ -11,9 +11,9 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmServerOperationOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmServerOptions
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.toSimpleString
-import org.unbrokendome.gradle.pluginutils.withDefault
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.toSimpleString
+import build.extensions.oss.gradle.pluginutils.withDefault
 import java.time.Duration
 
 

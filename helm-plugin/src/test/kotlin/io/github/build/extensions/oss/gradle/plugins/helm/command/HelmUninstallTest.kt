@@ -10,11 +10,11 @@ import io.github.build.extensions.oss.gradle.plugins.helm.spek.gradleExecMock
 import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.GradleExecMock
 import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.singleInvocation
 import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.verifyNoInvocations
-import org.unbrokendome.gradle.pluginutils.test.TaskOutcome
-import org.unbrokendome.gradle.pluginutils.test.execute
-import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
-import org.unbrokendome.gradle.pluginutils.test.spek.gradleTask
-import org.unbrokendome.gradle.pluginutils.test.spek.setupGradleProject
+import build.extensions.oss.gradle.pluginutils.test.TaskOutcome
+import build.extensions.oss.gradle.pluginutils.test.execute
+import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
+import build.extensions.oss.gradle.pluginutils.test.spek.gradleTask
+import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
 
 
 object HelmUninstallTest : ExecutionResultAwareSpek({

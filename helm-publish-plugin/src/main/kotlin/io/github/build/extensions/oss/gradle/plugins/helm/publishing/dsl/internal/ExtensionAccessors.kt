@@ -5,7 +5,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.publishing.HELM_PUBLIS
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.HELM_PUBLISHING_REPOSITORIES_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryContainer
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

@@ -1,12 +1,12 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
+import build.extensions.oss.gradle.pluginutils.rules.AbstractPatternRule
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ConfigurationContainer
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.dependencies.chartDependenciesConfigurationName
-import org.unbrokendome.gradle.pluginutils.rules.AbstractPatternRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =
