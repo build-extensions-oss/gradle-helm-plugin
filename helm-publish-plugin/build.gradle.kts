@@ -24,9 +24,9 @@ dependencies {
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-common")
     }
 
-    implementation(libs.unbrokenDomePluginUtils)
+    implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
 
-    testImplementation(libs.unbrokenDomeTestUtils)
+    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
 
     "functionalTestImplementation"(project(":plugin-test-utils"))
     "functionalTestImplementation"(libs.okHttpMockWebServer)
