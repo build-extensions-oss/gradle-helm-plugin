@@ -84,9 +84,3 @@ Please review our [functional contribution guidelines](./CONTRIBUTING.md) to get
 
 This project is distributed under the [MIT License](https://opensource.org/license/mit). See [`LICENSE`](./LICENSE) for
 more information.
-
-## Contact
-
-If you have a query or require support with this
-project, [raise an issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues). Otherwise, reach out to
-opensource@citi.com.
