@@ -5,7 +5,7 @@ gradleUtils = "1.1.0"
 okhttp = "4.12.0"
 jackson = "2.18.2"
 # No need to keep the same Kotlin version with Gradle, at least because kotlin runtime is a transitive dependency of okhttp
-kotlin = "1.9.23"
+kotlin = "2.0.21"
 junit = "5.11.4"
 
 [libraries]
@@ -32,7 +32,7 @@ coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ver
 
 
 [plugins]
-detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.6" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.8" }
 gradlePublish = { id = "com.gradle.plugin-publish", version = "1.3.0" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
