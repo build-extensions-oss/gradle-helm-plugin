@@ -12,7 +12,7 @@ project.
 
 The project uses [Dokka](https://github.com/Kotlin/dokka) for documentation generation (analogue of Javadoc on Kotlin
 world). This process might take some time, however if you'd like to disable it please specify the following property in
-your user `gradle.properties` file: `com.citi.gradle.helm.plugin.dokka.disabled=true`.
+your user `gradle.properties` file: `io.github.build.extensions.oss.gradle.helm.plugin.dokka.disabled=true`.
 
 # Tests
 
@@ -41,7 +41,7 @@ different source set and to different task. Please run `./gradlew functionalTest
 
 Functional tests download distribution archives from `https://services.gradle.org/distributions`. If you'd like to use
 another web server (for example, corporate artifacts provider) - please configure gradle property
-`com.citi.gradle.helm.plugin.distribution.url.prefix` in `~/.gradle/gradle.properties`
+`io.github.build.extensions.oss.gradle.helm.plugin.distribution.url.prefix` in `~/.gradle/gradle.properties`
 
 ### Helm executable replacement
 

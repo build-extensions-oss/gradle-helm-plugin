@@ -1,4 +1,4 @@
-public final class com/citi/gradle/plugins/helm/release/HelmReleasesPlugin : org/gradle/api/Plugin {
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/HelmReleasesPlugin : org/gradle/api/Plugin {
 	public static final field installAllTaskName Ljava/lang/String;
 	public static final field testAllTaskName Ljava/lang/String;
 	public static final field uninstallAllTaskName Ljava/lang/String;
@@ -7,22 +7,22 @@ public final class com/citi/gradle/plugins/helm/release/HelmReleasesPlugin : org
 	public fun apply (Lorg/gradle/api/Project;)V
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/ChartReference : org/gradle/api/Buildable {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference : org/gradle/api/Buildable {
 	public abstract fun getBuildDependencies ()Lorg/gradle/api/tasks/TaskDependency;
 	public abstract fun getChartLocation ()Ljava/lang/String;
 }
 
-public final class com/citi/gradle/plugins/helm/release/dsl/ChartReference$DefaultImpls {
-	public static fun getBuildDependencies (Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;)Lorg/gradle/api/tasks/TaskDependency;
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference$DefaultImpls {
+	public static fun getBuildDependencies (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;)Lorg/gradle/api/tasks/TaskDependency;
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions : com/citi/gradle/plugins/helm/release/dsl/HelmReleaseTestOptions {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions : io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTestOptions {
 	public abstract fun getEnabled ()Lorg/gradle/api/provider/Property;
 	public abstract fun getShowLogs ()Lorg/gradle/api/provider/Property;
 	public abstract fun getTimeout ()Lorg/gradle/api/provider/Property;
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmRelease : com/citi/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions, com/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties, org/gradle/api/Named {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions, io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties, org/gradle/api/Named {
 	public abstract fun forAnyTarget (Lorg/gradle/api/Action;)V
 	public abstract fun forTarget (Ljava/lang/String;Lorg/gradle/api/Action;)V
 	public abstract fun forTargets (Ljava/lang/Iterable;Lorg/gradle/api/Action;)V
@@ -36,45 +36,45 @@ public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmRel
 	public abstract fun valuesDirs ([Ljava/lang/Object;)V
 }
 
-public final class com/citi/gradle/plugins/helm/release/dsl/HelmRelease$DefaultImpls {
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/util/Map;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;)V
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
-	public static fun forAnyTarget (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Lorg/gradle/api/Action;)V
-	public static fun forTarget (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;Lorg/gradle/api/Action;)V
-	public static fun forTargets (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;Lorg/gradle/api/Action;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Iterable;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/Object;)V
-	public static fun mustInstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
-	public static fun mustUninstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
-	public static fun tags (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Iterable;)V
-	public static fun tags (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
-	public static fun test (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Lorg/gradle/api/Action;)V
-	public static fun valuesDir (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Object;)V
-	public static fun valuesDirs (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/Object;)V
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$DefaultImpls {
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/util/Map;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;)V
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
+	public static fun forAnyTarget (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Lorg/gradle/api/Action;)V
+	public static fun forTarget (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/String;Lorg/gradle/api/Action;)V
+	public static fun forTargets (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;Lorg/gradle/api/Action;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Iterable;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/Object;)V
+	public static fun mustInstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
+	public static fun mustUninstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
+	public static fun tags (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Iterable;)V
+	public static fun tags (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/String;)V
+	public static fun test (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Lorg/gradle/api/Action;)V
+	public static fun valuesDir (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;Ljava/lang/Object;)V
+	public static fun valuesDirs (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;[Ljava/lang/Object;)V
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific : com/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties {
-	public abstract fun getTarget ()Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseTarget;
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific : io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties {
+	public abstract fun getTarget ()Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTarget;
 }
 
-public final class com/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific$DefaultImpls {
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/String;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/util/Map;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/String;)V
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/Iterable;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/Object;)V
-	public static fun mustInstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
-	public static fun mustUninstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
-	public static fun test (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Lorg/gradle/api/Action;)V
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific$DefaultImpls {
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/String;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/util/Map;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/String;)V
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Ljava/lang/Iterable;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/Object;)V
+	public static fun mustInstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
+	public static fun mustUninstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;[Ljava/lang/String;)V
+	public static fun test (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease$TargetSpecific;Lorg/gradle/api/Action;)V
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties : com/citi/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions, com/citi/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Named {
-	public abstract fun chart (Ljava/lang/String;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public abstract fun chart (Ljava/lang/String;Ljava/lang/String;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public abstract fun chart (Ljava/util/Map;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Named {
+	public abstract fun chart (Ljava/lang/String;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public abstract fun chart (Ljava/lang/String;Ljava/lang/String;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public abstract fun chart (Ljava/util/Map;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
 	public abstract fun dependsOn (Ljava/lang/String;)V
 	public abstract fun dependsOn ([Ljava/lang/String;)V
 	public abstract fun from (Ljava/lang/Object;)V
@@ -87,7 +87,7 @@ public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmRel
 	public abstract fun getMustUninstallAfter ()Ljava/util/Set;
 	public abstract fun getReleaseName ()Lorg/gradle/api/provider/Property;
 	public abstract fun getReplace ()Lorg/gradle/api/provider/Property;
-	public abstract fun getTest ()Lcom/citi/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions;
+	public abstract fun getTest ()Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions;
 	public abstract fun installDependsOn (Ljava/lang/Iterable;)V
 	public abstract fun installDependsOn ([Ljava/lang/Object;)V
 	public abstract fun mustInstallAfter ([Ljava/lang/String;)V
@@ -95,52 +95,52 @@ public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmRel
 	public abstract fun test (Lorg/gradle/api/Action;)V
 }
 
-public final class com/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties$DefaultImpls {
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun chart (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/util/Map;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static synthetic fun chart$default (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/citi/gradle/plugins/helm/release/dsl/ChartReference;
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;)V
-	public static fun dependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/Iterable;)V
-	public static fun installDependsOn (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/Object;)V
-	public static fun mustInstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
-	public static fun mustUninstallAfter (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
-	public static fun test (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Lorg/gradle/api/Action;)V
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties$DefaultImpls {
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun chart (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/util/Map;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static synthetic fun chart$default (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ChartReference;
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/String;)V
+	public static fun dependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Ljava/lang/Iterable;)V
+	public static fun installDependsOn (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/Object;)V
+	public static fun mustInstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
+	public static fun mustUninstallAfter (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;[Ljava/lang/String;)V
+	public static fun test (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties;Lorg/gradle/api/Action;)V
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmReleaseTarget : com/citi/gradle/plugins/helm/command/ConfigurableHelmInstallationOptions, com/citi/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Named, org/gradle/api/plugins/ExtensionAware {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTarget : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallationOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Named, org/gradle/api/plugins/ExtensionAware {
 	public abstract fun getFileValues ()Lorg/gradle/api/provider/MapProperty;
 	public abstract fun getSelectTags ()Ljava/lang/String;
-	public abstract fun getTest ()Lcom/citi/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions;
+	public abstract fun getTest ()Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions;
 	public abstract fun getValueFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
 	public abstract fun getValues ()Lorg/gradle/api/provider/MapProperty;
 	public abstract fun setSelectTags (Ljava/lang/String;)V
 	public abstract fun test (Lorg/gradle/api/Action;)V
 }
 
-public final class com/citi/gradle/plugins/helm/release/dsl/HelmReleaseTarget$DefaultImpls {
-	public static fun test (Lcom/citi/gradle/plugins/helm/release/dsl/HelmReleaseTarget;Lorg/gradle/api/Action;)V
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTarget$DefaultImpls {
+	public static fun test (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTarget;Lorg/gradle/api/Action;)V
 }
 
-public abstract interface class com/citi/gradle/plugins/helm/release/dsl/HelmReleaseTestOptions {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTestOptions {
 	public abstract fun getEnabled ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getShowLogs ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getTimeout ()Lorg/gradle/api/provider/Provider;
 }
 
-public final class com/citi/gradle/plugins/helm/release/rules/HelmInstallReleaseTaskRuleKt {
-	public static final fun getInstallTaskName (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/rules/HelmInstallReleaseTaskRuleKt {
+	public static final fun getInstallTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
 }
 
-public final class com/citi/gradle/plugins/helm/release/rules/HelmStatusReleaseTaskRuleKt {
-	public static final fun getStatusTaskName (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/rules/HelmStatusReleaseTaskRuleKt {
+	public static final fun getStatusTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
 }
 
-public final class com/citi/gradle/plugins/helm/release/rules/HelmTestReleaseTaskRuleKt {
-	public static final fun getTestTaskName (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/rules/HelmTestReleaseTaskRuleKt {
+	public static final fun getTestTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
 }
 
-public final class com/citi/gradle/plugins/helm/release/rules/HelmUninstallReleaseTaskRuleKt {
-	public static final fun getUninstallTaskName (Lcom/citi/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
+public final class io/github/build/extensions/oss/gradle/plugins/helm/release/rules/HelmUninstallReleaseTaskRuleKt {
+	public static final fun getUninstallTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease;)Ljava/lang/String;
 }
 

@@ -18,7 +18,7 @@ for a full list of available tasks.
 .build.gradle
 [source,groovy]
 ----
-import com.citi.gradle.plugins.helm.command.tasks.*
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.*
 
 plugins {
     id 'com.citi.helm-commands' version '<VERSION>'

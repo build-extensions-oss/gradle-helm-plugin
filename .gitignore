@@ -5,4 +5,11 @@ out/
 
 # Gradle
 .gradle/
-build/
+
+# Ignore all files in build folders, however we must ask git to enumerate files - see below
+build/**
+*/build/**
+# Above we enumerated ignored files. Right now we must unignore all files with source code,
+# because our package name has 'build' inside, so that folder might be excluded by git
+!/kotlin/build/extensions
+!/kotlin/build/extensions/**/*
