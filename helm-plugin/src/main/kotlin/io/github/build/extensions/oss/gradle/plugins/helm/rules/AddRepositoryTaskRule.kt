@@ -1,14 +1,14 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.rules
 
+import build.extensions.oss.gradle.pluginutils.ifPresent
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.tasks.TaskContainer
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRepository
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.PasswordCredentials
-import org.unbrokendome.gradle.pluginutils.ifPresent
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
 
 
 private val namePattern =

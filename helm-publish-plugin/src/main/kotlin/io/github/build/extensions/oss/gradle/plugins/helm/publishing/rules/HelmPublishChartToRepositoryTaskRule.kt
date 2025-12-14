@@ -7,8 +7,8 @@ import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPub
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.publishConvention
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.tasks.HelmPublishChart
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.packagedArtifactConfigurationName
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule2
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern2
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule2
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
 private val namePattern =

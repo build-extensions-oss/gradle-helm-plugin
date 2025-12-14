@@ -13,9 +13,9 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmDownloadCl
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.deleteFileOnException
 import io.github.build.extensions.oss.gradle.plugins.helm.util.calculateDigestHex
 import io.github.build.extensions.oss.gradle.plugins.helm.util.formatDataSize
-import org.unbrokendome.gradle.pluginutils.SystemUtils
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.SystemUtils
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.IOException

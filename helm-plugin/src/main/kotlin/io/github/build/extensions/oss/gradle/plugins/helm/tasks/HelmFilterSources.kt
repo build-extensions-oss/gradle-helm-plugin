@@ -16,9 +16,9 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.putFrom
-import org.unbrokendome.gradle.pluginutils.io.expand
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.versionProvider
+import build.extensions.oss.gradle.pluginutils.io.expand
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.versionProvider
 
 
 /**

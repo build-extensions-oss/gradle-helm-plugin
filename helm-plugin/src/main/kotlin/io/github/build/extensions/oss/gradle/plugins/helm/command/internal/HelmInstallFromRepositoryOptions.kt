@@ -10,7 +10,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmInstallFromRepositoryOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmInstallationOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmOptions
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.net.URI
 
 

@@ -14,11 +14,11 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.Passwo
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.credentials
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.repositories
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsItem
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.fileValue
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.isPresent
-import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
-import org.unbrokendome.gradle.pluginutils.test.spek.setupGradleProject
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsItem
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.fileValue
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isPresent
+import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
+import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
 import java.io.File
 
 

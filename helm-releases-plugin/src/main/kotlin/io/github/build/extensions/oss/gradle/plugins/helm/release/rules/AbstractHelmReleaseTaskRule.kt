@@ -4,8 +4,8 @@ import org.gradle.api.NamedDomainObjectCollection
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmRelease
-import org.unbrokendome.gradle.pluginutils.rules.AbstractTaskRule
-import org.unbrokendome.gradle.pluginutils.rules.RuleNamePattern
+import build.extensions.oss.gradle.pluginutils.rules.AbstractTaskRule
+import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern
 
 
 internal abstract class AbstractHelmReleaseTaskRule<T : Task>(

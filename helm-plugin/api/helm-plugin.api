@@ -838,13 +838,13 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/depend
 	public static synthetic fun add$default (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/dependencies/ChartDependencyHandler;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
 }
 
-public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRule : org/unbrokendome/gradle/pluginutils/rules/AbstractTaskRule {
-	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/unbrokendome/gradle/pluginutils/rules/RuleNamePattern;)V
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRule : build/extensions/oss/gradle/pluginutils/rules/AbstractTaskRule {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
 	protected abstract fun configureFrom (Lorg/gradle/api/Task;Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmChart;)V
 }
 
-public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRuleOuterInner : org/unbrokendome/gradle/pluginutils/rules/AbstractPatternRuleOuterInner {
-	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lorg/unbrokendome/gradle/pluginutils/rules/RuleNamePattern2;)V
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRuleOuterInner : build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRuleOuterInner {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
 	protected abstract fun configureFrom (Lorg/gradle/api/Task;Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmChart;Lorg/gradle/api/Named;)V
 }
 
@@ -852,7 +852,7 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/rules/AddR
 	public static final fun getRegisterTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRepository;)Ljava/lang/String;
 }
 
-public final class io/github/build/extensions/oss/gradle/plugins/helm/rules/ChartDirArtifactRule : org/unbrokendome/gradle/pluginutils/rules/AbstractPatternRule {
+public final class io/github/build/extensions/oss/gradle/plugins/helm/rules/ChartDirArtifactRule : build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule {
 	public static final field Companion Lio/github/build/extensions/oss/gradle/plugins/helm/rules/ChartDirArtifactRule$Companion;
 	public fun <init> (Lorg/gradle/api/artifacts/ConfigurationContainer;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;)V
 	public synthetic fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;)V

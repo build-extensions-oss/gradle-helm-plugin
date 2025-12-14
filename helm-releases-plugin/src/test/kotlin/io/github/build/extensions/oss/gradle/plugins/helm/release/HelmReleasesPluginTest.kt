@@ -23,18 +23,18 @@ import org.gradle.api.Task
 import org.gradle.api.provider.Property
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.cast
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.containsTask
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.doesNotContainItem
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.doesNotHaveTaskDependency
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasExtension
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasExtensionNamed
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasOnlyTaskDependency
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasTaskDependency
-import org.unbrokendome.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
-import org.unbrokendome.gradle.pluginutils.test.evaluate
-import org.unbrokendome.gradle.pluginutils.test.spek.applyPlugin
-import org.unbrokendome.gradle.pluginutils.test.spek.setupGradleProject
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.cast
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.containsTask
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.doesNotContainItem
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.doesNotHaveTaskDependency
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasExtension
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasExtensionNamed
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasOnlyTaskDependency
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasTaskDependency
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
+import build.extensions.oss.gradle.pluginutils.test.evaluate
+import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
+import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
 
 
 object HelmReleasesPluginTest : Spek({

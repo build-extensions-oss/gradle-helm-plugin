@@ -5,7 +5,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.process.ExecOperations
 import org.gradle.workers.WorkAction
 import org.slf4j.LoggerFactory
-import org.unbrokendome.gradle.pluginutils.ifPresent
+import build.extensions.oss.gradle.pluginutils.ifPresent
 import java.io.OutputStream
 import javax.inject.Inject
 

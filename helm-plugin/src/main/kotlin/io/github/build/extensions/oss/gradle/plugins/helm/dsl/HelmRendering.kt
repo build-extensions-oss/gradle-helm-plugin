@@ -10,8 +10,8 @@ import org.gradle.api.tasks.TaskDependency
 import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.renderTaskName
-import org.unbrokendome.gradle.pluginutils.listProperty
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.listProperty
+import build.extensions.oss.gradle.pluginutils.property
 import javax.inject.Inject
 
 

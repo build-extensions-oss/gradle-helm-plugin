@@ -12,7 +12,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRepositoryHandler
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

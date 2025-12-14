@@ -8,7 +8,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

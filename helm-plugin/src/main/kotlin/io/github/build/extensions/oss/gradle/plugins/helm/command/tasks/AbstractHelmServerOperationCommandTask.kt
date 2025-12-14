@@ -5,7 +5,7 @@ import org.gradle.api.tasks.Internal
 import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmServerOperationOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmServerOperationOptionsApplier
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.time.Duration
 
 

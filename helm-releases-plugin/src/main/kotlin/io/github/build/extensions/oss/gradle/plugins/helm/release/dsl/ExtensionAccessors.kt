@@ -6,7 +6,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.HELM_ACTIVE_RELEASE_TA
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_RELEASES_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_RELEASE_TARGETS_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
-import org.unbrokendome.gradle.pluginutils.requiredExtension
+import build.extensions.oss.gradle.pluginutils.requiredExtension
 
 
 /**

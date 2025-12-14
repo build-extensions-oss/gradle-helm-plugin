@@ -10,7 +10,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.intern
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.AbstractHttpHelmChartPublisher
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.HelmChartPublisher
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.PublisherParams
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 import java.io.File
 import java.net.URI
 import javax.inject.Inject

@@ -35,10 +35,10 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.reflect.TypeOf
-import org.unbrokendome.gradle.pluginutils.booleanProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.durationProviderFromProjectProperty
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.providerFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.durationProviderFromProjectProperty
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 
 
 class HelmReleasesPlugin : Plugin<Project> {

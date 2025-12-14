@@ -15,7 +15,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryInternal
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.PublisherParams
-import org.unbrokendome.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.property
 
 
 /**

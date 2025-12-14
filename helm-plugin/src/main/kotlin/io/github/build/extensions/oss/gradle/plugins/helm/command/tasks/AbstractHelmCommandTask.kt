@@ -15,8 +15,8 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.GlobalHelmOpti
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
-import org.unbrokendome.gradle.pluginutils.property
-import org.unbrokendome.gradle.pluginutils.withDefault
+import build.extensions.oss.gradle.pluginutils.property
+import build.extensions.oss.gradle.pluginutils.withDefault
 import javax.inject.Inject
 
 
