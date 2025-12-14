@@ -4,7 +4,11 @@ name: Plugin documentation
 # https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
 # It shouldn't be merged with plugin publication to keep an ability of independent documentation update
 on:
+  # allow manual runs
   workflow_dispatch:
+  # run automatically on publish
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -13,8 +17,6 @@ permissions:
 
 jobs:
   gradle:
-    strategy:
-      fail-fast: true
     runs-on: ubuntu-latest
 
     environment:

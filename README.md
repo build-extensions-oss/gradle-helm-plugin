@@ -1,24 +1,7 @@
-<div align="center">
-  <a href="https://github.com/citi">
-    <img src="https://github.com/citi.png" alt="Citi" width="80" height="80">
-  </a>
-
-<h3 align="center">Citi/gradle-helm-plugin</h3>
-
-  <p align="center">
-    A suite of Gradle Plugins for <br />building, publishing and managing <a href="https://www.helm.sh">Helm</a> Charts
-    <br />
-  </p>
-
-  <p align="center">
-    <a href="https://citi.github.io/gradle-helm-plugin/"><img src="https://img.shields.io/badge/read%20our%20documentation-0f1632"></a>
-    <a href="https://plugins.gradle.org/plugin/io.github.build-extensions-oss.helm"><img src="https://img.shields.io/gradle-plugin-portal/v/io.github.build-extensions-oss.helm?colorA=0f1632&colorB=255be3" /></a>
-    <a href="./LICENSE"><img src="https://img.shields.io/github/license/build-extensions-oss/gradle-helm-plugin?label=license&colorA=0f1632&colorB=255be3" /></a>
-    <a href="https://img.shields.io/ossf-scorecard/github.com/build-extensions-oss/gradle-helm-plugin?label=openssf+scorecard&style=flat"><img src="https://img.shields.io/ossf-scorecard/github.com/Citi/gradle-helm-plugin?label=openssf+scorecard&style=flat" /></a>
-  </p>
-</div>
-
-<br />
+![Documentation](https://img.shields.io/badge/documentation?link=https%3A%2F%2Fbuild-extensions-oss.github.io%2Fgradle-helm-plugin%2F)
+![Gradle Portal](https://img.shields.io/gradle-plugin-portal/v/io.github.build-extensions-oss.helm?colorA=0f1632&colorB=255be3)
+![Licence](https://img.shields.io/github/license/build-extensions-oss/gradle-helm-plugin?label=license&colorA=0f1632&colorB=255be3)
+![Scorecard](https://img.shields.io/ossf-scorecard/github.com/build-extensions-oss/gradle-helm-plugin?label=openssf+scorecard&style=flat)
 
 ## Features
 
@@ -64,7 +47,8 @@ plugins {
 This repository is a fork of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin), which is a
 of [unbroken-dome/gradle-helm-plugin](https://github.com/unbroken-dome/gradle-helm-plugin).
 
-The version [v2.2.0](https://github.com/build-extensions-oss/gradle-helm-plugin/releases/tag/v2.2.0) has exactly the same code
+The version [v2.2.0](https://github.com/build-extensions-oss/gradle-helm-plugin/releases/tag/v2.2.0) has exactly the
+same code
 with version [2.2.0](https://github.com/Citi/gradle-helm-plugin/releases/tag/2.2.0)
 of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin). Therefore, first please use that version. All
 Java/Kotlin packages are the same, so the plugin should be fully compatible.
@@ -91,16 +75,10 @@ appreciated**.
 We welcome you to:
 
 - Fix typos or touch up documentation
-- Share your opinions on [existing issues](https://github.com/citi/gradle-helm-plugin/issues)
-- Help expand and improve our library by [opening a new issue](https://github.com/citi/gradle-helm-plugin/issues/new)
+- Share your opinions on [existing issues](https://github.com/build-extensions-oss/gradle-helm-plugin/issues)
+- Help expand and improve our library by [opening a new issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues/new)
 
-Please review our [community contribution guidelines](https://github.com/Citi/.github/blob/main/CONTRIBUTING.md)
-and [functional contribution guidelines](./CONTRIBUTING.md) to get started 👍
-
-## Code of Conduct
-
-We are committed to making open source an enjoyable and respectful experience for our community. See [
-`CODE_OF_CONDUCT`](https://github.com/Citi/.github/blob/main/CODE_OF_CONDUCT.md) for more information.
+Please review our [functional contribution guidelines](./CONTRIBUTING.md) to get started 👍
 
 ## License
 
@@ -110,5 +88,5 @@ more information.
 ## Contact
 
 If you have a query or require support with this
-project, [raise an issue](https://github.com/Citi/gradle-helm-plugin/issues). Otherwise, reach out to
+project, [raise an issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues). Otherwise, reach out to
 opensource@citi.com.
