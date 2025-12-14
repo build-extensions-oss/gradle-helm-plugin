@@ -14,8 +14,8 @@ dependencies {
 
     implementation(project(":helm-plugin"))
 
-    implementation(libs.unbrokenDomePluginUtils)
-    testImplementation(libs.unbrokenDomeTestUtils)
+    implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
+    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
 }
 
 

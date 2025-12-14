@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.snakeyaml)
     implementation(libs.orgJson)
 
-    implementation(libs.unbrokenDomePluginUtils)
+    implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
 
     testImplementation(libs.jsonPath)
     testImplementation(libs.jacksonDataBind)
@@ -24,7 +24,7 @@ dependencies {
     testImplementation(libs.okHttpMockWebServer)
 
     testImplementation(libs.coroutinesCore)
-    testImplementation(libs.unbrokenDomeTestUtils)
+    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
     testImplementation(libs.bundles.defaultTests)
     testRuntimeOnly(libs.junitEngine)
 }
