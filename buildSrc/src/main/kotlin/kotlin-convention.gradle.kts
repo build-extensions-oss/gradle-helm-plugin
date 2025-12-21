@@ -1,3 +1,10 @@
+import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     `java-library`
     kotlin("jvm")
@@ -6,15 +13,23 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
-/*
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+// let's keep JVM versions in a one place
+val projectJvmTarget = JvmTarget.JVM_1_8
+val projectJvmTargetInt = 8
+
+configure<KotlinJvmProjectExtension> {
+    jvmToolchain(projectJvmTargetInt)
 }
 
-tasks.withType<JavaCompile> {
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
-}*/
+tasks.withType<KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        jvmTarget = projectJvmTarget
+    }
+}
+tasks.withType<JavaCompile>().configureEach {
+    // synchronize Java version with Kotlin compiler
+    options.release.set(projectJvmTargetInt)
+}
 
 tasks.withType<Test> {
     // always execute tests
@@ -35,8 +50,6 @@ tasks.withType<Test> {
         systemProperty("SPEK_TIMEOUT", 30000)
     }
 }
-
-
 
 tasks.jar {
     archiveVersion.set(project.version.toString())

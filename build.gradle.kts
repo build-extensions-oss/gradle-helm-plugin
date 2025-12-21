@@ -49,35 +49,6 @@ subprojects {
             "testImplementation"(libs.spekDsl)
             "testRuntimeOnly"(libs.spekRunner)
         }
-
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-
-        tasks.withType<JavaCompile> {
-            sourceCompatibility = "1.8"
-            targetCompatibility = "1.8"
-        }
-
-        tasks.withType<Test> {
-            // always execute tests
-            outputs.upToDateWhen { false }
-
-            useJUnitPlatform()
-
-            testLogging.showStandardStreams = true
-
-            // give tests a temporary directory below the build dir so
-            // we don't pollute the system temp dir (Gradle tests don't clean up)
-            systemProperty("java.io.tmpdir", layout.buildDirectory.dir("tmp").get())
-
-            maxParallelForks = (project.property("test.maxParallelForks") as String).toInt()
-            if (maxParallelForks > 1) {
-                // Parallel tests seem to need a little more time to set up, so increase the test timeout to
-                // make sure that the first test in a forked process doesn't fail because of this
-                systemProperty("SPEK_TIMEOUT", 30000)
-            }
-        }
     }
 
     plugins.withId("org.jetbrains.dokka") {
