@@ -7,7 +7,7 @@ val functionalTest: SourceSet by sourceSets.creating
 
 val functionalTestTask = tasks.register<Test>("functionalTest") {
     description = "Runs the integration tests."
-    group = "verification"
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
     testClassesDirs = functionalTest.output.classesDirs
     classpath = functionalTest.runtimeClasspath
     mustRunAfter(tasks.test)

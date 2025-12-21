@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.asciidoctor)
     alias(libs.plugins.benManesVersions)
+    // is defined in buildSrc
+    id("org.jetbrains.kotlinx.kover")
 }
 
 
@@ -144,6 +146,23 @@ subprojects {
             description = "A suite of Gradle plugins for building, publishing and managing Helm charts."
             plugins.forEach { plugin ->
                 plugin.tags.add("helm")
+            }
+        }
+    }
+}
+
+tasks {
+    this.getByName("build") {
+        // prohibit building without verification
+        dependsOn(getByName("koverCachedVerify"))
+    }
+}
+
+kover.reports {
+    verify {
+        rule {
+            bound {
+                minValue.set(14)
             }
         }
     }
