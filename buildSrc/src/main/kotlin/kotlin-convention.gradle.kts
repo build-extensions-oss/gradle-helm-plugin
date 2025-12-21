@@ -1,33 +1,53 @@
+import org.gradle.kotlin.dsl.assign
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     `java-library`
+    kotlin("jvm")
+    id("io.gitlab.arturbosch.detekt")
+    id("dependencies-lock")
     id("org.jetbrains.kotlinx.kover")
 }
-/**
-Embedded plugin has common logic for different projects. So, mainly it is here to have an ability to put more code into Gradle files.
- */
 
-// we will lock dependencies on these two configurations. We aren't interested in others, however these ones will be used
-// for local invocation
-val configurationsToLock: List<Configuration> = listOf("runtimeClasspath", "testRuntimeClasspath").map { configurations[it] }
+// let's keep JVM versions in a one place
+val projectJvmTarget = JvmTarget.JVM_1_8
+val projectJvmTargetInt = 8
 
-// lock selected configurations. The build is failed if they aren't updated
-configurationsToLock.forEach {
-    it.resolutionStrategy.activateDependencyLocking()
+configure<KotlinJvmProjectExtension> {
+    jvmToolchain(projectJvmTargetInt)
 }
 
-// copied from https://docs.gradle.org/current/userguide/dependency_locking.html#sec:lock-all-configurations-in-one-build-execution
-// however we resolve only two configurations we are interested in
-// So, if there are any issues with `gradle.lockfile`, call `./gradlew resolveAndLockAll --write-locks`
-tasks.register("resolveAndLockAll") {
-    notCompatibleWithConfigurationCache("Filters configurations at execution time")
-    doFirst {
-        require(gradle.startParameter.isWriteDependencyLocks) { "$path must be run from the command line with the `--write-locks` flag" }
+tasks.withType<KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        jvmTarget = projectJvmTarget
     }
-    doLast {
-        configurationsToLock.forEach {
-            // resolve the configuration - it means that Gradle will generate lockfile for them
-            it.resolve()
-        }
+}
+tasks.withType<JavaCompile>().configureEach {
+    // synchronize Java version with Kotlin compiler
+    options.release.set(projectJvmTargetInt)
+}
+
+tasks.withType<Test> {
+    // always execute tests
+    outputs.upToDateWhen { false }
+
+    useJUnitPlatform()
+
+    testLogging.showStandardStreams = true
+
+    // give tests a temporary directory below the build dir so
+    // we don't pollute the system temp dir (Gradle tests don't clean up)
+    systemProperty("java.io.tmpdir", layout.buildDirectory.dir("tmp").get())
+
+    maxParallelForks = (project.property("test.maxParallelForks") as String).toInt()
+    if (maxParallelForks > 1) {
+        // Parallel tests seem to need a little more time to set up, so increase the test timeout to
+        // make sure that the first test in a forked process doesn't fail because of this
+        systemProperty("SPEK_TIMEOUT", 30000)
     }
 }
 
