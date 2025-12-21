@@ -26,11 +26,11 @@ internal class OnlyHelmPublishPluginTest {
     @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
     fun helmPublishPluginCouldBeAppliedAloneButDontCreateAnyTask(parameters: DefaultGradleRunnerParameters) {
         // given
-        val arguments = listOf("tasks", "--stacktrace")
-        val gradleRunner = GradleRunnerProvider
-            .createRunner(parameters)
-            .withProjectDir(testProjectDir)
-            .withArguments(arguments)
+        val gradleRunner = GradleRunnerProvider.createRunner(
+            parameters = parameters,
+            projectDir = testProjectDir,
+            arguments = listOf("tasks", "--stacktrace"),
+        )
 
         // when
         val result = gradleRunner.build()
