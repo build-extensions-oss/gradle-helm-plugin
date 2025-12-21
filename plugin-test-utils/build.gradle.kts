@@ -8,4 +8,9 @@ dependencies {
     api(gradleTestKit())
     api(libs.bundles.defaultTests)
     runtimeOnly(libs.junitEngine)
+
+    // import code coverage from other plugins - basically, some code from this project is used there
+    kover(":helm-plugin")
+    kover(":helm-publish-plugin")
+    kover(":helm-releases-plugin")
 }
