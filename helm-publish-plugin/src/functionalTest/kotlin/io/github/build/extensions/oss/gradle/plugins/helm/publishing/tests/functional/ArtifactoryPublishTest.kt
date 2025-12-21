@@ -56,10 +56,11 @@ internal class ArtifactoryPublishTest {
             helmExecutableParameter.parameterValue,
             "-PserverPort=${mockServer.currentPort}"
         )
-        val gradleRunner = GradleRunnerProvider
-            .createRunner(parameters)
-            .withProjectDir(testProjectDir)
-            .withArguments(arguments)
+        val gradleRunner = GradleRunnerProvider.createRunner(
+            parameters = parameters,
+            projectDir = testProjectDir,
+            arguments = arguments,
+        )
 
         // when
         val result = gradleRunner.build()
