@@ -36,7 +36,7 @@ org-jetbrains-kotlin-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kot
 # https://github.com/detekt/detekt
 # It must be compatible with Kotlin version, therefore it must be also compatible with Gradle (we use the version of the embedded Kotlin)
 # See https://detekt.dev/docs/introduction/compatibility/
-io-gitlab-arturbosch-detekt-detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.23.6" }
+io-gitlab-arturbosch-detekt-detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.23.8" }
 
 
 [plugins]
