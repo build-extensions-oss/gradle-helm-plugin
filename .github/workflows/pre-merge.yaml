@@ -52,20 +52,19 @@ jobs:
       # Build the project by simply running the command line
       # No need to use daemon (this is run once container), however we print detailed logs and stacktrace
       - name: Assemble the project
-        run:
+        # Notes:
+        # All important internal tasks a linked to build.
+        # Double Gradle compiler memory. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
+        # Put a lot of memory here - the operating system has plenty of it
+        # We will not re-run recompilation, so let's keep Kotlin compiler in the same process as well
+        run: |
           ./gradlew \
-          # all important internal tasks a linked to build. 
           build \
-          # publish code coverage
           koverXmlReport \
-          # double Gradle compiler memory. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
-          # Put a lot of memory here - the operating system has plenty of it 
           -Porg.gradle.jvmargs=-Xmx4G \
-          # We will not re-run recompilation, so let's keep everything in a single process.
           -Pkotlin.compiler.execution.strategy=in-process \
           --stacktrace \
           --info \
-          # disable daemon - we will run a process only once, no need to create nested calls
           --no-daemon
 
       # see https://app.codecov.io/github/build-extensions-oss
