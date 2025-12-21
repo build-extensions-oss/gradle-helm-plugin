@@ -15,12 +15,6 @@ allprojects {
 }
 
 subprojects {
-    plugins.withId("io.gitlab.arturbosch.detekt") {
-        tasks.build.configure {
-            dependsOn(tasks.named("detekt"))
-        }
-    }
-
     plugins.withType<JavaGradlePluginPlugin> {
         dependencies {
             "compileOnly"(kotlin("stdlib"))

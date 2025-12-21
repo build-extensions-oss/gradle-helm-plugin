@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     kotlin("jvm")
+    id("io.gitlab.arturbosch.detekt")
     id("dependencies-lock")
     id("org.jetbrains.kotlinx.kover")
 }
@@ -58,7 +59,7 @@ rootProject.tasks.named("build").configure {
         // prohibit build without verification
         dependsOn(named("koverCachedVerify"))
         // prohibit build without running detekt
-        //dependsOn(named("detektMain"))
-        //dependsOn(named("detektTest"))
+        dependsOn(named("detektMain"))
+        dependsOn(named("detektTest"))
     }
 }

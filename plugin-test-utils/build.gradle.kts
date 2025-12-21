@@ -1,6 +1,5 @@
 plugins {
     id("kotlin-convention") // keep shared logic here
-    alias(libs.plugins.detekt)
 }
 
 dependencies {
