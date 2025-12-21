@@ -1,0 +1,6 @@
+# Default: do not enforce line endings globally (use Git defaults / user settings)
+* -text
+
+# YAML files must use Linux (LF) line endings - otherwise github actions might complain
+*.yml  text eol=lf
+*.yaml text eol=lf
