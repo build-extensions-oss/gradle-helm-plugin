@@ -50,9 +50,20 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
 
       # Build the project by simply running the command line
-      # No need to use daemon (this is run once container), however we print detailed logs and stacktraces
+      # No need to use daemon (this is run once container), however we print detailed logs and stacktrace
       - name: Assemble the project
-        run: ./gradlew build koverXmlReport --stacktrace --info --no-daemon
+        # Notes:
+        # All important internal tasks a linked to build.
+        # Add more memory for Gradle and compiler. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
+        # Keep Kotlin compiler running as a daemon - otherwise the configuration will be complex
+        run: |
+          ./gradlew \
+          build \
+          koverXmlReport \
+          "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
+          --stacktrace \
+          --info \
+          --no-daemon
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov
