@@ -30,6 +30,8 @@ junitEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref =
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.9.0" }
 
+org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.3" }
+
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.8" }

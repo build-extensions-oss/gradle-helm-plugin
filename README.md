@@ -2,6 +2,7 @@
 ![Gradle Portal](https://img.shields.io/gradle-plugin-portal/v/io.github.build-extensions-oss.helm?colorA=0f1632&colorB=255be3)
 ![Licence](https://img.shields.io/github/license/build-extensions-oss/gradle-helm-plugin?label=license&colorA=0f1632&colorB=255be3)
 ![Scorecard](https://img.shields.io/ossf-scorecard/github.com/build-extensions-oss/gradle-helm-plugin?label=openssf+scorecard&style=flat)
+[![codecov](https://codecov.io/gh/build-extensions-oss/gradle-helm-plugin/graph/badge.svg?token=7Q2YBFQRCG)](https://codecov.io/gh/build-extensions-oss/gradle-helm-plugin)
 
 ## Features
 
