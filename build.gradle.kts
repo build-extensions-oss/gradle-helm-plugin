@@ -1,5 +1,4 @@
 plugins {
-    alias(libs.plugins.kotlinJvm) apply false
     alias(libs.plugins.gradlePublish) apply false
     alias(libs.plugins.dokka)
     alias(libs.plugins.asciidoctor)

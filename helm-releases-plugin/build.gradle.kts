@@ -1,12 +1,11 @@
 plugins {
-    kotlin("jvm")
+    id("kotlin-convention") // keep shared logic here
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
     id("maven-publish")
     alias(libs.plugins.detekt)
     alias(libs.plugins.binaryCompatibilityValidator)
-    id("kotlin-convention") // keep shared logic here
 }
 
 
