@@ -85,12 +85,6 @@ subprojects {
         }
     }
 
-    plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
-        tasks.build.configure {
-            dependsOn(tasks.named("apiCheck"))
-        }
-    }
-
     plugins.withId("org.jetbrains.dokka") {
 
         dependencies {

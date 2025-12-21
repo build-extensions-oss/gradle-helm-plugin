@@ -52,7 +52,7 @@ jobs:
       # Build the project by simply running the command line
       # No need to use daemon (this is run once container), however we print detailed logs and stacktraces
       - name: Assemble the project
-        run: ./gradlew build --stacktrace --info --no-daemon
+        run: ./gradlew build koverXmlReport --stacktrace --info --no-daemon
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov

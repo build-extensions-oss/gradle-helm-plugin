@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    id("org.jetbrains.kotlinx.kover")
 }
 /**
 Embedded plugin has common logic for different projects. So, mainly it is here to have an ability to put more code into Gradle files.
@@ -36,3 +37,22 @@ tasks.jar {
 
 // otherwise Gradle fails with 'Cannot publish artifacts as no version set.'
 project.version = rootProject.version.toString()
+
+kover {
+    currentProject {
+        sources {
+            excludedSourceSets.add("test")
+        }
+    }
+}
+
+// if someone request build task - let's configure it additionally
+rootProject.tasks.named("build").configure {
+    tasks {
+        // prohibit build without verification
+        dependsOn(named("koverCachedVerify"))
+        // prohibit build without running detekt
+        dependsOn(named("detektMain"))
+        dependsOn(named("detektTest"))
+    }
+}
