@@ -58,7 +58,10 @@ jobs:
           # publish code coverage
           koverXmlReport \
           # double Gradle compiler memory. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
-          -Porg.gradle.jvmargs=-Xmx1G
+          # Put a lot of memory here - the operating system has plenty of it 
+          -Porg.gradle.jvmargs=-Xmx4G
+          # We will not re-run recompilation, so let's keep everything in a single process.
+          -Pkotlin.compiler.execution.strategy=in-process
           --stacktrace \
           --info \
           # disable daemon - we will run a process only once, no need to create nested calls
