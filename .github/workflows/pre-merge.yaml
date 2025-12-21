@@ -54,15 +54,13 @@ jobs:
       - name: Assemble the project
         # Notes:
         # All important internal tasks a linked to build.
-        # Double Gradle compiler memory. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
-        # Put a lot of memory here - the operating system has plenty of it
-        # We will not re-run recompilation, so let's keep Kotlin compiler in the same process as well
+        # Add more memory for Gradle and compiler. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
+        # Keep Kotlin compiler running as a daemon - otherwise the configuration will be complex
         run: |
           ./gradlew \
           build \
           koverXmlReport \
-          -Porg.gradle.jvmargs=-Xmx4G \
-          -Pkotlin.compiler.execution.strategy=in-process \
+          "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
           --stacktrace \
           --info \
           --no-daemon
