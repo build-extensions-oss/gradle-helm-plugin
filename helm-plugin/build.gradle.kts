@@ -29,8 +29,8 @@ dependencies {
     testRuntimeOnly(libs.junitEngine)
 
     // import code coverage from other plugins - basically, some code from this project is used there
-    kover(":helm-publish-plugin")
-    kover(":helm-releases-plugin")
+    kover(project(":helm-publish-plugin"))
+    kover(project(":helm-releases-plugin"))
 }
 
 
