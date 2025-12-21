@@ -24,7 +24,7 @@ object GradleRunnerProvider {
             it.contains("kover")
         }
         // value is like:
-        // -javaagent:C:\Users\igorm\IdeaProjects\gradle-helm-plugin\helm-publish-plugin\build\kover\kover-jvm-agent-0.9.3.jar=file:C:\Users\igorm\IdeaProjects\gradle-helm-plugin\helm-publish-plugin\build\tmp\functionalTest\kover-agent.args
+        // -javaagent:xxx/build/kover/kover-jvm-agent-0.9.3.jar=file:xxx/functionalTest/kover-agent.args
         val rawArgument = requireNotNull(javaAgentArgument) {
             "Unable to find Kover input arguments in $allInputArguments"
         }
