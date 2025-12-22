@@ -12,4 +12,8 @@ class WrappedGradleRunner(private val gradleRunner: GradleRunner) {
     fun build(): BuildResult {
         return gradleRunner.build()
     }
+
+    fun buildAndFail(): BuildResult {
+        return gradleRunner.buildAndFail()
+    }
 }
