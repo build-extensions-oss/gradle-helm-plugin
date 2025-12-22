@@ -19,7 +19,8 @@ jobs:
       matrix:
         # Mac OS and Windows are turned off: https://github.com/Citi/gradle-helm-plugin/issues/5
         os: [ ubuntu-latest ]
-        jdk: [ 8, 11, 17 ]
+        # Test on Java 17 only until we finish Gradle 9 migration
+        jdk: [ 17 ]
     runs-on: ${{ matrix.os }}
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow

@@ -14,8 +14,9 @@ plugins {
 }
 
 // let's keep JVM versions in a one place
-val projectJvmTarget = JvmTarget.JVM_1_8
-val projectJvmTargetInt = 8
+// The lowest Java supported by Gradle 9 is Java 17 - let's keep it as a baseline.
+val projectJvmTarget = JvmTarget.JVM_17
+val projectJvmTargetInt = 17
 
 configure<KotlinJvmProjectExtension> {
     jvmToolchain(projectJvmTargetInt)
