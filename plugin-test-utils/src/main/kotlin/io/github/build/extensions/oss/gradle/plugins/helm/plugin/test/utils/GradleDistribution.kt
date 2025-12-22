@@ -8,7 +8,11 @@ sealed interface GradleDistribution {
         }
     }
 
-    object Current : GradleDistribution
+    object Current : GradleDistribution {
+        override fun toString(): String {
+            return "Current"
+        }
+    }
 
     /**
      * Ideally is to have couple the latest distributions from https://gradle.org/releases/.
