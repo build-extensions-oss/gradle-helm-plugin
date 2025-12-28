@@ -80,10 +80,16 @@ internal class ConfigurationChartReference(
 ) : ChartReference {
 
     override val chartLocation: String
+        /**
+         * Resolves the chart name for the internal configuration.
+         * We have single artifact with single file, so let's use the API below.
+         */
         get() = project.configurations.getByName(configurationName)
-            .resolvedConfiguration
+            .incoming
+            .artifacts
+            .artifactFiles
             .files
-            .first()
+            .single()
             .absolutePath
 
 
