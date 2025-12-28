@@ -1,5 +1,5 @@
 plugins {
-    id("kotlin-convention") // keep shared logic here
+    id("gradle-plugin-convention") // keep shared logic here
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
     id("org.jetbrains.dokka")
