@@ -41,16 +41,16 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepositoryContainer : org/gradle/api/PolymorphicDomainObjectContainer {
-	public abstract fun artifactory (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;
-	public abstract fun artifactory (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;
-	public abstract fun chartMuseum (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;
-	public abstract fun chartMuseum (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;
-	public abstract fun gitlab (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;
-	public abstract fun gitlab (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;
-	public abstract fun harbor (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;
-	public abstract fun harbor (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;
-	public abstract fun nexus (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;
-	public abstract fun nexus (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;
+	public fun artifactory (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;
+	public fun artifactory (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;
+	public fun chartMuseum (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;
+	public fun chartMuseum (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;
+	public fun gitlab (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;
+	public fun gitlab (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;
+	public fun harbor (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;
+	public fun harbor (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;
+	public fun nexus (Ljava/lang/String;Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;
+	public fun nexus (Lorg/gradle/api/Action;)Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;
 }
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepositoryContainer$DefaultImpls {
