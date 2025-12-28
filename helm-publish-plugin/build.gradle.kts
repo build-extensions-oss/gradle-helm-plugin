@@ -46,3 +46,7 @@ gradlePlugin {
 apiValidation {
     ignoredPackages.add("io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.internal")
 }
+
+dokka {
+    moduleName.set("Gradle Helm Publish Plugin")
+}

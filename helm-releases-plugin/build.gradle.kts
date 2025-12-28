@@ -28,3 +28,6 @@ gradlePlugin {
         }
     }
 }
+dokka {
+    moduleName.set("Gradle Helm Releases Plugin")
+}
