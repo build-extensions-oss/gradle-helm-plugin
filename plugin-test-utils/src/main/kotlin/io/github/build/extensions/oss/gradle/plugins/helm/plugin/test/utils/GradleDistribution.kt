@@ -20,6 +20,7 @@ sealed interface GradleDistribution {
      * So we will be able to add even beta versions of Gradle in future.
      */
     enum class Custom(val version: String) : GradleDistribution {
+        V9_2_1("9.2.1"),
         V8_1_1("8.1.1"),
         V7_6_1("7.6.1")
     }
