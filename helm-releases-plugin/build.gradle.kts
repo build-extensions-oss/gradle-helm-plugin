@@ -11,6 +11,7 @@ plugins {
 dependencies {
 
     implementation(project(":helm-plugin"))
+    runtimeOnly(libs.bundles.defaultTestsRuntime)
 
     implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
     testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
