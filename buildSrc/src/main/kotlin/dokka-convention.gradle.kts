@@ -28,16 +28,13 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
     }
 }
 
-
-plugins.withType<JavaGradlePluginPlugin> {
-    tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
-        dokkaSourceSets.all {
-            externalDocumentationLink {
-                url.set(uri("https://docs.gradle.org/current/javadoc/").toURL())
-            }
-            externalDocumentationLink {
-                url.set(uri("https://docs.groovy-lang.org/latest/html/groovy-jdk/").toURL())
-            }
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
+    dokkaSourceSets.all {
+        externalDocumentationLink {
+            url.set(uri("https://docs.gradle.org/current/javadoc/").toURL())
+        }
+        externalDocumentationLink {
+            url.set(uri("https://docs.groovy-lang.org/latest/html/groovy-jdk/").toURL())
         }
     }
 }
