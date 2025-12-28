@@ -54,7 +54,7 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing
 	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
-public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmChartPublishConvention {
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmChartPublishExtension {
 	public abstract fun getPublish ()Lorg/gradle/api/provider/Property;
 }
 
