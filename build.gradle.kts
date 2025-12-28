@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.gradlePublish) apply false
-    alias(libs.plugins.dokka)
+    id("org.jetbrains.dokka")
     alias(libs.plugins.asciidoctor)
     alias(libs.plugins.benManesVersions)
     // is defined in buildSrc
@@ -52,11 +52,6 @@ subprojects {
     }
 
     plugins.withId("org.jetbrains.dokka") {
-
-        dependencies {
-            "dokkaJavadocPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:${libs.versions.dokka.get()}")
-        }
-
         // have an option to disable Dokka task for local builds
         tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishPluginJavaDocsJar" }
             .all {
