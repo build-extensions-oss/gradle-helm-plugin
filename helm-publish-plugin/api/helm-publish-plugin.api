@@ -11,18 +11,8 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
 }
 
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ArtifactoryHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
-}
-
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
 	public abstract fun getTenantIds ()Lorg/gradle/api/provider/ListProperty;
-}
-
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/ChartMuseumHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/CustomHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
@@ -31,27 +21,12 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 	public abstract fun getUploadPath ()Lorg/gradle/api/provider/Property;
 }
 
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/CustomHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/CustomHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/CustomHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
-}
-
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
 	public abstract fun getProjectId ()Lorg/gradle/api/provider/Property;
 }
 
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/GitlabHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
-}
-
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
 	public abstract fun getProjectName ()Lorg/gradle/api/provider/Property;
-}
-
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HarborHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmChartPublishExtension {
@@ -63,11 +38,6 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer, org/gradle/api/Named {
 	public abstract fun getUrl ()Lorg/gradle/api/provider/Property;
-}
-
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepositoryContainer : org/gradle/api/PolymorphicDomainObjectContainer {
@@ -99,11 +69,6 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository : io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository {
 	public abstract fun getApiVersion ()Lorg/gradle/api/provider/Property;
 	public abstract fun getRepository ()Lorg/gradle/api/provider/Property;
-}
-
-public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/NexusHelmPublishingRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing/rules/HelmPublishChartTaskRuleKt {

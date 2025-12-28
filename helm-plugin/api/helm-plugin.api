@@ -712,11 +712,6 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 	public abstract fun url (Ljava/lang/Object;)V
 }
 
-public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRepository$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRepository;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRepository;Ljava/lang/Class;Lgroovy/lang/Closure;)V
-}
-
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRepositoryHandler : org/gradle/api/NamedDomainObjectContainer {
 	public abstract fun bitnami (Ljava/lang/String;)V
 	public abstract fun helmIncubator (Ljava/lang/String;)V
@@ -759,18 +754,11 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer {
-	public abstract fun credentials (Lgroovy/lang/Closure;)V
-	public abstract fun credentials (Ljava/lang/Class;Lgroovy/lang/Closure;)V
 	public abstract fun credentials (Ljava/lang/Class;Lorg/gradle/api/Action;)V
 	public abstract fun credentials (Lorg/gradle/api/Action;)V
 	public abstract fun getConfiguredCredentials ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getCredentials ()Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/PasswordCredentials;
 	public abstract fun getCredentials (Ljava/lang/Class;)Lorg/gradle/api/credentials/Credentials;
-}
-
-public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer$DefaultImpls {
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer;Lgroovy/lang/Closure;)V
-	public static fun credentials (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer;Ljava/lang/Class;Lgroovy/lang/Closure;)V
 }
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainerKt {
@@ -785,8 +773,6 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/internal/CredentialsContainerSupport : io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer {
 	public fun <init> (Lorg/gradle/api/model/ObjectFactory;Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/internal/CredentialsFactory;)V
-	public fun credentials (Lgroovy/lang/Closure;)V
-	public fun credentials (Ljava/lang/Class;Lgroovy/lang/Closure;)V
 	public fun credentials (Ljava/lang/Class;Lorg/gradle/api/Action;)V
 	public fun credentials (Lorg/gradle/api/Action;)V
 	public fun getConfiguredCredentials ()Lorg/gradle/api/provider/Provider;
