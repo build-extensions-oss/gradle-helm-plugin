@@ -73,7 +73,13 @@ rootProject.tasks.named("build").configure {
         // prohibit build without verification
         dependsOn(named("koverCachedVerify"))
         // prohibit build without running detekt
-        dependsOn(named("detektMain"))
-        dependsOn(named("detektTest"))
+        // uncomment after https://github.com/build-extensions-oss/gradle-helm-plugin/issues/65
+        // dependsOn(named("detektMain"))
+        // dependsOn(named("detektTest"))
     }
+}
+
+// fix after https://github.com/build-extensions-oss/gradle-helm-plugin/issues/65
+tasks.getByName("detekt") {
+    enabled = false
 }
