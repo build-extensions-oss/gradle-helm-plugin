@@ -9,6 +9,7 @@ import org.gradle.process.ExecSpec
 import org.gradle.workers.WorkerExecutor
 import org.slf4j.LoggerFactory
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmOptionsApplier
+import org.gradle.process.ExecResult
 
 
 /**
@@ -134,16 +135,19 @@ internal class HelmExecProviderSupport(
     private fun execHelmSync(
         command: String, subcommand: String?,
         action: Action<HelmExecSpec>?, withExecSpec: (ExecSpec.() -> Unit)? = null
-    ) = project.exec { execSpec ->
+    ): ExecResult {
+        val x = project.providers.exec { execSpec ->
+            val helmExecSpec = DefaultHelmExecSpec(execSpec, command, subcommand)
+            withExecSpec?.invoke(execSpec)
+            applyOptions(helmExecSpec)
+            action?.execute(helmExecSpec)
 
-        val helmExecSpec = DefaultHelmExecSpec(execSpec, command, subcommand)
-        withExecSpec?.invoke(execSpec)
-        applyOptions(helmExecSpec)
-        action?.execute(helmExecSpec)
-
-        if (logger.isInfoEnabled) {
-            logger.info("Executing: {}", maskCommandLine(execSpec.commandLine))
+            if (logger.isInfoEnabled) {
+                logger.info("Executing: {}", maskCommandLine(execSpec.commandLine))
+            }
         }
+
+        return x.result.get()
     }
 
 
