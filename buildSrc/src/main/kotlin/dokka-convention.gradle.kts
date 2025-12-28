@@ -10,36 +10,6 @@ tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishP
         from(tasks.named("dokkaJavadoc"))
     }
 
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
-    dokkaSourceSets.all {
-        externalDocumentationLink {
-            url.set(uri("https://docs.oracle.com/javase/8/docs/api/").toURL())
-        }
-        reportUndocumented.set(false)
-
-        val sourceSetName = this.name
-        val githubUrl = project.extra["github.url"] as String
-
-        sourceLink {
-            localDirectory.set(project.file("src/$sourceSetName/kotlin"))
-            remoteUrl.set(
-                uri("$githubUrl/blob/v${project.version}/${project.projectDir.relativeTo(rootDir)}/src/$sourceSetName/kotlin").toURL()
-            )
-            remoteLineSuffix.set("#L")
-        }
-    }
-}
-
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
-    dokkaSourceSets.all {
-        externalDocumentationLink {
-            url.set(uri("https://docs.gradle.org/current/javadoc/").toURL())
-        }
-        externalDocumentationLink {
-            url.set(uri("https://docs.groovy-lang.org/latest/html/groovy-jdk/").toURL())
-        }
-    }
-}
 
 // strangely, "dokka {}" doesn't work here for Gradle 8. Worth migration later...
 extensions.configure<DokkaExtension>("dokka") {
