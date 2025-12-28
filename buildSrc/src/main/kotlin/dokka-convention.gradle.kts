@@ -1,13 +1,17 @@
 import org.jetbrains.dokka.gradle.DokkaExtension
 
 plugins {
+    // First of all - see https://kotlinlang.org/docs/dokka-migration.html#select-documentation-output-format
+    // This is needed for html generation (will be published via https://github.com/build-extensions-oss/gradle-helm-plugin/issues/56)
     id("org.jetbrains.dokka")
+    // This is needed for proper javadocs
+    id("org.jetbrains.dokka-javadoc")
 }
 
 // have an option to disable Dokka task for local builds
 tasks.withType<Jar>().matching { it.name == "javadocJar" || it.name == "publishPluginJavaDocsJar" }
     .all {
-        from(tasks.named("dokkaJavadoc"))
+        from(tasks.named("dokkaGeneratePublicationJavadoc"))
     }
 
 
