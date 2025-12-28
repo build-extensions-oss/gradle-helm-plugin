@@ -3,7 +3,6 @@ package io.github.build.extensions.oss.gradle.plugins.helm.publishing
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.HasConvention
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.tasks.TaskDependency
 import org.gradle.internal.reflect.Instantiator
@@ -13,9 +12,9 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPl
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.charts
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
-import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmChartPublishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmChartPublishExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingExtension
-import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.createHelmChartPublishConvention
+import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.createHelmChartPublishExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.createHelmPublishingExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.internal.repositories
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.rules.HelmPublishChartTaskRule
@@ -42,7 +41,7 @@ class HelmPublishPlugin
 
             val charts = project.helm.charts
             charts.all { chart ->
-                addChartPublishConvention(chart, project)
+                addChartPublishExtension(chart, project)
             }
 
             project.tasks.run {
@@ -73,11 +72,13 @@ class HelmPublishPlugin
     /**
      * Adds a convention object to a chart for holding publishing-related properties.
      *
-     * @see HelmChartPublishConvention
+     * @see HelmChartPublishExtension
      */
-    private fun addChartPublishConvention(chart: HelmChart, project: Project) {
-        (chart as HasConvention).convention.plugins[HELM_CHART_PUBLISHING_CONVENTION_NAME] =
-            project.objects.createHelmChartPublishConvention()
+    private fun addChartPublishExtension(chart: HelmChart, project: Project) {
+        (chart as ExtensionAware).extensions.add(
+            HELM_CHART_PUBLISHING_CONVENTION_NAME,
+            project.objects.createHelmChartPublishExtension()
+        )
     }
 
 
