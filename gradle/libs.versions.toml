@@ -1,5 +1,4 @@
 [versions]
-dokka = "1.9.20"
 spek = "2.0.19"
 gradleUtils = "1.1.0"
 okhttp = "4.12.0"
@@ -32,7 +31,7 @@ coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ver
 
 org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.3" }
 org-jetbrains-kotlin-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-org-jetbrains-dokka-org-jetbrains-dokka-gradle-plugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin", version = "1.9.20" }
+org-jetbrains-dokka-org-jetbrains-dokka-gradle-plugin = { module = "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin", version = "2.1.0" }
 
 # https://github.com/detekt/detekt
 # It must be compatible with Kotlin version, therefore it must be also compatible with Gradle (we use the version of the embedded Kotlin)
