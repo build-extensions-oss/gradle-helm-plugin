@@ -38,7 +38,7 @@ internal class HelmChartReference(
 
 
     private val artifact: PublishArtifact
-        get() = configuration.artifacts.first()
+        get() = configuration.artifacts.single()
 
 
     override val chartLocation: String
@@ -85,9 +85,7 @@ internal class ConfigurationChartReference(
          * We have single artifact with single file, so let's use the API below.
          */
         get() = project.configurations.getByName(configurationName)
-            .incoming
             .artifacts
-            .artifactFiles
             .files
             .single()
             .absolutePath
