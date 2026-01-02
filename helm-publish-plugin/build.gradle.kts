@@ -27,6 +27,7 @@ dependencies {
 
     "functionalTestImplementation"(project(":plugin-test-utils"))
     "functionalTestImplementation"(libs.okHttpMockWebServer)
+    "functionalTestRuntimeOnly"(libs.bundles.defaultTestsRuntime)
 }
 
 
