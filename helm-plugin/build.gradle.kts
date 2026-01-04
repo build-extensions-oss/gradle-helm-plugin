@@ -19,12 +19,11 @@ dependencies {
     testImplementation(libs.jacksonDataBind)
     testImplementation(libs.jacksonDataFormatYaml)
 
+    testImplementation(project(":unit-test-utils"))
     testImplementation(libs.okHttpMockWebServer)
 
     testImplementation(libs.coroutinesCore)
     testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
-    testImplementation(libs.bundles.defaultTests)
-    testRuntimeOnly(libs.bundles.defaultTestsRuntime)
 
     // import code coverage from other plugins - basically, some code from this project is used there
     kover(project(":helm-publish-plugin"))

@@ -13,5 +13,6 @@ include(
     "helm-plugin",
     "helm-publish-plugin",
     "helm-releases-plugin",
-    "plugin-test-utils"
+    "plugin-test-utils",
+    "unit-test-utils"
 )
