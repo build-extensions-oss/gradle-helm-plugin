@@ -118,7 +118,8 @@ jobs:
           ./gradlew \
             --no-daemon \
             --stacktrace \
-            "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \     
+            "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
+            "-Pio.github.build.extensions.oss.gradle.helm.plugin.functional.tests.only=true" \
             functionalTest
 
       - name: Upload Kover execution data
