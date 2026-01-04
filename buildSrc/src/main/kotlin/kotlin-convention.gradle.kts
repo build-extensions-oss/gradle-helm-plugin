@@ -1,6 +1,3 @@
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
@@ -59,10 +56,28 @@ tasks.jar {
 // otherwise Gradle fails with 'Cannot publish artifacts as no version set.'
 project.version = rootProject.version.toString()
 
+val externalCoverageFiles = rootProject.layout.buildDirectory.dir(
+    "tmp/kover-artefacts"
+).get().asFileTree.matching { include("**/*.ic") }
+
 kover {
     currentProject {
         sources {
             excludedSourceSets.add("test")
+        }
+    }
+    reports {
+        // this setting is propagated to all child projects. They will apply these code coverage results on top on what they have
+        total {
+            additionalBinaryReports.addAll(externalCoverageFiles)
+        }
+    }
+}
+
+tasks.register("validateExternalKoverArtifacts") {
+    doLast {
+        require(externalCoverageFiles.files.isNotEmpty()) {
+            "Unable to find any file in external artifacts: ${externalCoverageFiles.files.joinToString()}"
         }
     }
 }

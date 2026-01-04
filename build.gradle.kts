@@ -72,29 +72,12 @@ tasks {
     }
 }
 
-val externalCoverageFiles = rootProject.layout.buildDirectory.dir(
-    "tmp/kover-artefacts"
-).get().asFileTree.matching { include("**/*.ic") }
-
 kover.reports {
     verify {
         rule {
             bound {
                 minValue.set(14)
             }
-        }
-    }
-
-    // this setting is propagated to all child projects. They will apply these code coverage results on top on what they have
-    total {
-        additionalBinaryReports.addAll(externalCoverageFiles)
-    }
-}
-
-tasks.register("validateExternalKoverArtifacts") {
-    doLast {
-        require(externalCoverageFiles.files.isNotEmpty()) {
-            "Unable to find any file in external artifacts: ${externalCoverageFiles.files.joinToString()}"
         }
     }
 }
@@ -104,7 +87,6 @@ val asciidoctorExt: Configuration by configurations.creating
 dependencies {
     asciidoctorExt(libs.tabbedCodeExtension)
 }
-
 
 tasks.named("asciidoctor", org.asciidoctor.gradle.jvm.AsciidoctorTask::class) {
 
