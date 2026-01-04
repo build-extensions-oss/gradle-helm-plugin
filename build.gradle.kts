@@ -80,6 +80,14 @@ kover.reports {
             }
         }
     }
+
+    total {
+        val files = rootProject.layout.buildDirectory.dir(
+            "tmp/kover-artefacts"
+        ).get().asFileTree.matching { include("**/*.ic") }
+
+        additionalBinaryReports.addAll(files)
+    }
 }
 
 

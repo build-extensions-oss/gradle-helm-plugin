@@ -1,11 +1,9 @@
 pluginManagement {
-
     repositories {
         gradlePluginPortal()
         mavenCentral()
     }
 }
-
 
 rootProject.name = "gradle-helm-plugin-parent"
 
@@ -14,5 +12,5 @@ include(
     "helm-publish-plugin",
     "helm-releases-plugin",
     "plugin-test-utils",
-    "unit-test-utils"
+    "unit-test-utils",
 )

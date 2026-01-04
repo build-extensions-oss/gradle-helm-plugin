@@ -52,21 +52,34 @@ jobs:
         # All important internal tasks a linked to build.
         # Add more memory for Gradle and compiler. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
         # Keep Kotlin compiler running as a daemon - otherwise the configuration will be complex
+        # What we run here:
+        # 1. `build` task - because it is usually executed by developers. It includes unit test and compilation.
+        # 2. `publishAllPublicationsToLocalRepoRepository` - to publish all plugins into internal repository
         run: |
           ./gradlew \
           build \
+          publishAllPublicationsToLocalRepoRepository \
           "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
           --stacktrace \
           --info \
           --no-daemon
 
-      - name: Upload plugin and code coverage
+      - name: Upload plugin files
         uses: actions/upload-artifact@v4
         with:
           name: build-output
           if-no-files-found: error
           path: |
-            **/build/**
+            ./build/local-repo/**
+
+      - name: Upload Kover execution data (for unit tests)
+        uses: actions/upload-artifact@v4
+        with:
+          # Must be unique per job (artifact v4 immutability)
+          name: kover-unit-tests
+          if-no-files-found: error
+          path: |
+            **/build/bin-reports/*.ic
 
   functional-test:
     name: Functional tests (${{ matrix.os }}, Java ${{ matrix.java }})
@@ -108,12 +121,57 @@ jobs:
             "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \     
             functionalTest
 
-      - name: Upload JaCoCo execution data
+      - name: Upload Kover execution data
         uses: actions/upload-artifact@v4
         with:
           # Must be unique per job (artifact v4 immutability)
-          name: jacoco-${{ matrix.os }}-java${{ matrix.java }}
+          name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
           if-no-files-found: error
           path: |
-            **/build/jacoco/*.exec
-            **/build/jacoco/*.ec
+            **/build/bin-reports/*.ic
+
+  coverage:
+    name: Coverage (merge OS runs, upload to Codecov)
+    needs: functional-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Download Kover unit test output
+        uses: actions/download-artifact@v4
+        with:
+          name: kover-unit-tests
+          path: ./build/tmp/kover-artefacts/unit-tests
+
+      - name: Download Kover functional tests artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: kover-functional-tests-*
+          path: ./build/tmp/kover-artefacts/functional-tests
+          merge-multiple: true
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Merge Kover reports
+        run: ./gradlew \
+          --no-daemon \
+          --stacktrace \
+          "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
+          koverXmlReport
+
+      # see https://app.codecov.io/github/build-extensions-oss
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./build/reports/kover/report.xml
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
