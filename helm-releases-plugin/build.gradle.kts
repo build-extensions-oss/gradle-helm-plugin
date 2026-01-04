@@ -11,10 +11,9 @@ plugins {
 dependencies {
 
     implementation(project(":helm-plugin"))
-    testRuntimeOnly(libs.bundles.defaultTestsRuntime)
+    testImplementation(project(":unit-test-utils"))
 
     implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
-    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
 }
 
 

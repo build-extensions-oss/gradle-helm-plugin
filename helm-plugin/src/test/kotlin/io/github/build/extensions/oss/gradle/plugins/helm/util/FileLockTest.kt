@@ -2,10 +2,6 @@ package io.github.build.extensions.oss.gradle.plugins.helm.util
 
 import io.kotest.matchers.equals.shouldBeEqual
 import java.io.File
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
@@ -26,31 +22,29 @@ internal class FileLockTest {
 
     @Test
     fun twoFunctionsArentAbleToUpdateFile() {
-        runBlocking {
-            val thread2IsReady = CompletableDeferred<Unit>()
+        val thread2IsReady = CompletableFuture<Unit>()
 
-            val taskIndices = 0..2
+        val taskIndices = 0..2
 
-            val parallelTasks = taskIndices.map { taskIndex ->
-                async {
-                    // don't start until all tasks have been created
-                    thread2IsReady.await()
-                    withLockFile(fileToLock) {
-                        taskIndex
-                    }
+        val parallelTasks = taskIndices.map { taskIndex ->
+            CompletableFuture.supplyAsync {
+                // don't start until all tasks have been created
+                thread2IsReady.get()
+                withLockFile(fileToLock) {
+                    taskIndex
                 }
             }
-
-            thread2IsReady.complete(Unit)
-
-            val taskResults = parallelTasks.awaitAll().toSet()
-
-            taskResults shouldBeEqual taskIndices.toSet()
         }
+
+        thread2IsReady.complete(Unit)
+
+        val taskResults = parallelTasks.map { it.get() }.toSet()
+
+        taskResults shouldBeEqual taskIndices.toSet()
     }
 
     @Test
-    fun multipleThreadsSynchronizedWhenUsingTheSameFile(){
+    fun multipleThreadsSynchronizedWhenUsingTheSameFile() {
         val taskIndices = 0..2
         val parallelTasks = taskIndices.map { taskIndex ->
             CompletableFuture.supplyAsync {
@@ -67,7 +61,7 @@ internal class FileLockTest {
     }
 
     @Test
-    fun twoThreadsSynchronizedWhenUsingTheSameFileThroughADifferentPath(){
+    fun twoThreadsSynchronizedWhenUsingTheSameFileThroughADifferentPath() {
         val parallelTasks = mutableListOf<CompletableFuture<Int>>(
             CompletableFuture.supplyAsync {
                 withLockFile(File(tempFolder, "../" + tempFolder.name + "/text.txt")) {
@@ -85,19 +79,19 @@ internal class FileLockTest {
 
         val taskResults = parallelTasks.map(CompletableFuture<Int>::join).toSet()
 
-        taskResults shouldBeEqual setOf(1,2)
+        taskResults shouldBeEqual setOf(1, 2)
     }
 
     @Test
-    fun fileLockWorksForNewFile(){
+    fun fileLockWorksForNewFile() {
         val file = File(tempFolder, "newLockFile.lock")
         file.delete()
         val parallelTask = CompletableFuture.supplyAsync {
-                withLockFile(file) {
-                    Thread.sleep(100)
-                    1
-                }
+            withLockFile(file) {
+                Thread.sleep(100)
+                1
             }
+        }
 
         val taskResults = parallelTask.get()
 

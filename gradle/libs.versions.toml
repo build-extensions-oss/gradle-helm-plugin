@@ -49,6 +49,3 @@ asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "4.0.4" }
 benManesVersions = { id = "com.github.ben-manes.versions", version = "0.53.0" }
 binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.16.0" }
 
-[bundles]
-defaultTests = ["junit", "kotestAssertions"]
-defaultTestsRuntime = ["junitEngine", "junitPlatform"]

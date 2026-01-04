@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     api(gradleTestKit())
-    api(libs.bundles.defaultTests)
-    testRuntimeOnly(libs.bundles.defaultTestsRuntime)
+
+    api(project(":unit-test-utils"))
 
     // import code coverage from other plugins - basically, some code from this project is used there
     kover(project(":helm-plugin"))
