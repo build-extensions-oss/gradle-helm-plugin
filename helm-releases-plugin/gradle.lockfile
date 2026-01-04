@@ -58,5 +58,5 @@ org.spekframework.spek2:spek-dsl:2.0.19=testRuntimeClasspath
 org.spekframework.spek2:spek-runner-junit5:2.0.19=testRuntimeClasspath
 org.spekframework.spek2:spek-runtime-jvm:2.0.19=testRuntimeClasspath
 org.spekframework.spek2:spek-runtime:2.0.19=testRuntimeClasspath
-org.yaml:snakeyaml:2.3=runtimeClasspath,testRuntimeClasspath
+org.yaml:snakeyaml:2.5=runtimeClasspath,testRuntimeClasspath
 empty=
