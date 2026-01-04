@@ -1,7 +1,7 @@
 [versions]
 dokka = "2.1.0"
 spek = "2.0.19"
-gradleUtils = "1.1.0"
+gradleUtils = "1.2.2"
 okhttp = "4.12.0"
 jackson = "2.18.2"
 # No need to keep the same Kotlin version with Gradle, at least because kotlin runtime is a transitive dependency of okhttp
