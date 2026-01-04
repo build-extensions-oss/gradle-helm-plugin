@@ -23,3 +23,13 @@ extensions.configure<PublishingExtension>("publishing") {
         }
     }
 }
+
+// if we run functional test only, we must disable code compilation task.
+// Why? Because we want to compile code for Java 17 and run functional test on other JVMs and operating systems.
+// To double-check that we don't recompile code before we run it on Java 21 or later, let's simply disable compilation.
+if (cleanRunEnabled) {
+    val kotlinCompilationTask = tasks.getByName("compileKotlin")
+
+    // disable compilation if functional tests are enabled
+    kotlinCompilationTask.enabled = false
+}

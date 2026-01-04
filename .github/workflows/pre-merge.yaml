@@ -13,15 +13,9 @@ permissions:
   contents: read
 
 jobs:
-  gradle:
-    strategy:
-      fail-fast: false
-      matrix:
-        # Mac OS and Windows are turned off: https://github.com/Citi/gradle-helm-plugin/issues/5
-        os: [ ubuntu-latest ]
-        # Test on Java 17 only until we finish Gradle 9 migration
-        jdk: [ 17 ]
-    runs-on: ${{ matrix.os }}
+  # this job only compiled code and runs unit tests. It doesn't run functional tests.
+  build:
+    runs-on: ubuntu-latest
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
       - name: Harden the runner (Audit all outbound calls)
@@ -42,7 +36,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
         with:
-          java-version: ${{ matrix.jdk }}
+          # Java 17 is baseline for our project. So, code must be compiled under it
+          java-version: 17
           distribution: 'temurin'
 
       # Optimize Gradle execution
@@ -60,16 +55,65 @@ jobs:
         run: |
           ./gradlew \
           build \
-          koverXmlReport \
           "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
           --stacktrace \
           --info \
           --no-daemon
 
-      # see https://app.codecov.io/github/build-extensions-oss
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+      - name: Upload plugin and code coverage
+        uses: actions/upload-artifact@v4
         with:
-          files: ./build/reports/kover/report.xml
-          verbose: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+          name: build-output
+          if-no-files-found: error
+          path: |
+            **/build/**
+
+  functional-test:
+    name: Functional tests (${{ matrix.os }}, Java ${{ matrix.java }})
+    needs: build
+    runs-on: ${{ matrix.os }}
+
+    # run test on multiple operating systems
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: ["17", "21"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Download build outputs
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./
+
+      # Key requirement: do NOT recompile during tests, but run functional tests.
+      - name: Functional tests (no recompilation)
+        run: |
+          ./gradlew \
+            --no-daemon \
+            --stacktrace \
+            "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \     
+            functionalTest
+
+      - name: Upload JaCoCo execution data
+        uses: actions/upload-artifact@v4
+        with:
+          # Must be unique per job (artifact v4 immutability)
+          name: jacoco-${{ matrix.os }}-java${{ matrix.java }}
+          if-no-files-found: error
+          path: |
+            **/build/jacoco/*.exec
+            **/build/jacoco/*.ec

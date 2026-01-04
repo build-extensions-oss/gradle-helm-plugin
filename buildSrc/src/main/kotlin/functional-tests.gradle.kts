@@ -10,7 +10,6 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
     group = LifecycleBasePlugin.VERIFICATION_GROUP
     testClassesDirs = functionalTest.output.classesDirs
     classpath = functionalTest.runtimeClasspath
-    mustRunAfter(tasks.test)
 
     // needs to be removed via https://github.com/build-extensions-oss/gradle-helm-plugin/issues/41
     val urlOverrideProperty = "io.github.build.extensions.oss.gradle.helm.plugin.distribution.url.prefix"
@@ -18,13 +17,23 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
         systemProperty(urlOverrideProperty, urlOverride)
     }
 
-    // before running functional test - we must publish all plugins locally
-    dependsOn(tasks.named("publishAllPublicationsToLocalRepoRepository"))
-    // depend on main plugin as well - otherwise recompilation might not happen
-    dependsOn(project(":helm-plugin").tasks.named("publishAllPublicationsToLocalRepoRepository"))
-}
+    // in simplified run, we will re-publish everything into maven local before running functional tests
+    if (!cleanRunEnabled) {
+        // before running functional test - we must publish all plugins locally
+        dependsOn(tasks.named("publishAllPublicationsToLocalRepoRepository"))
+        // depend on main plugin as well - otherwise recompilation might not happen
+        dependsOn(project(":helm-plugin").tasks.named("publishAllPublicationsToLocalRepoRepository"))
+    }
 
-tasks.build {
-    dependsOn(functionalTestTask)
+    doFirst {
+        val runOnGitHub = providers.environmentVariable("GITHUB_ACTIONS")
+            .map { it.toBoolean() }
+            .orElse(false)
+            .get()
+
+        if (runOnGitHub && !cleanRunEnabled) {
+            throw GradleException("functionalTests are requested to run on GitHub, however property ${BuildConstants.FUNCTIONAL_TESTS_ONLY} wasn't set. Please set up it for explicit configuration.")
+        }
+    }
 }
 
