@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "description": [
+    "We specify more operating memory for Gradle run, because default 0.5Gb isn't enough to quickly precompile the Gradle code. Renovate allocates 3Gb RAM and 15 GB disk space",
+    "We also limit 'branchConcurrentLimit' to 3 (from default 10), because Renovate spends 4-6 minutes per each branch (why it is so slow?) and has 30 minutes global timeout"
+  ],
+  "env": {
+    "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx2500M -Dkotlin.compiler.execution.strategy=\"in-process\""
+  },
+  "branchConcurrentLimit": 3
 }
