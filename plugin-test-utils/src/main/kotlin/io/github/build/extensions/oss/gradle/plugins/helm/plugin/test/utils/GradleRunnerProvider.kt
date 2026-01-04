@@ -42,7 +42,8 @@ object GradleRunnerProvider {
         projectDir: File
     ): WrappedGradleRunner {
         val runner = GradleRunner.create()
-            .withPluginClasspath()
+            // strictly don't use plugin classpath - use the jars published into the local repository
+            // .withPluginClasspath()
             // set arguments here. With a positive probability someone can override that - let's ignore it for now, because
             .withArguments(arguments)
             .withProjectDir(projectDir)
