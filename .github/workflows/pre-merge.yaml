@@ -102,6 +102,8 @@ jobs:
 
       # Key requirement: do NOT recompile during tests, but run functional tests.
       - name: Functional tests (no recompilation)
+        # workaround for Windows
+        shell: bash
         run: |
           ./gradlew \
             --no-daemon \
