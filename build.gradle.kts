@@ -81,6 +81,7 @@ kover.reports {
         }
     }
 
+    // this setting is propagated to all child projects. They will apply these code coverage results on top on what they have
     total {
         val files = rootProject.layout.buildDirectory.dir(
             "tmp/kover-artefacts"
