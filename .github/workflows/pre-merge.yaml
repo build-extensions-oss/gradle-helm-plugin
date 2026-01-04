@@ -109,7 +109,8 @@ jobs:
             --stacktrace \
             "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
             "-Pio.github.build.extensions.oss.gradle.helm.plugin.functional.tests.only=true" \
-            functionalTest
+            functionalTest \
+            copyFunctionalTestCoverage
 
       - name: Upload Kover execution data
         uses: actions/upload-artifact@v4
@@ -117,8 +118,7 @@ jobs:
           # Must be unique per job (artifact v4 immutability)
           name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
           if-no-files-found: error
-          path: |
-            **/build/bin-reports/*.ic
+          path: ./build/tmp/collected/kover-bin-reports/*.ic
 
   coverage:
     name: Coverage (merge OS runs, upload to Codecov)

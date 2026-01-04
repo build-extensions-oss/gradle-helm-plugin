@@ -46,3 +46,21 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
     }
 }
 
+/**
+ * Copies all Kover coverage files into a single directory, which will be uploaded by GitHub
+ */
+tasks.register<Copy>("copyFunctionalTestCoverage") {
+    from(layout.buildDirectory.dir("kover/bin-reports"))
+    include("**/*.ic")
+    // rename from 'functionalTest.ic' to 'functionalTest-<project.name>.ic' to avoid same files rewriting
+    rename {
+        val oldPrefix = it.substringBeforeLast(".ic")
+        val intermediate = project.name
+        "$oldPrefix-$intermediate.ic"
+    }
+    // see notation './build/tmp/collected/kover-bin-reports/' in pre-merge.yaml
+    into(rootProject.layout.buildDirectory.dir("tmp/collected/kover-bin-reports/"))
+
+    dependsOn(functionalTestTask)
+}
+
