@@ -52,12 +52,9 @@ jobs:
         # All important internal tasks a linked to build.
         # Add more memory for Gradle and compiler. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
         # Keep Kotlin compiler running as a daemon - otherwise the configuration will be complex
-        # What we run here:
-        # 1. `build` task - because it is usually executed by developers. It includes unit test and compilation.
-        # 2. `publishAllPublicationsToLocalRepoRepository` - to publish all plugins into internal repository
+        # We just publish plugin here - deep tests will be executed at later stages
         run: |
           ./gradlew \
-          build \
           publishAllPublicationsToLocalRepoRepository \
           "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
           --stacktrace \
@@ -71,15 +68,6 @@ jobs:
           if-no-files-found: error
           path: |
             ./build/local-repo/**
-
-      - name: Upload Kover execution data (for unit tests)
-        uses: actions/upload-artifact@v4
-        with:
-          # Must be unique per job (artifact v4 immutability)
-          name: kover-unit-tests
-          if-no-files-found: error
-          path: |
-            **/build/bin-reports/*.ic
 
   functional-test:
     name: Functional tests (${{ matrix.os }}, Java ${{ matrix.java }})
@@ -146,12 +134,6 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Download Kover unit test output
-        uses: actions/download-artifact@v4
-        with:
-          name: kover-unit-tests
-          path: ./build/tmp/kover-artefacts/unit-tests
-
       - name: Download Kover functional tests artifacts
         uses: actions/download-artifact@v4
         with:
@@ -162,12 +144,15 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # Merge XML reports - and exclude functional tests (they must be executed on other platforms)
       - name: Merge Kover reports
         run: ./gradlew \
           --no-daemon \
           --stacktrace \
           "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
-          koverXmlReport
+          build \
+          koverXmlReport \
+          -x functionalTest
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov
