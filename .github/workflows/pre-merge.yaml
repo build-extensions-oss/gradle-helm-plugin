@@ -66,8 +66,7 @@ jobs:
         with:
           name: build-output
           if-no-files-found: error
-          path: |
-            ./build/local-repo/**
+          path: ./build/local-repo/**
 
   functional-test:
     name: Functional tests (${{ matrix.os }}, Java ${{ matrix.java }})
@@ -98,7 +97,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: ./
+          path: ./build/local-repo/
 
       # Key requirement: do NOT recompile during tests, but run functional tests.
       - name: Functional tests (no recompilation)
