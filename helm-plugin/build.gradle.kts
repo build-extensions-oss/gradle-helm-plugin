@@ -22,8 +22,6 @@ dependencies {
     testImplementation(project(":unit-test-utils"))
     testImplementation(libs.okHttpMockWebServer)
 
-    testImplementation(libs.coroutinesCore)
-
     // import code coverage from other plugins - basically, some code from this project is used there
     kover(project(":helm-publish-plugin"))
     kover(project(":helm-releases-plugin"))
