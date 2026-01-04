@@ -35,5 +35,14 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
             throw GradleException("functionalTests are requested to run on GitHub, however property ${BuildConstants.FUNCTIONAL_TESTS_ONLY} wasn't set. Please set up it for explicit configuration.")
         }
     }
+    // ensure that we have all files required
+    doFirst {
+        val localRepositoryFolder =
+            rootProject.layout.buildDirectory.dir("local-repo/io/github/build-extensions-oss").get().asFile
+
+        require(localRepositoryFolder.isDirectory) {
+            "$localRepositoryFolder is not a directory: it must be presented on disk before run"
+        }
+    }
 }
 
