@@ -50,3 +50,12 @@ apiValidation {
 dokka {
     moduleName.set("Gradle Helm Publish Plugin")
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "localRepo"
+            url = rootProject.layout.buildDirectory.dir("local-repo").get().asFile.toURI()
+        }
+    }
+}

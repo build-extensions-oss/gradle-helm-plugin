@@ -17,6 +17,9 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
     findProperty(urlOverrideProperty)?.let { urlOverride ->
         systemProperty(urlOverrideProperty, urlOverride)
     }
+
+    // before running functional test - we must publish all plugins locally
+    dependsOn(tasks.named("publishAllPublicationsToLocalRepoRepository"))
 }
 
 tasks.build {
