@@ -4,3 +4,4 @@
 # YAML files must use Linux (LF) line endings - otherwise github actions might complain
 *.yml  text eol=lf
 *.yaml text eol=lf
+*.lockfile text eol=lf
