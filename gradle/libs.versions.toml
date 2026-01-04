@@ -30,7 +30,6 @@ junitEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref =
 # is needed because of https://github.com/gradle/gradle/issues/34512#issuecomment-3149703490
 junitPlatform = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.9.0" }
 
 org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.3" }
 org-jetbrains-kotlin-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
