@@ -6,9 +6,14 @@ plugins {
  * All these dependencies will be propagated to all test projects
  */
 dependencies {
-    api(libs.bundles.defaultTests)
+    api(libs.junit)
+    api(libs.kotestAssertions)
+
     api(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
-    runtimeOnly(libs.bundles.defaultTestsRuntime)
+
+    // both dependencies below are needed for running JUnit test with Gradle 9
+    runtimeOnly(libs.junitEngine)
+    runtimeOnly(libs.junitPlatform)
 }
 
 kover {
