@@ -23,7 +23,6 @@ dependencies {
     testImplementation(libs.okHttpMockWebServer)
 
     testImplementation(libs.coroutinesCore)
-    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
 
     // import code coverage from other plugins - basically, some code from this project is used there
     kover(project(":helm-publish-plugin"))

@@ -22,8 +22,7 @@ dependencies {
 
     implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
 
-    testImplementation(libs.io.github.build.extensions.oss.gradle.plugin.test.utils)
-    testRuntimeOnly(libs.bundles.defaultTestsRuntime)
+    testImplementation(project(":unit-test-utils"))
 
     "functionalTestImplementation"(project(":plugin-test-utils"))
     "functionalTestImplementation"(libs.okHttpMockWebServer)
