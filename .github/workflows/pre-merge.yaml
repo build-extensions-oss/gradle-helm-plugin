@@ -147,13 +147,7 @@ jobs:
 
       # Merge XML reports - and exclude functional tests (they must be executed on other platforms)
       - name: Merge Kover reports
-        run: ./gradlew \
-          --no-daemon \
-          --stacktrace \
-          "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
-          build \
-          koverXmlReport \
-          -x functionalTest
+        run: ./gradlew build koverXmlReport -x functionalTest "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" --no-daemon --info --stacktrace
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov
