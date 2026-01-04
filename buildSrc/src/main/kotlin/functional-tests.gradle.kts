@@ -20,6 +20,8 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
 
     // before running functional test - we must publish all plugins locally
     dependsOn(tasks.named("publishAllPublicationsToLocalRepoRepository"))
+    // depend on main plugin as well - otherwise recompilation might not happen
+    dependsOn(project(":helm-plugin").tasks.named("publishAllPublicationsToLocalRepoRepository"))
 }
 
 tasks.build {
