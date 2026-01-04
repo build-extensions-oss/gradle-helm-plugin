@@ -72,6 +72,10 @@ tasks {
     }
 }
 
+val externalCoverageFiles = rootProject.layout.buildDirectory.dir(
+    "tmp/kover-artefacts"
+).get().asFileTree.matching { include("**/*.ic") }
+
 kover.reports {
     verify {
         rule {
@@ -83,14 +87,17 @@ kover.reports {
 
     // this setting is propagated to all child projects. They will apply these code coverage results on top on what they have
     total {
-        val files = rootProject.layout.buildDirectory.dir(
-            "tmp/kover-artefacts"
-        ).get().asFileTree.matching { include("**/*.ic") }
-
-        additionalBinaryReports.addAll(files)
+        additionalBinaryReports.addAll(externalCoverageFiles)
     }
 }
 
+tasks.register("validateExternalKoverArtifacts") {
+    doLast {
+        require(externalCoverageFiles.files.isNotEmpty()) {
+            "Unable to find any file in external artifacts: ${externalCoverageFiles.files.joinToString()}"
+        }
+    }
+}
 
 val asciidoctorExt: Configuration by configurations.creating
 
