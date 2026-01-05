@@ -4,4 +4,7 @@
 # YAML files must use Linux (LF) line endings - otherwise github actions might complain
 *.yml  text eol=lf
 *.yaml text eol=lf
+# these files are generated either manually on Windows, or automatically by Renovate. So, let's avoid line ending issues
 *.lockfile text eol=lf
+# Somehow we have different line endings for md files. So, github doesn't show text difference
+*.md text eol=lf
