@@ -34,7 +34,7 @@ jobs:
       # setup JDK - depending on version selected
       # https://github.com/marketplace/actions/setup-java-jdk
       - name: Set up JDK
-        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5.1.0
         with:
           # Java 17 is baseline for our project. So, code must be compiled under it
           java-version: 17
@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java ${{ matrix.java }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: ${{ matrix.java }}
@@ -130,7 +130,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
