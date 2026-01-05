@@ -82,13 +82,11 @@ kover.reports {
     }
 }
 
-
 val asciidoctorExt: Configuration by configurations.creating
 
 dependencies {
     asciidoctorExt(libs.tabbedCodeExtension)
 }
-
 
 tasks.named("asciidoctor", org.asciidoctor.gradle.jvm.AsciidoctorTask::class) {
 

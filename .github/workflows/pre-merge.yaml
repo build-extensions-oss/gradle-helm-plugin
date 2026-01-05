@@ -13,15 +13,9 @@ permissions:
   contents: read
 
 jobs:
-  gradle:
-    strategy:
-      fail-fast: false
-      matrix:
-        # Mac OS and Windows are turned off: https://github.com/Citi/gradle-helm-plugin/issues/5
-        os: [ ubuntu-latest ]
-        # Test on Java 17 only until we finish Gradle 9 migration
-        jdk: [ 17 ]
-    runs-on: ${{ matrix.os }}
+  # this job only compiled code and runs unit tests. It doesn't run functional tests.
+  build:
+    runs-on: ubuntu-latest
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
       - name: Harden the runner (Audit all outbound calls)
@@ -42,7 +36,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
         with:
-          java-version: ${{ matrix.jdk }}
+          # Java 17 is baseline for our project. So, code must be compiled under it
+          java-version: 17
           distribution: 'temurin'
 
       # Optimize Gradle execution
@@ -57,14 +52,102 @@ jobs:
         # All important internal tasks a linked to build.
         # Add more memory for Gradle and compiler. See also https://github.com/build-extensions-oss/gradle-helm-plugin/issues/26
         # Keep Kotlin compiler running as a daemon - otherwise the configuration will be complex
+        # We just publish plugin here - deep tests will be executed at later stages
         run: |
           ./gradlew \
-          build \
-          koverXmlReport \
+          publishAllPublicationsToLocalRepoRepository \
           "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
           --stacktrace \
           --info \
           --no-daemon
+
+      - name: Upload plugin files
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          if-no-files-found: error
+          path: ./build/local-repo/**
+
+  functional-test:
+    name: Functional tests (${{ matrix.os }}, Java ${{ matrix.java }})
+    needs: build
+    runs-on: ${{ matrix.os }}
+
+    # run test on multiple operating systems
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: ["17", "21"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Download build outputs
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./build/local-repo/
+
+      # Key requirement: do NOT recompile during tests, but run functional tests.
+      - name: Functional tests (no recompilation)
+        # workaround for Windows
+        shell: bash
+        run: |
+          ./gradlew \
+            --no-daemon \
+            --stacktrace \
+            "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" \
+            "-Pio.github.build.extensions.oss.gradle.helm.plugin.functional.tests.only=true" \
+            functionalTest \
+            copyFunctionalTestCoverage
+
+      - name: Upload Kover execution data
+        uses: actions/upload-artifact@v4
+        with:
+          # Must be unique per job (artifact v4 immutability)
+          name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
+          if-no-files-found: error
+          path: ./build/tmp/collected/kover-bin-reports/*.ic
+
+  coverage:
+    name: Coverage (merge OS runs, upload to Codecov)
+    needs: functional-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Download Kover functional tests artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: kover-functional-tests-*
+          path: ./build/tmp/kover-artefacts/functional-tests
+          merge-multiple: true
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Merge XML reports - and exclude functional tests (they must be executed on other platforms)
+      - name: Merge Kover reports
+        run: ./gradlew build koverXmlReport validateExternalKoverArtifacts -x functionalTest "-Porg.gradle.jvmargs=-Xmx1G -XX:MaxMetaspaceSize=2G" --no-daemon --info --stacktrace
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov

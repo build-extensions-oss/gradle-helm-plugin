@@ -65,7 +65,7 @@ Version `3.1.0` (under construction) might be not backward compatible with older
 
 - Gradle 7 or higher
 
-- JDK 1.8 or higher (for running Gradle)
+- JDK 17 or higher (for running Gradle)
 
 - Helm command-line client 3.+
 
@@ -78,9 +78,35 @@ We welcome you to:
 
 - Fix typos or touch up documentation
 - Share your opinions on [existing issues](https://github.com/build-extensions-oss/gradle-helm-plugin/issues)
-- Help expand and improve our library by [opening a new issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues/new)
+- Help expand and improve our library
+  by [opening a new issue](https://github.com/build-extensions-oss/gradle-helm-plugin/issues/new)
 
 Please review our [functional contribution guidelines](./CONTRIBUTING.md) to get started 👍
+
+## Testing
+
+Code is tested on GitHub. Additionally, code is manually verified via neighbour
+repository: https://github.com/build-extensions-oss/gradle-plugin-examples.
+
+There are three types of tests:
+
+* Unit tests (with mocks and so on)
+* Functional tests via Gradle simulation (old - should be removed). They run on Linux only. They are executed in the
+  same time with unit tests.
+* Functional tests via Gradle Test Kit.
+
+The most comprehensive checks are done via Gradle Functional tests. And GitHub workflow logic is the following:
+
+1. We compile code on ubuntu-latest and publish jars locally.
+2. Plugin is published into local jar versioned with git hash (to avoid accidental usage from another build).
+3. Functional tests:
+    1. Executed on multiple platforms
+    2. Use the jar published (e.g. the don't recompile the same plugin code)
+    3. Run on different Java versions.
+4. The latest GitHub action - we run all unit tests, however code coverage is aggregated with functional tests as well.
+
+In other words, we compile code once and then run tests on different platforms. That is needed to check that the real
+code will be good enough to be used on different operating systems.
 
 ## License
 

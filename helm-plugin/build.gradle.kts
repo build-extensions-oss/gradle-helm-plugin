@@ -27,7 +27,6 @@ dependencies {
     kover(project(":helm-releases-plugin"))
 }
 
-
 gradlePlugin {
     plugins {
         create("helmCommandsPlugin") {
