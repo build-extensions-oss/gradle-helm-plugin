@@ -16,7 +16,7 @@ mockk = "io.mockk:mockk:1.14.7"
 tabbedCodeExtension = "com.bmuschko:asciidoctorj-tabbed-code-extension:0.3"
 orgJson = "org.json:json:20251224"
 jsonPath = "com.jayway.jsonpath:json-path:2.10.0"
-kotestAssertions = "io.kotest:kotest-assertions-core:5.9.1"
+kotestAssertions = "io.kotest:kotest-assertions-core:6.0.7"
 jacksonDataBind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jacksonDataFormatYaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version.ref = "jackson" }
 okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
