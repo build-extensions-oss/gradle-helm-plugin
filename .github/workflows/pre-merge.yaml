@@ -62,7 +62,7 @@ jobs:
           --no-daemon
 
       - name: Upload plugin files
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build-output
           if-no-files-found: error
@@ -94,7 +94,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Download build outputs
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build-output
           path: ./build/local-repo/
@@ -113,7 +113,7 @@ jobs:
             copyFunctionalTestCoverage
 
       - name: Upload Kover execution data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           # Must be unique per job (artifact v4 immutability)
           name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
@@ -136,7 +136,7 @@ jobs:
           java-version: "17"
 
       - name: Download Kover functional tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           pattern: kover-functional-tests-*
           path: ./build/tmp/kover-artefacts/functional-tests
