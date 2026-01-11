@@ -2,7 +2,7 @@
 
 The _gradle-helm-plugin_ library provides several Gradle plugins, with different use cases for each.
 
-All plugins IDs are prefixed the namespace `com.citi`.
+All plugins IDs are prefixed the namespace `io.github.build-extensions-oss`.
 
 
 == `helm-commands`

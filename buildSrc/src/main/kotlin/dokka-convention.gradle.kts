@@ -36,12 +36,10 @@ extensions.configure<DokkaExtension>("dokka") {
 
         reportUndocumented.set(false)
 
-        val githubUrl = project.extra["github.url"] as String
-
         sourceLink {
             localDirectory.set(project.file("src/$sourceSetName/kotlin"))
             remoteUrl.set(
-                uri("$githubUrl/blob/v${project.version}/${project.projectDir.relativeTo(rootDir)}/src/$sourceSetName/kotlin")
+                uri("${BuildConstants.GITHUB_URL}/blob/v${project.version}/${project.projectDir.relativeTo(rootDir)}/src/$sourceSetName/kotlin")
             )
             remoteLineSuffix.set("#L")
         }

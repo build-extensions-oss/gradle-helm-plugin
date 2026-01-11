@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   # run automatically on publish
   release:
-    types: [published]
+    types: [ published ]
 
 # We deploy into the *account pages* repository (<owner>.github.io), so we do not use the GitHub Pages
 # artifact/deploy APIs here. Deployment happens via a git push into the account pages repo.
@@ -42,12 +42,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      # https://github.com/marketplace/actions/setup-java-jdk
-      - name: Set up JDK 17
-        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5.1.0
-        with:
-          java-version: 17
-          distribution: 'temurin'
+      # https://github.com/marketplace/actions/build-with-gradle
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
 
       # https://github.com/marketplace/actions/gradle-wrapper-validation
       - name: Validate Gradle wrapper
@@ -58,6 +55,24 @@ jobs:
         uses: gradle/gradle-build-action@ac2d340dc04d9e1113182899e983b5400c17cda1 # v3.5.0
         with:
           arguments: asciidoctor
+
+      # Retrieve the latest official release. That guarantees that we always put the proper version into documentation
+      # Please note the parameter "-Pversion=${{ steps.latest_release.outputs.tag }}" below
+      # See also https://cli.github.com/manual/gh_api
+      - name: Get latest release via gh
+        id: latest_release
+        shell: bash
+        env:
+          # otherwise it will fail with: 'gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable.'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "tag=$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json tagName --jq '.[0].tagName')" >> "$GITHUB_OUTPUT"
+          echo "name=$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json name --jq '.[0].name')" >> "$GITHUB_OUTPUT"
+
+      - name: Generate documentation
+        # run askiidoctor command, however assign more operating memory: we have it on VM, so why not using it?
+        run: ./gradlew asciidoctor "-Pversion=${{ steps.latest_release.outputs.tag }}" "-Porg.gradle.jvmargs=-Xmx4G -XX:MaxMetaspaceSize=2G" --no-daemon --info --stacktrace
 
       # Checkout the <owner>.github.io repository and publish docs into a subfolder named after this repository
       - name: Checkout account pages repository
