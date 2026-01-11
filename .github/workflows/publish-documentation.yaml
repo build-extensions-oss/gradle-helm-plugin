@@ -10,10 +10,10 @@ on:
   release:
     types: [published]
 
+# We deploy into the *account pages* repository (<owner>.github.io), so we do not use the GitHub Pages
+# artifact/deploy APIs here. Deployment happens via a git push into the account pages repo.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   gradle:
@@ -23,6 +23,14 @@ jobs:
       # This job must only run in Publishing environment. It is protected from the majority of runs, which prevents Gradle secrets leakage
       name: Publishing
       url: https://github.com/build-extensions-oss/gradle-helm-plugin/settings/environments/10298625189/edit
+
+    env:
+      # Target repo that backs the GitHub *account* pages site:
+      #   https://<owner>.github.io/
+      ACCOUNT_PAGES_REPO: ${{ github.repository_owner }}/${{ github.repository_owner }}.github.io
+      # Deploy under a prefix so the docs are served at:
+      #   https://<owner>.github.io/<this-repository>/
+      DEPLOY_PREFIX: ${{ github.event.repository.name }}
 
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
@@ -51,13 +59,45 @@ jobs:
         with:
           arguments: asciidoctor
 
-      # https://github.com/actions/upload-pages-artifact
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+      # Checkout the <owner>.github.io repository and publish docs into a subfolder named after this repository
+      - name: Checkout account pages repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
-          path: './build/docs/asciidoc'
+          repository: ${{ env.ACCOUNT_PAGES_REPO }}
+          path: account-pages
+          # REQUIRED: a PAT with write access to <owner>.github.io (GITHUB_TOKEN cannot push to a different repo)
+          # is defined here: https://github.com/build-extensions-oss/gradle-helm-plugin/settings/environments/10298625189/edit
+          token: ${{ secrets.ACCOUNT_PAGES_TOKEN }}
 
-      # https://github.com/actions/deploy-pages
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+      - name: Publish docs into account pages with repository prefix
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          SRC_DIR="./build/docs/asciidoc/"
+          DEST_ROOT="./account-pages"
+          DEST_DIR="${DEST_ROOT}/${DEPLOY_PREFIX}"
+
+          # Ensure GitHub Pages serves raw files (no Jekyll processing).
+          touch "${DEST_ROOT}/.nojekyll"
+
+          mkdir -p "${DEST_DIR}"
+          rsync -av --delete "${SRC_DIR}" "${DEST_DIR}/"
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cd account-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to deploy."
+            exit 0
+          fi
+
+          git commit -m "Deploy ${DEPLOY_PREFIX} docs from ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
+          git push
