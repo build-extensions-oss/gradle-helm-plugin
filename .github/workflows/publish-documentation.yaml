@@ -62,6 +62,9 @@ jobs:
       - name: Get latest release via gh
         id: latest_release
         shell: bash
+        env:
+          # otherwise it will fail with: 'gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable.'
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           echo "tag=$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json tagName --jq '.[0].tagName')" >> "$GITHUB_OUTPUT"
