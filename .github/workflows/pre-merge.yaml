@@ -156,3 +156,11 @@ jobs:
           files: ./build/reports/kover/report.xml
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Diagnostic - coverage data
+        uses: actions/upload-artifact@v6
+        with:
+          # Must be unique per job (artifact v4 immutability)
+          name: all-coverage
+          if-no-files-found: error
+          path: ./**/report.xml
