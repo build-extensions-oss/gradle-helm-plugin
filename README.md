@@ -57,7 +57,7 @@ Java/Kotlin packages are the same, so the plugin should be fully compatible.
 Version `3.1.0` (under construction) might be not backward compatible with older plugin versions, because:
 
 * It has new Java/Kotlin packages that match this project.
-  * Unless you call plugin functions directly, it would be hard to notice any differences with simple plugin usages
+    * Unless you call plugin functions directly, it would be hard to notice any differences with simple plugin usages
 * It is compatible with Gradle 9 (and remain being compatible with Gradle 7), however some old APIs have been removed.
 * The minimal Java version is Java 17 (not 1.8).
 
@@ -68,6 +68,16 @@ Version `3.1.0` (under construction) might be not backward compatible with older
 - JDK 17 or higher (for running Gradle)
 
 - Helm command-line client 3.+
+
+### Limitations
+
+Due to open source nature of the project, some functionality isn't supported for old versions of Gradle.
+
+| Feature                        | Gradle Version                                                                 |
+|--------------------------------|--------------------------------------------------------------------------------|
+| Basic Helm Chart Functionality | 7, 8, 9                                                                        |
+| Helm Publish                   | 7, 8, 9                                                                        |
+| Helm Releases                  | 7, 8 - basic support (not tested regularly); 9 - full support (constant tests) |
 
 ## Contributing
 
