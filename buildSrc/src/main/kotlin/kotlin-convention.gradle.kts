@@ -56,9 +56,11 @@ tasks.jar {
 // otherwise Gradle fails with 'Cannot publish artifacts as no version set.'
 project.version = rootProject.version.toString()
 
-val externalCoverageFiles = rootProject.layout.buildDirectory.dir(
-    "tmp/kover-artefacts"
-).get().asFileTree.matching { include("**/*.ic") }
+val externalArtifactsFolder = rootProject.layout.buildDirectory.dir(
+    "tmp/kover-artifacts"
+).get()
+
+val externalCoverageFiles = externalArtifactsFolder.asFileTree.matching { include("**/*.ic") }
 
 kover {
     currentProject {
@@ -77,7 +79,7 @@ kover {
 tasks.register("validateExternalKoverArtifacts") {
     doLast {
         require(externalCoverageFiles.files.isNotEmpty()) {
-            "Unable to find any file in external artifacts: ${externalCoverageFiles.files.joinToString()}"
+            "Unable to find any file in external artifacts in ${externalArtifactsFolder}: ${externalCoverageFiles.files.joinToString()}"
         }
     }
 }

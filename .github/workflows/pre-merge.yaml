@@ -139,8 +139,13 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           pattern: kover-functional-tests-*
-          path: ./build/tmp/kover-artefacts/functional-tests
-          merge-multiple: true
+          path: ./build/tmp/kover-artifacts/functional-tests
+          # see https://github.com/actions/download-artifact
+          # this instructs the build action to download each artifact to different folder.
+          # Folder should be like:
+          # ./build/tmp/kover-artifacts/functional-tests/kover-functional-tests-windows-latest-java17/
+          # Alternatively all files will be overridden by the either first or last artifact.
+          merge-multiple: false
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v5
