@@ -53,8 +53,8 @@ subprojects {
 
     plugins.withId("com.gradle.plugin-publish") {
         with(the<GradlePluginDevelopmentExtension>()) {
-            website = "https://build-extensions-oss.github.io/gradle-helm-plugin/"
-            vcsUrl = "https://github.com/build-extensions-oss/gradle-helm-plugin"
+            website = BuildConstants.GITHUB_PAGES_DOCUMENTATION
+            vcsUrl = BuildConstants.GITHUB_URL
             description = "A suite of Gradle plugins for building, publishing and managing Helm charts."
             plugins.forEach { plugin ->
                 plugin.tags.add("helm")
