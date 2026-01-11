@@ -58,18 +58,14 @@ jobs:
 
       # Retrieve the latest official release. That guarantees that we always put the proper version into documentation
       # Please note the parameter "-Pversion=${{ steps.latest_release.outputs.tag }}" below
-      - name: Get latest official release (REST API)
+      # See also https://cli.github.com/manual/gh_api
+      - name: Get latest release via gh
         id: latest_release
         shell: bash
         run: |
           set -euo pipefail
-          json="$(curl -sS \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest")"
-
-          echo "tag=$(jq -r '.tag_name' <<<"$json")" >> "$GITHUB_OUTPUT"
-          echo "name=$(jq -r '.name' <<<"$json")" >> "$GITHUB_OUTPUT"
+          echo "tag=$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json tagName --jq '.[0].tagName')" >> "$GITHUB_OUTPUT"
+          echo "name=$(gh release list --exclude-drafts --exclude-pre-releases --limit 1 --json name --jq '.[0].name')" >> "$GITHUB_OUTPUT"
 
       - name: Generate documentation
         # run askiidoctor command, however assign more operating memory: we have it on VM, so why not using it?
