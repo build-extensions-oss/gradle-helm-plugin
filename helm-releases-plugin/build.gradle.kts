@@ -2,18 +2,18 @@ plugins {
     id("gradle-plugin-convention") // keep shared logic here
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
-    id("org.jetbrains.dokka")
-    id("maven-publish")
     alias(libs.plugins.binaryCompatibilityValidator)
+    id("functional-tests") // logic related to Gradle functional testing is here
 }
 
 
 dependencies {
-
     implementation(project(":helm-plugin"))
     testImplementation(project(":unit-test-utils"))
 
     implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
+
+    "functionalTestImplementation"(project(":plugin-test-utils"))
 }
 
 

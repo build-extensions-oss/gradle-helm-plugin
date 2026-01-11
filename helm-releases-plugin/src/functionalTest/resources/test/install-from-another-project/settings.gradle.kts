@@ -1,0 +1,17 @@
+/**
+ * See publishing in gradle-plugin-convention.gradle.kts
+ * https://docs.gradle.org/current/userguide/part8_publish_locally.html#step_3_configure_the_local_repository_in_consumer
+ */
+pluginManagement {
+    repositories {
+        maven {
+            url = file("../../../../build/local-repo").toURI()
+        }
+        gradlePluginPortal()
+    }
+}
+
+include(
+    "project-which-installs",
+    "project-with-chart",
+)

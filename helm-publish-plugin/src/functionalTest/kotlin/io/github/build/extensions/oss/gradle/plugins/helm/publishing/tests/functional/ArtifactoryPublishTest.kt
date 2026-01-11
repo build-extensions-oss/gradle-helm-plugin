@@ -2,6 +2,7 @@ package io.github.build.extensions.oss.gradle.plugins.helm.publishing.tests.func
 
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
+import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.HelmExecutable
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain

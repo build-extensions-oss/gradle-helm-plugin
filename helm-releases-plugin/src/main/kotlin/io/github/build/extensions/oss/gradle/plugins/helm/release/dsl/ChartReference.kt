@@ -84,10 +84,12 @@ internal class ConfigurationChartReference(
          * Resolves the chart name for the internal configuration.
          * We have single artifact with single file, so let's use the API below.
          */
-        get() = project.configurations.getByName(configurationName)
-            .artifacts
-            .files
+        get() = project.configurations
+            .getByName(configurationName)
+            .resolvedConfiguration
+            .resolvedArtifacts
             .single()
+            .file
             .absolutePath
 
 
