@@ -2,8 +2,6 @@ plugins {
     id("gradle-plugin-convention") // keep shared logic here
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
-    id("org.jetbrains.dokka")
-    id("maven-publish")
     alias(libs.plugins.binaryCompatibilityValidator)
 }
 
