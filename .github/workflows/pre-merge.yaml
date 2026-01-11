@@ -29,7 +29,7 @@ jobs:
       # Protect from putting custom jar as a gradle wrapper
       # https://github.com/gradle/actions/tree/main/wrapper-validation
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v5
+        uses: gradle/actions/wrapper-validation@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
       # setup JDK - depending on version selected
       # https://github.com/marketplace/actions/setup-java-jdk
@@ -43,7 +43,7 @@ jobs:
       # Optimize Gradle execution
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
       # Build the project by simply running the command line
       # No need to use daemon (this is run once container), however we print detailed logs and stacktrace
@@ -62,7 +62,7 @@ jobs:
           --no-daemon
 
       - name: Upload plugin files
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: build-output
           if-no-files-found: error
@@ -82,19 +82,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
       - name: Set up Java ${{ matrix.java }}
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5
         with:
           distribution: temurin
           java-version: ${{ matrix.java }}
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
       - name: Download build outputs
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           name: build-output
           path: ./build/local-repo/
@@ -113,7 +113,7 @@ jobs:
             copyFunctionalTestCoverage
 
       - name: Upload Kover execution data
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           # Must be unique per job (artifact v4 immutability)
           name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
@@ -127,16 +127,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
       - name: Set up Java 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5
         with:
           distribution: temurin
           java-version: "17"
 
       - name: Download Kover functional tests artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           pattern: kover-functional-tests-*
           path: ./build/tmp/kover-artifacts/functional-tests
@@ -148,7 +148,7 @@ jobs:
           merge-multiple: false
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
       # Merge XML reports - and exclude functional tests (they must be executed on other platforms)
       - name: Merge Kover reports
@@ -156,7 +156,7 @@ jobs:
 
       # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5
         with:
           files: ./build/reports/kover/report.xml
           verbose: true
