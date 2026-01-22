@@ -44,7 +44,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
 
       # https://github.com/marketplace/actions/gradle-wrapper-validation
       - name: Validate Gradle wrapper
