@@ -62,7 +62,7 @@ jobs:
           --no-daemon
 
       - name: Upload plugin files
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           name: build-output
           if-no-files-found: error
@@ -94,7 +94,7 @@ jobs:
         uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
 
       - name: Download build outputs
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
         with:
           name: build-output
           path: ./build/local-repo/
@@ -113,7 +113,7 @@ jobs:
             copyFunctionalTestCoverage
 
       - name: Upload Kover execution data
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
         with:
           # Must be unique per job (artifact v4 immutability)
           name: kover-functional-tests-${{ matrix.os }}-java${{ matrix.java }}
@@ -136,7 +136,7 @@ jobs:
           java-version: "17"
 
       - name: Download Kover functional tests artifacts
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
         with:
           pattern: kover-functional-tests-*
           path: ./build/tmp/kover-artifacts/functional-tests
