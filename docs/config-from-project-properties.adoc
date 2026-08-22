@@ -86,19 +86,19 @@ You can configure repositories entirely from Gradle properties -- just the prese
 |===
 | Property | Description
 
-| `helm.repository.<name>.url`
+| `helm.repositories.<name>.url`
 | The URL of the repository.
 
-| `helm.repository.<name>.credentials.username`
+| `helm.repositories.<name>.credentials.username`
 | Username for password-based authentication.
 
-| `helm.repository.<name>.credentials.password`
+| `helm.repositories.<name>.credentials.password`
 | Password for password-based authentication.
 
-| `helm.repository.<name>.credentials.certificateFile`
+| `helm.repositories.<name>.credentials.certificateFile`
 | Client certificate file for certificate authentication.
 
-| `helm.repository.<name>.credentials.keyFile`
+| `helm.repositories.<name>.credentials.keyFile`
 | Private key file for certificate authentication.
 |===
 
