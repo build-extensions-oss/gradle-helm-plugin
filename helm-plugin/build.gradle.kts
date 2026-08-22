@@ -3,6 +3,7 @@ plugins {
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish")
     alias(libs.plugins.binaryCompatibilityValidator)
+    id("functional-tests") // logic related to Gradle functional testing is here
 }
 
 
@@ -23,6 +24,8 @@ dependencies {
     // import code coverage from other plugins - basically, some code from this project is used there
     kover(project(":helm-publish-plugin"))
     kover(project(":helm-releases-plugin"))
+
+    "functionalTestImplementation"(project(":plugin-test-utils"))
 }
 
 gradlePlugin {

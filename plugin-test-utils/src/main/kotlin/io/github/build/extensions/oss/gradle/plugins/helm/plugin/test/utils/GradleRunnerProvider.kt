@@ -46,7 +46,7 @@ object GradleRunnerProvider {
 
             when (val versionOverride = parameters.helmVersion) {
                 null -> Unit
-                else -> add("helm.client.download.version=$versionOverride")
+                else -> add("-Phelm.client.download.version=$versionOverride")
             }
         }
 
