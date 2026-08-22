@@ -41,11 +41,20 @@ object GradleRunnerProvider {
         arguments: List<String>,
         projectDir: File
     ): WrappedGradleRunner {
+        val finalArguments = buildList {
+            addAll(arguments)
+
+            when (val versionOverride = parameters.helmVersion) {
+                null -> Unit
+                else -> add("helm.client.download.version=$versionOverride")
+            }
+        }
+
         val runner = GradleRunner.create()
             // strictly don't use plugin classpath - use the jars published into the local repository
             // .withPluginClasspath()
             // set arguments here. With a positive probability someone can override that - let's ignore it for now, because
-            .withArguments(arguments)
+            .withArguments(finalArguments)
             .withProjectDir(projectDir)
             .let { runner ->
                 applyDistribution(runner, parameters.distribution)

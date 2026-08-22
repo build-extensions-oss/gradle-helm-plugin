@@ -38,7 +38,7 @@ internal class ArtifactoryPublishTest {
     }
 
     @ParameterizedTest
-    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
+    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSetWithoutHelmVersion")
     fun helmPublishShouldCallArtifactoryWithCredentials(parameters: DefaultGradleRunnerParameters) {
         // given
         val destinationChartArchive =
