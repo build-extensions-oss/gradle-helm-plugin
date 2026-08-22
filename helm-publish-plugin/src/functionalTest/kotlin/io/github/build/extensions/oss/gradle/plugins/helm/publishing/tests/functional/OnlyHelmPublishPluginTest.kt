@@ -23,7 +23,7 @@ internal class OnlyHelmPublishPluginTest {
     }
 
     @ParameterizedTest
-    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSet")
+    @MethodSource("io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters#getDefaultParameterSetWithoutHelmVersion")
     fun helmPublishPluginCouldBeAppliedAloneButDontCreateAnyTask(parameters: DefaultGradleRunnerParameters) {
         // given
         val gradleRunner = GradleRunnerProvider.createRunner(
