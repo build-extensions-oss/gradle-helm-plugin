@@ -7,11 +7,14 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
-subprojects {
+allprojects {
+    // subprojects need repositories. Root project needs it for kover report
     repositories {
         mavenCentral()
     }
+}
 
+subprojects {
     plugins.withType<JavaGradlePluginPlugin> {
         dependencies {
             "compileOnly"(kotlin("stdlib"))
