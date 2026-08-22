@@ -5,6 +5,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.Grad
 import io.kotest.matchers.file.containFile
 import io.kotest.matchers.file.exist
 import io.kotest.matchers.should
+import io.kotest.matchers.string.contain
 import io.kotest.matchers.string.shouldContain
 import java.io.File
 import org.junit.jupiter.api.BeforeEach
@@ -46,9 +47,15 @@ internal class HelmSimpleRenderTest {
         // check that the linting task had been executed
         output shouldContain "Task :helmLintMainChart"
 
-        val folderWithChart = testProjectDir.toPath().resolve("build/helm/charts/helmRenderProjectName").toFile()
+        val folderWithChart = testProjectDir.resolve("build/helm/charts/helmRenderProjectName")
         folderWithChart should exist()
         // check that the main yaml file was copied
         folderWithChart should containFile("Chart.yaml")
+
+        val renderedServiceYaml = testProjectDir.resolve("build/helm/render/main/default/helmRenderProjectName/templates/service.yaml")
+        renderedServiceYaml should exist()
+        // check that we render the project name into the file.
+        // e.g. the line 'name: xxxxx{{ .Chart.Name }}' should be converted to what we check below
+        renderedServiceYaml.readText() should contain("name: xxxxxhelmRenderProjectName")
     }
 }
