@@ -1,8 +1,6 @@
 package io.github.build.extensions.oss.gradle.plugins.helm
 
 import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
-import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
-import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.toUri
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPlugin
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmInstallationCommandTask
@@ -31,6 +29,8 @@ class HelmPlugin
     internal companion object {
         const val addRepositoriesTaskName = "helmAddRepositories"
         const val updateRepositoriesTaskName = "helmUpdateRepositories"
+
+        private const val repositoriesPropertyPrefix = "helm.repositories."
     }
 
 
@@ -265,13 +265,16 @@ class HelmPlugin
      * @receiver the current Gradle [Project]
      */
     private fun Project.createRepositoriesFromProjectProperties() {
-        properties.keys
-            .filter { it.startsWith("helm.repositories.") }
-            .mapNotNull { it.split('.').drop(2).firstOrNull() }
-            .distinct()
-            .forEach { repositoryName ->
-                createRepositoryFromProjectProperties(repositoryName)
+        providers.gradlePropertiesPrefixedBy(repositoriesPropertyPrefix)
+            .get()
+            .keys
+            .asSequence()
+            .map { propertyName ->
+                propertyName.removePrefix(repositoriesPropertyPrefix).substringBefore('.')
             }
+            .filter(String::isNotEmpty)
+            .distinct()
+            .forEach(::createRepositoryFromProjectProperties)
     }
 
 
@@ -283,22 +286,29 @@ class HelmPlugin
      * @param name the name of the repository
      */
     private fun Project.createRepositoryFromProjectProperties(name: String) {
-        val prefix = "helm.repositories.$name"
+        val prefix = "$repositoriesPropertyPrefix$name"
+        val username = providers.gradleProperty("$prefix.credentials.username")
+        val certificateFile = providers.gradleProperty("$prefix.credentials.certificateFile")
+
         helm.repositories
             .create(name) { repository ->
                 repository.url.set(
-                    providerFromProjectProperty("$prefix.url").toUri()
+                    providers.gradleProperty("$prefix.url").toUri()
                 )
 
-                if (hasProperty("$prefix.credentials.username")) {
+                if (username.isPresent) {
                     repository.credentials { cred ->
-                        cred.username.set(providerFromProjectProperty("$prefix.credentials.username"))
-                        cred.password.set(providerFromProjectProperty("$prefix.credentials.password"))
+                        cred.username.set(username)
+                        cred.password.set(providers.gradleProperty("$prefix.credentials.password"))
                     }
-                } else if (hasProperty("$prefix.credentials.certificateFile")) {
+                } else if (certificateFile.isPresent) {
                     repository.credentials(CertificateCredentials::class) {
-                        certificateFile.set(fileProviderFromProjectProperty("$prefix.credentials.certificateFile"))
-                        keyFile.set(fileProviderFromProjectProperty("$prefix.credentials.keyFile"))
+                        certificateFile.set(layout.projectDirectory.file(certificateFile))
+                        keyFile.set(
+                            layout.projectDirectory.file(
+                                providers.gradleProperty("$prefix.credentials.keyFile")
+                            )
+                        )
                     }
                 }
             }
