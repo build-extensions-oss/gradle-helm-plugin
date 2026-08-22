@@ -7,14 +7,11 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
-
-allprojects {
+subprojects {
     repositories {
         mavenCentral()
     }
-}
 
-subprojects {
     plugins.withType<JavaGradlePluginPlugin> {
         dependencies {
             "compileOnly"(kotlin("stdlib"))

@@ -1,0 +1,2 @@
+* Integration tests are placed in functionalTest build configuration. They run real Gradle as a subprocess (by using
+  GradleRunner). To add integration test - check file `OnlyHelmPublishPluginTest.kt` as an example.
