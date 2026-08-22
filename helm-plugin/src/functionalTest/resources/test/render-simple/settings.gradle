@@ -10,3 +10,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+// chart name will use the project name by default
+rootProject.name = "helmRenderProjectName"

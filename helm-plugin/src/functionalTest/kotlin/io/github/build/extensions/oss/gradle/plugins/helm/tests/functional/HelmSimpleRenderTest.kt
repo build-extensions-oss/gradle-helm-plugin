@@ -2,6 +2,9 @@ package io.github.build.extensions.oss.gradle.plugins.helm.tests.functional
 
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
+import io.kotest.matchers.file.containFile
+import io.kotest.matchers.file.exist
+import io.kotest.matchers.should
 import io.kotest.matchers.string.shouldContain
 import java.io.File
 import org.junit.jupiter.api.BeforeEach
@@ -38,5 +41,14 @@ internal class HelmSimpleRenderTest {
         val output = result.output
 
         output shouldContain "BUILD SUCCESSFUL"
+        // check that the desired task had been executed
+        output shouldContain "Task :helmRender"
+        // check that the linting task had been executed
+        output shouldContain "Task :helmLintMainChart"
+
+        val folderWithChart = testProjectDir.toPath().resolve("build/helm/charts/helmRenderProjectName").toFile()
+        folderWithChart should exist()
+        // check that the main yaml file was copied
+        folderWithChart should containFile("Chart.yaml")
     }
 }
