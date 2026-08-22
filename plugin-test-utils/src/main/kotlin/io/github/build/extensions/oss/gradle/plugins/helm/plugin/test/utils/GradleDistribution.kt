@@ -21,7 +21,6 @@ sealed interface GradleDistribution {
      */
     enum class Custom(val version: String) : GradleDistribution {
         V9_2_1("9.2.1"),
-        V8_1_1("8.1.1"),
-        V7_6_1("7.6.1")
+        V8_1_1("8.1.1")
     }
 }
