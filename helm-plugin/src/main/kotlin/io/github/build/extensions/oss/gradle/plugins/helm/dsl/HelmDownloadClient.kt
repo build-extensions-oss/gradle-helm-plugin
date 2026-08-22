@@ -38,7 +38,7 @@ interface HelmDownloadClient {
     /**
      * The version of the client to be downloaded.
      *
-     * Defaults to the latest version available at the time of the plugin release (currently `3.4.1`).
+     * Defaults to the latest version available at the time of the plugin release (currently `4.2.4`).
      *
      * @see DEFAULT_HELM_CLIENT_VERSION
      */
