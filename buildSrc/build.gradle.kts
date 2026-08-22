@@ -3,6 +3,10 @@ plugins {
 }
 
 repositories {
+    // ban default repositories - including Maven Central - to avoid error ' Received status code 429 from server: Too Many Requests'
+    // https://github.com/renovatebot/renovate/discussions/43146
+    // clear()
+
     gradlePluginPortal()
 }
 
