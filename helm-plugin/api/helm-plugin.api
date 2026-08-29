@@ -23,30 +23,49 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/HelmPlugin
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableGlobalHelmOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/GlobalHelmOptions {
 	public abstract fun getDebug ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getDebug ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getExecutable ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getExecutable ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getExtraArgs ()Lorg/gradle/api/provider/ListProperty;
+	public synthetic fun getExtraArgs ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getXdgCacheHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgCacheHome ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getXdgConfigHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgConfigHome ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getXdgDataHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgDataHome ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallationOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/HelmInstallFromRepositoryOptions {
 	public abstract fun getCaFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public synthetic fun getCaFile ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getCertFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public synthetic fun getCertFile ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getKeyFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public synthetic fun getKeyFile ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getPassword ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getPassword ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getRepository ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getRepository ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getUsername ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getUsername ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallationOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmServerOperationOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/HelmInstallationOptions {
 	public abstract fun getAtomic ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getAtomic ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getCreateNamespace ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getCreateNamespace ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getDevel ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getDevel ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getVerify ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getVerify ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getVersion ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getVersion ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getWait ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getWait ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getWaitForJobs ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getWaitForJobs ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/HelmOptions {
@@ -54,20 +73,29 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmServerOperationOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmServerOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/HelmServerOperationOptions {
 	public abstract fun getDryRun ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getDryRun ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getNoHooks ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getNoHooks ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getRemoteTimeout ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getRemoteTimeout ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmServerOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/HelmServerOptions {
 	public abstract fun getKubeConfig ()Lorg/gradle/api/file/RegularFileProperty;
+	public synthetic fun getKubeConfig ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getKubeContext ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getKubeContext ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getNamespace ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getNamespace ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/HelmValueOptions {
 	public abstract fun getFileValues ()Lorg/gradle/api/provider/MapProperty;
+	public synthetic fun getFileValues ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getValueFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
+	public synthetic fun getValueFiles ()Lorg/gradle/api/file/FileCollection;
 	public abstract fun getValues ()Lorg/gradle/api/provider/MapProperty;
+	public synthetic fun getValues ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/command/GlobalHelmOptions : io/github/build/extensions/oss/gradle/plugins/helm/command/HelmOptions {
@@ -835,11 +863,13 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/depend
 
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRule : build/extensions/oss/gradle/pluginutils/rules/AbstractTaskRule {
 	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
+	public synthetic fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;)V
 	protected abstract fun configureFrom (Lorg/gradle/api/Task;Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmChart;)V
 }
 
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/rules/AbstractHelmChartTaskRuleOuterInner : build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRuleOuterInner {
 	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public synthetic fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;Lorg/gradle/api/Named;)V
 	protected abstract fun configureFrom (Lorg/gradle/api/Task;Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmChart;Lorg/gradle/api/Named;)V
 }
 
