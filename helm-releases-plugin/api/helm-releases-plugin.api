@@ -18,8 +18,11 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/release/ds
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions : io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTestOptions {
 	public abstract fun getEnabled ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getEnabled ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getShowLogs ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getShowLogs ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getTimeout ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getTimeout ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmRelease : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallFromRepositoryOptions, io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseProperties, org/gradle/api/Named {
@@ -111,10 +114,13 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/release/ds
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/release/dsl/HelmReleaseTarget : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmInstallationOptions, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Named, org/gradle/api/plugins/ExtensionAware {
 	public abstract fun getFileValues ()Lorg/gradle/api/provider/MapProperty;
+	public synthetic fun getFileValues ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getSelectTags ()Ljava/lang/String;
 	public abstract fun getTest ()Lio/github/build/extensions/oss/gradle/plugins/helm/release/dsl/ConfigurableHelmReleaseTestOptions;
 	public abstract fun getValueFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
+	public synthetic fun getValueFiles ()Lorg/gradle/api/file/FileCollection;
 	public abstract fun getValues ()Lorg/gradle/api/provider/MapProperty;
+	public synthetic fun getValues ()Lorg/gradle/api/provider/Provider;
 	public abstract fun setSelectTags (Ljava/lang/String;)V
 	public fun test (Lorg/gradle/api/Action;)V
 }
