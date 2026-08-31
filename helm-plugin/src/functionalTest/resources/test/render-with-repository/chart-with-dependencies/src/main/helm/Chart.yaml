@@ -1,0 +1,7 @@
+apiVersion: v2
+name: chart-with-dependencies
+version: 0.1.0
+dependencies:
+  - name: dependent-chart
+    version: 1.2.3
+    repository: "@test"

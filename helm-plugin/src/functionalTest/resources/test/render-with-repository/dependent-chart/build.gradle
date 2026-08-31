@@ -1,0 +1,23 @@
+plugins {
+    id 'io.github.build-extensions-oss.helm' version '0.0.1'
+}
+
+version = '1.2.3'
+
+helm {
+    charts {
+        main {
+
+        }
+    }
+    downloadClient {
+        enabled = true
+    }
+}
+
+def dependentChartPackage = tasks.named('helmPackageMainChart')
+
+tasks.register('copyDependentChartToHelmRegistry', Copy) {
+    from(dependentChartPackage)
+    into(layout.projectDirectory.dir('../helm-registry'))
+}

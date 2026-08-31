@@ -1,0 +1,62 @@
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
+
+plugins {
+    id 'io.github.build-extensions-oss.helm' version '0.0.1'
+}
+
+version = '4.5.6'
+
+helm {
+    repositories {
+        // check enum AuthorizationConfigurationWay and class RepositoryTestParameters
+        // depending on what we want to test, the code below has a lot of branches.
+        // the goal is to enable different authorization logic and to test different scenarios keeping the remaining chart the same
+        if (project.property('helmRepositoryConfigurationWay') == 'GradleCode') {
+            test {
+                // we always have the url
+                url project.property('helmRepositoryUrl')
+
+                // sometimes we put CA file
+                if (project.hasProperty('helmRepositoryCaFile')) {
+                    caFile = file(project.property('helmRepositoryCaFile'))
+                }
+
+                // sometimes we configure credentials in a one of the ways above
+                switch (project.findProperty('helmRepositoryAuthorization')) {
+                    case 'Anonymous':
+                        break
+                    case 'UserPassword':
+                        credentials {
+                            // Keep these values in sync with BasicAuthorizationDispatcher.
+                            username = 'repository-user'
+                            password = 'repository-password'
+                        }
+                        break
+                    case 'Certificate':
+                        credentials(CertificateCredentials) {
+                            certificateFile = file(project.property('helmRepositoryCertificateFile'))
+                            keyFile = file(project.property('helmRepositoryKeyFile'))
+                        }
+                        break
+                    default:
+                        throw new Exception("Unknown option of ${project.findProperty('helmRepositoryAuthorization')}")
+                }
+            }
+        }
+    }
+    charts {
+        main {
+
+        }
+    }
+    downloadClient {
+        enabled = true
+    }
+}
+
+if (project.property('helmRepositoryConfigurationWay') == 'GradleProperties' &&
+    project.hasProperty('helmRepositoryCaFile')) {
+    afterEvaluate {
+        helm.repositories.getByName('test').caFile = file(project.property('helmRepositoryCaFile'))
+    }
+}

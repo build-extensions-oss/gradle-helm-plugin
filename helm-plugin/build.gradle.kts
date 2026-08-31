@@ -26,6 +26,10 @@ dependencies {
     kover(project(":helm-releases-plugin"))
 
     "functionalTestImplementation"(project(":plugin-test-utils"))
+
+    // are required to check helm repositories
+    "functionalTestImplementation"(libs.okHttpMockWebServer)
+    "functionalTestImplementation"(libs.okHttpTls)
 }
 
 gradlePlugin {
