@@ -1,7 +1,6 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils
 
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
-import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters.Companion.allWithoutHelmVersion
 import org.junit.jupiter.params.provider.Arguments
 import java.util.stream.Stream
 
@@ -33,10 +32,10 @@ data class RepositoryTestParameters(
     companion object {
         private val all = DefaultGradleRunnerParameters.all.flatMap { gradleRunnerParameters ->
             AuthorizationConfigurationWay.entries.flatMap { authorizationConfigurationWay ->
-                RepositoryAuthorization.entries.map {
-                    it to RepositoryTestParameters(
+                RepositoryAuthorization.entries.map { authorization ->
+                    RepositoryTestParameters(
                         gradleRunnerParameters = gradleRunnerParameters,
-                        authorization = it,
+                        authorization = authorization,
                         authorizationConfigurationWay = authorizationConfigurationWay
                     )
                 }
