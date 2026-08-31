@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource
  * The test does a smoke check of the dependent helm chart, which would be used in another test.
  * This one must do anything complex, because the goal is to briefly check that everything is ok.
  */
-internal class HelmRepositoryDependentChartQuickRenderTest {
+internal class HelmDependentChartQuickRenderTest {
 
     private val sourceDirectory = File("./src/functionalTest/resources/test/render-with-repository")
 

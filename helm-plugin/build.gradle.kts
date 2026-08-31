@@ -26,6 +26,7 @@ dependencies {
     kover(project(":helm-releases-plugin"))
 
     "functionalTestImplementation"(project(":plugin-test-utils"))
+    "functionalTestImplementation"(libs.okHttpMockWebServer)
 }
 
 gradlePlugin {
