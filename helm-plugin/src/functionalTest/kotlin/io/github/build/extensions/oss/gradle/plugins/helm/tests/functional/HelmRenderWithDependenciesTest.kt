@@ -3,20 +3,16 @@ package io.github.build.extensions.oss.gradle.plugins.helm.tests.functional
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
 import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.AuthorizationConfigurationWay
+import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.BasicAuthorizationDispatcher
 import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.DirectoryDispatcher
 import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.RepositoryAuthorization
+import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.RepositoryCertificates
 import io.github.build.extensions.oss.gradle.plugins.helm.tests.functional.utils.RepositoryTestParameters
 import io.kotest.matchers.file.exist
 import io.kotest.matchers.should
 import io.kotest.matchers.string.shouldContain
 import java.io.File
-import okhttp3.Credentials
-import okhttp3.mockwebserver.Dispatcher
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import okhttp3.mockwebserver.RecordedRequest
-import okhttp3.tls.HandshakeCertificates
-import okhttp3.tls.HeldCertificate
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.io.TempDir
@@ -39,7 +35,7 @@ internal class HelmRenderWithDependenciesTest {
     // the okhttp server will play a role of helm registry
     private lateinit var server: MockWebServer
 
-    private lateinit var repositoryCertificates: RepositoryCertificates
+    private lateinit var repositoryCertificates: RepositoryCertificates.Configuration
 
     @BeforeEach
     fun setup() {
@@ -131,7 +127,7 @@ internal class HelmRenderWithDependenciesTest {
             }
 
             if (authorization == RepositoryAuthorization.Certificate) {
-                repositoryCertificates = createRepositoryCertificates()
+                repositoryCertificates = RepositoryCertificates.create(testProjectDir)
                 useHttps(repositoryCertificates.serverSocketFactory, false)
                 requireClientAuth()
             }
@@ -153,8 +149,14 @@ internal class HelmRenderWithDependenciesTest {
                 when (parameters.authorization) {
                     RepositoryAuthorization.Anonymous -> Unit
                     RepositoryAuthorization.UserPassword -> {
-                        add("-P$prefix.credentials.username=$REPOSITORY_USERNAME")
-                        add("-P$prefix.credentials.password=$REPOSITORY_PASSWORD")
+                        add(
+                            "-P$prefix.credentials.username=" +
+                                BasicAuthorizationDispatcher.REPOSITORY_USERNAME
+                        )
+                        add(
+                            "-P$prefix.credentials.password=" +
+                                BasicAuthorizationDispatcher.REPOSITORY_PASSWORD
+                        )
                     }
                     RepositoryAuthorization.Certificate -> {
                         add("-P$prefix.credentials.certificateFile=${repositoryCertificates.clientCertificateFile}")
@@ -167,10 +169,7 @@ internal class HelmRenderWithDependenciesTest {
 
                 when (parameters.authorization) {
                     RepositoryAuthorization.Anonymous -> Unit
-                    RepositoryAuthorization.UserPassword -> {
-                        add("-PhelmRepositoryUsername=$REPOSITORY_USERNAME")
-                        add("-PhelmRepositoryPassword=$REPOSITORY_PASSWORD")
-                    }
+                    RepositoryAuthorization.UserPassword -> Unit
                     RepositoryAuthorization.Certificate -> {
                         add("-PhelmRepositoryCertificateFile=${repositoryCertificates.clientCertificateFile}")
                         add("-PhelmRepositoryKeyFile=${repositoryCertificates.clientKeyFile}")
@@ -184,71 +183,7 @@ internal class HelmRenderWithDependenciesTest {
         }
     }
 
-    private fun createRepositoryCertificates(): RepositoryCertificates {
-        val certificateAuthority = HeldCertificate.Builder()
-            .certificateAuthority(0)
-            .commonName("Test Helm repository CA")
-            .build()
-        val serverCertificate = HeldCertificate.Builder()
-            .commonName("localhost")
-            .addSubjectAlternativeName("localhost")
-            .addSubjectAlternativeName("127.0.0.1")
-            .signedBy(certificateAuthority)
-            .build()
-        val clientCertificate = HeldCertificate.Builder()
-            .commonName("Test Helm repository client")
-            .signedBy(certificateAuthority)
-            .build()
-
-        val certificateDirectory = testProjectDir.resolve("repository-certificates").apply {
-            check(mkdir()) { "Unable to create certificate directory at $this" }
-        }
-        val caCertificateFile = certificateDirectory.resolve("ca.pem").apply {
-            writeText(certificateAuthority.certificatePem())
-        }
-        val clientCertificateFile = certificateDirectory.resolve("client.pem").apply {
-            writeText(clientCertificate.certificatePem())
-        }
-        val clientKeyFile = certificateDirectory.resolve("client-key.pem").apply {
-            writeText(clientCertificate.privateKeyPkcs8Pem())
-        }
-        val serverCertificates = HandshakeCertificates.Builder()
-            .heldCertificate(serverCertificate, certificateAuthority.certificate)
-            .addTrustedCertificate(certificateAuthority.certificate)
-            .build()
-
-        return RepositoryCertificates(
-            serverSocketFactory = serverCertificates.sslSocketFactory(),
-            caCertificateFile = caCertificateFile,
-            clientCertificateFile = clientCertificateFile,
-            clientKeyFile = clientKeyFile,
-        )
-    }
-
-    private class BasicAuthorizationDispatcher(
-        private val delegate: Dispatcher,
-    ) : Dispatcher() {
-        override fun dispatch(request: RecordedRequest): MockResponse {
-            if (request.headers["Authorization"] != Credentials.basic(REPOSITORY_USERNAME, REPOSITORY_PASSWORD)) {
-                return MockResponse()
-                    .setResponseCode(401)
-                    .setHeader("WWW-Authenticate", "Basic realm=\"helm-repository\"")
-            }
-
-            return delegate.dispatch(request)
-        }
-    }
-
-    private data class RepositoryCertificates(
-        val serverSocketFactory: javax.net.ssl.SSLSocketFactory,
-        val caCertificateFile: File,
-        val clientCertificateFile: File,
-        val clientKeyFile: File,
-    )
-
     private companion object {
         const val REPOSITORY_NAME = "test"
-        const val REPOSITORY_USERNAME = "repository-user"
-        const val REPOSITORY_PASSWORD = "repository-password"
     }
 }

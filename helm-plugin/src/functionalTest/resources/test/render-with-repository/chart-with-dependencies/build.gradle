@@ -23,10 +23,13 @@ helm {
 
                 // sometimes we configure credentials in a one of the ways above
                 switch (project.findProperty('helmRepositoryAuthorization')) {
+                    case 'Anonymous':
+                        break
                     case 'UserPassword':
                         credentials {
-                            username = project.property('helmRepositoryUsername')
-                            password = project.property('helmRepositoryPassword')
+                            // Keep these values in sync with BasicAuthorizationDispatcher.
+                            username = 'repository-user'
+                            password = 'repository-password'
                         }
                         break
                     case 'Certificate':
