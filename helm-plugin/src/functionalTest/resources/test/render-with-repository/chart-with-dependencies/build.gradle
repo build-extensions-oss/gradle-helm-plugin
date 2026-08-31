@@ -1,0 +1,21 @@
+plugins {
+    id 'io.github.build-extensions-oss.helm' version '0.0.1'
+}
+
+version = '4.5.6'
+
+helm {
+    repositories {
+        test {
+            url project.property('helmRepositoryUrl')
+        }
+    }
+    charts {
+        main {
+
+        }
+    }
+    downloadClient {
+        enabled = true
+    }
+}
