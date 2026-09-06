@@ -10,7 +10,7 @@
 
 - Build, package and publish Helm Charts using a declarative Gradle DSL
 
-- Resolve placeholders like ${chartVersion} from chart source files before packaging
+- Resolve placeholders like `${chartVersion}` from chart source files before packaging
 
 - Resolve dependencies between charts using Gradle artifact dependencies
 
@@ -48,18 +48,7 @@ plugins {
 This repository is a fork of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin), which is a
 of [unbroken-dome/gradle-helm-plugin](https://github.com/unbroken-dome/gradle-helm-plugin).
 
-The version [v2.2.0](https://github.com/build-extensions-oss/gradle-helm-plugin/releases/tag/v2.2.0) has exactly the
-same code
-with version [2.2.0](https://github.com/Citi/gradle-helm-plugin/releases/tag/2.2.0)
-of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin). Therefore, first please use that version. All
-Java/Kotlin packages are the same, so the plugin should be fully compatible.
-
-Version `3.1.0` (under construction) might be not backward compatible with older plugin versions, because:
-
-* It has new Java/Kotlin packages that match this project.
-    * Unless you call plugin functions directly, it would be hard to notice any differences with simple plugin usages
-* It is compatible with Gradle 8 and 9.
-* The minimal Java version is Java 17 (not 1.8).
+Version `3.1.0` received a lot of updates and might be not backward compatible with older plugin versions in a rare corner case scenarios.
 
 ## Requirements
 
@@ -67,7 +56,7 @@ Version `3.1.0` (under construction) might be not backward compatible with older
 
 - JDK 17 or higher (for running Gradle)
 
-- Helm command-line client 3.+
+- Helm command-line client either 3.+ or 4.+
 
 ### Limitations
 
@@ -78,6 +67,8 @@ Due to open source nature of the project, some functionality isn't supported for
 | Basic Helm Chart Functionality | 8, 9           |
 | Helm Publish                   | 8, 9           |
 | Helm Releases                  | 8, 9           |
+
+The last Gradle Helm Plugin officially supported Gradle 7 was `3.1.2`. All further versions don't have tests for Gradle 7, however the API isn't rewritten without a necessity.
 
 ## Contributing
 
@@ -107,7 +98,7 @@ There are three types of tests:
 
 The most comprehensive checks are done via Gradle Functional tests. And GitHub workflow logic is the following:
 
-1. We compile code on ubuntu-latest and publish jars locally.
+1. We compile code on `ubuntu-latest` and publish jars locally.
 2. Plugin is published into local jar versioned with git hash (to avoid accidental usage from another build).
 3. Functional tests:
     1. Executed on multiple platforms
@@ -117,6 +108,16 @@ The most comprehensive checks are done via Gradle Functional tests. And GitHub w
 
 In other words, we compile code once and then run tests on different platforms. That is needed to check that the real
 code will be good enough to be used on different operating systems.
+
+So, basically, we have this:
+
+```
+                    compile
+                /      |      \
+    test on win   test on lin  test on mac
+                \      |      /
+           aggregate code coverage
+```
 
 ## License
 
