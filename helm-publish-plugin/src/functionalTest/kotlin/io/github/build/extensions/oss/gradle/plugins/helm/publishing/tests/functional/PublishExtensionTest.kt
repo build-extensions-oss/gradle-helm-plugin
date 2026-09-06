@@ -8,6 +8,7 @@ import io.kotest.matchers.string.shouldNotContain
 import java.io.File
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.io.TempDir
+import org.junit.jupiter.api.io.TempDirDeletionStrategy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -35,7 +36,7 @@ internal class PublishExtensionTest {
         }
     }
 
-    @TempDir
+    @TempDir(deletionStrategy = TempDirDeletionStrategy.IgnoreFailures::class) // don't fail on temp file removal - otherwise test report from GitHub Actions might hide the real issue
     private lateinit var testProjectDir: File
 
     @BeforeEach
