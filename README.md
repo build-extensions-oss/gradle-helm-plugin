@@ -48,7 +48,8 @@ plugins {
 This repository is a fork of [Citi/gradle-helm-plugin](https://github.com/Citi/gradle-helm-plugin), which is a
 of [unbroken-dome/gradle-helm-plugin](https://github.com/unbroken-dome/gradle-helm-plugin).
 
-Version `3.1.0` received a lot of updates and might be not backward compatible with older plugin versions in a rare corner case scenarios.
+Version `3.1.0` received a lot of updates and might be not backward compatible with older plugin versions in a rare
+corner case scenarios.
 
 ## Requirements
 
@@ -68,7 +69,14 @@ Due to open source nature of the project, some functionality isn't supported for
 | Helm Publish                   | 8, 9           |
 | Helm Releases                  | 8, 9           |
 
-The last Gradle Helm Plugin officially supported Gradle 7 was `3.1.2`. All further versions don't have tests for Gradle 7, however the API isn't rewritten without a necessity.
+The last Gradle Helm Plugin officially supported Gradle 7 was `3.1.2`. All further versions don't have tests for Gradle
+7, however the API isn't rewritten without a necessity.
+
+#### Known compatibility issues
+
+* Starting from version `3.2.0`, Gradle `8.1.1` isn't recommended. It fails with
+  `A new daemon was started but could not be connected to` on Windows & Java 21 (but works for other operating systems
+  or older JVMs).
 
 ## Contributing
 
