@@ -5,10 +5,11 @@ import java.io.File
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
+import org.junit.jupiter.api.io.TempDirDeletionStrategy
 import java.util.concurrent.CompletableFuture
 
 internal class FileLockTest {
-    @TempDir
+    @TempDir(deletionStrategy = TempDirDeletionStrategy.IgnoreFailures::class) // don't fail on temp file removal - otherwise test report from GitHub Actions might hide the real issue
     private lateinit var tempFolder: File
 
     private lateinit var fileToLock: File

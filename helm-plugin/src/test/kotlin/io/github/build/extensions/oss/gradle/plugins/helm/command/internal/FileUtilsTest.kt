@@ -12,12 +12,13 @@ import io.mockk.mockk
 import java.io.File
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.io.TempDir
+import org.junit.jupiter.api.io.TempDirDeletionStrategy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.slf4j.Logger
 
 class FileUtilsTest {
-    @TempDir
+    @TempDir(deletionStrategy = TempDirDeletionStrategy.IgnoreFailures::class) // don't fail on temp file removal - otherwise test report from GitHub Actions might hide the real issue
     private lateinit var temporaryFolder: File
 
     @ParameterizedTest

@@ -16,6 +16,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.io.TempDir
+import org.junit.jupiter.api.io.TempDirDeletionStrategy
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -27,7 +28,7 @@ internal class HelmRenderWithDependenciesTest {
     // the folder to the helm chart which we are going to render
     private val sourceDirectory = File("./src/functionalTest/resources/test/render-with-repository")
 
-    @TempDir
+    @TempDir(deletionStrategy = TempDirDeletionStrategy.IgnoreFailures::class) // don't fail on temp file removal - otherwise test report from GitHub Actions might hide the real issue
     private lateinit var testProjectDir: File
 
     private lateinit var helmRegistryDirectory: File

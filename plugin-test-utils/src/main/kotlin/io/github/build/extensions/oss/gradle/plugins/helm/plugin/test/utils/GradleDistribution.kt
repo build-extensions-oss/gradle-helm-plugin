@@ -21,6 +21,7 @@ sealed interface GradleDistribution {
      */
     enum class Custom(val version: String) : GradleDistribution {
         V9_2_1("9.2.1"),
-        V8_1_1("8.1.1")
+        // Gradle 8.1.1 doesn't work with existing binaries due to 'A new daemon was started but could not be connected to'
+        V8_7_0("8.7")
     }
 }
