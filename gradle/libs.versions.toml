@@ -46,5 +46,5 @@ io-gitlab-arturbosch-detekt-detekt-gradle-plugin = { module = "io.gitlab.arturbo
 gradlePublish = { id = "com.gradle.plugin-publish", version = "2.1.1" }
 asciidoctor = { id = "org.asciidoctor.jvm.convert", version = "4.0.5" }
 benManesVersions = { id = "io.github.ben-manes.versions", version = "0.61.0" }
-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.1" }
+binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.2" }
 
