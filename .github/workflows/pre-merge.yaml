@@ -112,6 +112,12 @@ jobs:
             functionalTest \
             copyFunctionalTestCoverage
 
+      # Upload test results, including the failing tests.
+      # How to access them:
+      # 1. Open GitHub actions. Navigate to artifacts.
+      # 2. Download the artifact starting with `functional-test-reports-` as a zip file.
+      # 3. Unpack zip file locally.
+      # 4. Open the file like `helm-plugin/build/reports/tests/functionalTest/index.html`.
       - name: Upload functional test reports
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
