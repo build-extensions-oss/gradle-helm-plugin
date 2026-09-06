@@ -1,3 +1,7 @@
+ignore:
+  - "plugin-test-utils/**/*" # Test utility module
+  - "**/functionalTest/**/*" # Functional test sources in all modules
+
 # see https://docs.codecov.com/docs/common-recipe-list#show-project-coverage-changes-on-the-pull-request-comment
 comment: # this is a top-level key
   layout: " diff, flags, files"
