@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.UUID
 import org.gradle.api.Action
-import org.gradle.api.Project
+import org.gradle.process.ExecOperations
 import org.gradle.process.ExecSpec
 import org.gradle.workers.WorkerExecutor
 import org.slf4j.LoggerFactory
@@ -71,7 +71,8 @@ internal fun HelmExecProvider.execHelmCaptureOutput(
 
 
 internal class HelmExecProviderSupport(
-    private val project: Project,
+    private val execOperations: ExecOperations,
+    private val stdoutCaptureDir: File,
     private val workerExecutor: WorkerExecutor?,
     private val options: HelmOptions,
     private val optionsAppliers: Iterable<HelmOptionsApplier>,
@@ -79,9 +80,9 @@ internal class HelmExecProviderSupport(
 ) : HelmExecProvider {
 
     constructor(
-        project: Project, workerExecutor: WorkerExecutor?, options: HelmOptions,
-        optionsApplier: HelmOptionsApplier
-    ) : this(project, workerExecutor, options, listOf(optionsApplier))
+        execOperations: ExecOperations, stdoutCaptureDir: File, workerExecutor: WorkerExecutor?,
+        options: HelmOptions, optionsApplier: HelmOptionsApplier
+    ) : this(execOperations, stdoutCaptureDir, workerExecutor, options, listOf(optionsApplier))
 
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -110,7 +111,7 @@ internal class HelmExecProviderSupport(
         if (shouldExecInWorker()) {
             // Use a unique ID for this invocation, to name our stdout/stderr capture files
             val uniqueId = UUID.randomUUID().toString()
-            val stdoutFile = project.buildDir.resolve("tmp/helm/$uniqueId.out")
+            val stdoutFile = stdoutCaptureDir.resolve("$uniqueId.out")
 
             try {
                 execHelmInWorker(command, subcommand, action, stdoutFile)
@@ -135,8 +136,8 @@ internal class HelmExecProviderSupport(
     private fun execHelmSync(
         command: String, subcommand: String?,
         action: Action<HelmExecSpec>?, withExecSpec: (ExecSpec.() -> Unit)? = null
-    ): ExecResult {
-        val x = project.providers.exec { execSpec ->
+    ): ExecResult =
+        execOperations.exec { execSpec ->
             val helmExecSpec = DefaultHelmExecSpec(execSpec, command, subcommand)
             withExecSpec?.invoke(execSpec)
             applyOptions(helmExecSpec)
@@ -146,9 +147,6 @@ internal class HelmExecProviderSupport(
                 logger.info("Executing: {}", maskCommandLine(execSpec.commandLine))
             }
         }
-
-        return x.result.get()
-    }
 
 
     private fun execHelmInWorker(
@@ -195,7 +193,9 @@ internal class HelmExecProviderSupport(
      * @return a new [HelmExecProviderSupport] that uses the given description
      */
     fun withDescription(description: String): HelmExecProviderSupport =
-        HelmExecProviderSupport(project, workerExecutor, options, optionsAppliers, description)
+        HelmExecProviderSupport(
+            execOperations, stdoutCaptureDir, workerExecutor, options, optionsAppliers, description
+        )
 
 
     /**
@@ -205,7 +205,9 @@ internal class HelmExecProviderSupport(
      * @return a new [HelmExecProviderSupport] that uses the given strategy to apply options
      */
     fun withOptionsAppliers(optionsAppliers: Iterable<HelmOptionsApplier>): HelmExecProviderSupport =
-        HelmExecProviderSupport(project, workerExecutor, options, optionsAppliers, description)
+        HelmExecProviderSupport(
+            execOperations, stdoutCaptureDir, workerExecutor, options, optionsAppliers, description
+        )
 
 
     /**

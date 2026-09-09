@@ -1,11 +1,7 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.dsl
 
 import org.gradle.api.Project
-import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Property
-import org.gradle.api.provider.Provider
-import io.github.build.extensions.oss.gradle.plugins.helm.command.rules.extractClientTaskName
-import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmExtractClient
 import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.property
 import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
@@ -46,27 +42,18 @@ interface HelmDownloadClient {
 }
 
 
-internal interface HelmDownloadClientInternal : HelmDownloadClient {
-
-    /**
-     * The task that extracts the Helm client executable.
-     *
-     * If the automatic client download is [enabled], then this will point to a task in the
-     * root project for the desired version. If not [enabled], the provider will have no value.
-     */
-    val extractClientTask: Provider<HelmExtractClient>
-
-    /**
-     * Path of the extracted executable file.
-     */
-    val executable: Provider<RegularFile>
-}
-
-
+/**
+ * This holds only the user-facing settings; locating the download and extract tasks for [version] is done by
+ * the `HelmCommandsPlugin`, which has a [Project] to do it with at configuration time.
+ *
+ * Note that [project] is intentionally a plain constructor parameter rather than a property: it is used only
+ * to build the conventions below, and keeping a reference to it in a field would make every task that wires a
+ * convention from the `helm` extension unserializable for the configuration cache.
+ */
 internal open class DefaultHelmDownloadClient
 @Inject constructor(
-    private val project: Project
-) : HelmDownloadClient, HelmDownloadClientInternal {
+    project: Project
+) : HelmDownloadClient {
 
     override val enabled: Property<Boolean> =
         project.objects.property<Boolean>()
@@ -82,25 +69,4 @@ internal open class DefaultHelmDownloadClient
                     "helm.client.download.version", HelmDownloadClient.DEFAULT_HELM_CLIENT_VERSION
                 )
             )
-
-
-    override val extractClientTask: Provider<HelmExtractClient> =
-        version.flatMap { version ->
-            if (enabled.get()) {
-                project.rootProject.tasks.named(extractClientTaskName(version), HelmExtractClient::class.java)
-            } else {
-                project.provider { null }
-            }
-        }
-
-
-    override val executable: Provider<RegularFile>
-        // Need to use flatMap here because map isn't allowed to return null
-        get() = enabled.flatMap { enabled ->
-            if (enabled) {
-                extractClientTask.flatMap { it.executable }
-            } else {
-                project.provider { null }
-            }
-        }
 }

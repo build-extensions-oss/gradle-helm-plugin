@@ -159,8 +159,8 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
 
     @TaskAction
     fun downloadClientPackage() {
-        val sha256SumFile = project.file(sha256SumFile)
-        val targetFile = project.file(outputFile)
+        val sha256SumFile = this.sha256SumFile.get().asFile
+        val targetFile = outputFile.get().asFile
 
         sha256SumFile.delete()
         targetFile.delete()
@@ -172,7 +172,7 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
                 val expectedDigest = readSha256DigestFromFile()
 
                 // If the target file already exists and matches then we don't need to download it again
-                if (verifySha256Digest(expectedDigest, project.file(outputFile))) {
+                if (verifySha256Digest(expectedDigest, targetFile)) {
                     return
                 }
 
@@ -276,7 +276,7 @@ abstract class HelmDownloadClientPackage : DefaultTask() {
      * @return the SHA-256 digest as a hex-encoded string
      */
     private fun readSha256DigestFromFile(): String {
-        val file = project.file(sha256SumFile)
+        val file = sha256SumFile.get().asFile
         val targetFileName = packageFileName.get()
         val text = file.readText()
         val items = text.trim().split(Regex("\\s+"))

@@ -22,7 +22,7 @@ import build.extensions.oss.gradle.pluginutils.property
  * specified explicitly using the [chartName] and [chartVersion] properties, the task will parse the `Chart.yaml`
  * file and extract the missing information from there.
  */
-open class HelmPackage : AbstractHelmCommandTask() {
+abstract class HelmPackage : AbstractHelmCommandTask() {
 
     internal companion object {
 

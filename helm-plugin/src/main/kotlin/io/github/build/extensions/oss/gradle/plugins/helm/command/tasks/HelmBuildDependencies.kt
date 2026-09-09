@@ -13,7 +13,7 @@ import org.gradle.api.tasks.TaskAction
  *
  * Corresponds to the `helm dependency build` CLI command.
  */
-open class HelmBuildDependencies : AbstractHelmDependenciesTask() {
+abstract class HelmBuildDependencies : AbstractHelmDependenciesTask() {
 
     @get:[InputFile Optional]
     final override val lockFile: Provider<RegularFile>
@@ -22,7 +22,7 @@ open class HelmBuildDependencies : AbstractHelmDependenciesTask() {
     init {
         @Suppress("LeakingThis")
         onlyIf {
-            val lockFile = project.file(this.lockFile)
+            val lockFile = this.lockFile.get().asFile
             if (lockFile.exists()) {
                 // regular helm dep build behavior
                 true

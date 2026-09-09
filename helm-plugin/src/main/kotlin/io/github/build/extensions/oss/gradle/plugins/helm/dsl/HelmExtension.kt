@@ -14,6 +14,7 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.process.ExecOperations
 import build.extensions.oss.gradle.pluginutils.booleanProviderFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.dirProviderFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
@@ -73,8 +74,9 @@ internal interface HelmExtensionInternal : HelmExtension {
 
 private open class DefaultHelmExtension
 @Inject constructor(
-    private val project: Project,
-    objects: ObjectFactory
+    project: Project,
+    objects: ObjectFactory,
+    private val execOperations: ExecOperations
 ) : HelmExtension, HelmExtensionInternal,
     ConfigurableHelmServerOptions by HelmServerOptionsHolder(objects).applyConventions(project) {
 
@@ -168,7 +170,9 @@ private open class DefaultHelmExtension
 
 
     private val execProvider: HelmExecProvider
-        get() = HelmExecProviderSupport(project, null, this, GlobalHelmOptionsApplier)
+        get() = HelmExecProviderSupport(
+            execOperations, tmpDir.get().asFile, null, this, GlobalHelmOptionsApplier
+        )
 }
 
 

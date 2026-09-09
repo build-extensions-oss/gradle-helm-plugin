@@ -433,21 +433,27 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/command/in
 	public static final fun mergeValues (Lio/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions;Lio/github/build/extensions/oss/gradle/plugins/helm/command/HelmValueOptions;)Lio/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions;
 }
 
-public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask : org/gradle/api/DefaultTask, io/github/build/extensions/oss/gradle/plugins/helm/command/GlobalHelmOptions {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask : org/gradle/api/DefaultTask, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableGlobalHelmOptions {
 	public fun <init> ()V
 	protected final fun execHelm (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
 	public static synthetic fun execHelm$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 	protected final fun execHelmCaptureOutput (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
 	public static synthetic fun execHelmCaptureOutput$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/String;
-	public final fun getDebug ()Lorg/gradle/api/provider/Provider;
-	public final fun getExecutable ()Lorg/gradle/api/provider/Provider;
-	public final fun getExtraArgs ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getDebug ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getDebug ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getExecutable ()Lorg/gradle/api/provider/Property;
+	public synthetic fun getExecutable ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getExtraArgs ()Lorg/gradle/api/provider/ListProperty;
+	public synthetic fun getExtraArgs ()Lorg/gradle/api/provider/Provider;
 	protected final fun getRegistryConfigFile ()Lorg/gradle/api/provider/Provider;
 	protected final fun getRepositoryCacheDir ()Lorg/gradle/api/provider/Provider;
 	protected final fun getRepositoryConfigFile ()Lorg/gradle/api/provider/Provider;
-	public final fun getXdgCacheHome ()Lorg/gradle/api/provider/Provider;
-	public final fun getXdgConfigHome ()Lorg/gradle/api/provider/Provider;
-	public final fun getXdgDataHome ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getXdgCacheHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgCacheHome ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getXdgConfigHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgConfigHome ()Lorg/gradle/api/provider/Provider;
+	public abstract fun getXdgDataHome ()Lorg/gradle/api/file/DirectoryProperty;
+	public synthetic fun getXdgDataHome ()Lorg/gradle/api/provider/Provider;
 }
 
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
@@ -515,7 +521,7 @@ public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command
 	public synthetic fun getRemoteTimeout ()Lorg/gradle/api/provider/Provider;
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmAddRepository : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmAddRepository : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
 	public fun <init> ()V
 	public final fun addRepository ()V
 	public final fun getCaFile ()Lorg/gradle/api/file/RegularFileProperty;
@@ -528,7 +534,7 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun getUsername ()Lorg/gradle/api/provider/Property;
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmBuildDependencies : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmBuildDependencies : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask {
 	public fun <init> ()V
 	public final fun buildDependencies ()V
 }
@@ -559,13 +565,13 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun getVersion ()Lorg/gradle/api/provider/Property;
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmInstall : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmInstall : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
 	public fun <init> ()V
 	public final fun getReplace ()Lorg/gradle/api/provider/Property;
 	public final fun install ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmInstallOrUpgrade : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmInstallOrUpgrade : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
 	public fun <init> ()V
 	public final fun getHistoryMax ()Lorg/gradle/api/provider/Property;
 	public final fun getReplace ()Lorg/gradle/api/provider/Property;
@@ -574,22 +580,22 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun installOrUpgrade ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmLint : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmLint : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask, io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions {
 	public fun <init> ()V
 	public final fun getChartDir ()Lorg/gradle/api/file/DirectoryProperty;
-	public final fun getFileValues ()Lorg/gradle/api/provider/MapProperty;
+	public abstract fun getFileValues ()Lorg/gradle/api/provider/MapProperty;
 	public synthetic fun getFileValues ()Lorg/gradle/api/provider/Provider;
 	public final fun getOutputMarkerFile ()Lorg/gradle/api/file/RegularFileProperty;
 	public final fun getStrict ()Lorg/gradle/api/provider/Property;
-	public final fun getValueFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
+	public abstract fun getValueFiles ()Lorg/gradle/api/file/ConfigurableFileCollection;
 	public synthetic fun getValueFiles ()Lorg/gradle/api/file/FileCollection;
-	public final fun getValues ()Lorg/gradle/api/provider/MapProperty;
+	public abstract fun getValues ()Lorg/gradle/api/provider/MapProperty;
 	public synthetic fun getValues ()Lorg/gradle/api/provider/Provider;
 	public final fun getWithSubcharts ()Lorg/gradle/api/provider/Property;
 	public final fun lint ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmPackage : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmPackage : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
 	public fun <init> ()V
 	public final fun getAppVersion ()Lorg/gradle/api/provider/Property;
 	public final fun getChartFileName ()Lorg/gradle/api/provider/Provider;
@@ -603,7 +609,7 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun helmPackage ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmStatus : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmStatus : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerCommandTask {
 	public fun <init> ()V
 	public final fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
 	public final fun getOutputFormat ()Lorg/gradle/api/provider/Property;
@@ -612,7 +618,7 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun status ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmTemplate : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmTemplate : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
 	public fun <init> ()V
 	public final fun getApiVersions ()Lorg/gradle/api/provider/ListProperty;
 	public final fun getIsUpgrade ()Lorg/gradle/api/provider/Property;
@@ -625,7 +631,7 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun renderTemplate ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmTest : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmTest : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerCommandTask {
 	public fun <init> ()V
 	public final fun getReleaseName ()Lorg/gradle/api/provider/Property;
 	public final fun getRemoteTimeout ()Lorg/gradle/api/provider/Property;
@@ -633,7 +639,7 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun test ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUninstall : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerOperationCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUninstall : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerOperationCommandTask {
 	public fun <init> ()V
 	public final fun getKeepHistory ()Lorg/gradle/api/provider/Property;
 	public final fun getReleaseName ()Lorg/gradle/api/provider/Property;
@@ -641,20 +647,20 @@ public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/He
 	public final fun uninstallRelease ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateDependencies : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateDependencies : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask {
 	public fun <init> ()V
 	public final fun getSkipRefresh ()Lorg/gradle/api/provider/Property;
 	public final fun updateDependencies ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateRepositories : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateRepositories : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
 	public fun <init> ()V
 	public final fun getRepositoryCacheTtl ()Lorg/gradle/api/provider/Property;
 	public final fun getRepositoryNames ()Lorg/gradle/api/provider/ListProperty;
 	public final fun updateRepositories ()V
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpgrade : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpgrade : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmInstallationCommandTask {
 	public fun <init> ()V
 	public final fun getHistoryMax ()Lorg/gradle/api/provider/Property;
 	public final fun getInstall ()Lorg/gradle/api/provider/Property;

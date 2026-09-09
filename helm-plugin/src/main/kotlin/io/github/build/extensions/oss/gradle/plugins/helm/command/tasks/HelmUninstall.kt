@@ -12,7 +12,7 @@ import build.extensions.oss.gradle.pluginutils.property
  * Uninstalls a release from the cluster. Corresponds to the `helm uninstall` CLI command.
  */
 @Suppress("LeakingThis")
-open class HelmUninstall : AbstractHelmServerOperationCommandTask() {
+abstract class HelmUninstall : AbstractHelmServerOperationCommandTask() {
 
     /**
      * The name of the release to be uninstalled.

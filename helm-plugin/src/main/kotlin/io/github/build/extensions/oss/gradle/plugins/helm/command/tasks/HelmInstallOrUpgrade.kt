@@ -14,7 +14,7 @@ import build.extensions.oss.gradle.pluginutils.property
  * This task will call `helm upgrade --install` by default, or `helm install --replace` if the release does
  * not exist or has previously failed.
  */
-open class HelmInstallOrUpgrade : AbstractHelmInstallationCommandTask() {
+abstract class HelmInstallOrUpgrade : AbstractHelmInstallationCommandTask() {
 
     /**
      * If `true`, re-use the given release name, even if that name is already used.

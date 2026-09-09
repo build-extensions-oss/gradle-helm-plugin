@@ -9,7 +9,7 @@ import build.extensions.oss.gradle.pluginutils.property
 /**
  * Installs a chart into the cluster. Corresponds to the `helm install` CLI command.
  */
-open class HelmInstall : AbstractHelmInstallationCommandTask() {
+abstract class HelmInstall : AbstractHelmInstallationCommandTask() {
 
     /**
      * If `true`, re-use the given release name, even if that name is already used.

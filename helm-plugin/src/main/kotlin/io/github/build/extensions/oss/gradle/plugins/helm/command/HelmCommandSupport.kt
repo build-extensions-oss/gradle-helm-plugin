@@ -1,12 +1,9 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command
 
-import org.gradle.api.Project
 import org.gradle.api.provider.Provider
-import org.gradle.workers.WorkerExecutor
 import org.json.JSONArray
 import org.json.JSONObject
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
-import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmOptionsApplier
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmServerOptionsApplier
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmCommandTask
 import io.github.build.extensions.oss.gradle.plugins.helm.model.Release
@@ -18,11 +15,6 @@ import io.github.build.extensions.oss.gradle.plugins.helm.model.Release
 internal class HelmCommandSupport(
     private val execProvider: HelmExecProviderSupport
 ) {
-    constructor(
-        project: Project, workerExecutor: WorkerExecutor, options: HelmOptions,
-        optionsApplier: HelmOptionsApplier = GlobalHelmOptionsApplier
-    ) : this(HelmExecProviderSupport(project, workerExecutor, options, optionsApplier))
-
 
     /**
      * Calls `helm ls` to get the current status of a release.
@@ -49,4 +41,4 @@ internal class HelmCommandSupport(
 
 
 internal val <T : AbstractHelmCommandTask> T.helmCommandSupport
-    get() = HelmCommandSupport(project, workerExecutor, this)
+    get() = HelmCommandSupport(execProviderSupport)
