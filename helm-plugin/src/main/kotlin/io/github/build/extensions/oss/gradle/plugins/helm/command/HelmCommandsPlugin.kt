@@ -5,11 +5,13 @@ import build.extensions.oss.gradle.pluginutils.durationProviderFromProjectProper
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_LINT_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.conventionsFrom
+import io.github.build.extensions.oss.gradle.plugins.helm.command.rules.extractClientTaskName
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmCommandTask
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmInstallationCommandTask
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmServerCommandTask
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmServerOperationCommandTask
-import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmDownloadClientInternal
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmExtractClient
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmDownloadClient
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.createHelmExtension
@@ -17,7 +19,14 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.createLinting
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskDependency
+
+
+/**
+ * The name of the Helm executable to use if neither an explicit path nor an automatic download is configured.
+ */
+private const val DEFAULT_HELM_EXECUTABLE = "helm"
 
 
 class HelmCommandsPlugin
@@ -47,25 +56,31 @@ class HelmCommandsPlugin
 
 
         // Apply the global Helm options as defaults to each command task
-        val downloadClient = helmExtension.downloadClient as HelmDownloadClientInternal
+        val extractClientTask = project.extractClientTask(helmExtension.downloadClient)
 
-        project.tasks.withType(AbstractHelmCommandTask::class.java) { task ->
-            task.globalOptions.set(helmExtension)
-
-            task.dependsOn(TaskDependency {
-                setOfNotNull(downloadClient.extractClientTask.orNull)
-            })
+        project.tasks.withType(AbstractHelmCommandTask::class.java).configureEach { task ->
+            task.conventionsFrom(helmExtension)
 
             task.downloadedExecutable.set(
-                downloadClient.executable.map { it.asFile.absolutePath }
+                extractClientTask.flatMap { it.executable }.map { it.asFile.absolutePath }
             )
+
+            // An explicitly configured executable wins; otherwise use the downloaded client if the
+            // download is enabled, and fall back to whatever is on the PATH.
+            task.executable.convention(
+                helmExtension.executable
+                    .orElse(task.downloadedExecutable)
+                    .orElse(DEFAULT_HELM_EXECUTABLE)
+            )
+
+            task.dependsOn(TaskDependency { setOfNotNull(extractClientTask.orNull) })
         }
 
-        project.tasks.withType(AbstractHelmServerCommandTask::class.java) { task ->
+        project.tasks.withType(AbstractHelmServerCommandTask::class.java).configureEach { task ->
             task.conventionsFrom(helmExtension as ConfigurableHelmServerOptions)
         }
 
-        project.tasks.withType(AbstractHelmServerOperationCommandTask::class.java) { task ->
+        project.tasks.withType(AbstractHelmServerOperationCommandTask::class.java).configureEach { task ->
             task.dryRun.convention(
                 project.booleanProviderFromProjectProperty("helm.dryRun")
             )
@@ -77,7 +92,7 @@ class HelmCommandsPlugin
             )
         }
 
-        project.tasks.withType(AbstractHelmInstallationCommandTask::class.java) { task ->
+        project.tasks.withType(AbstractHelmInstallationCommandTask::class.java).configureEach { task ->
             task.atomic.convention(
                 project.booleanProviderFromProjectProperty("helm.atomic")
             )
@@ -89,4 +104,26 @@ class HelmCommandsPlugin
             )
         }
     }
+
+
+    /**
+     * Locates the task in the root project that extracts the configured version of the Helm client.
+     *
+     * The provider has no value if the automatic client download is not enabled. Everything inside it is
+     * resolved lazily, so that simply applying the plugin does not create the download tasks.
+     *
+     * This deliberately lives in the plugin rather than on the [HelmDownloadClient] DSL object: the resulting
+     * provider yields a [HelmExtractClient] task, and a task is not something that may be reachable from the
+     * state of another task.
+     */
+    private fun Project.extractClientTask(downloadClient: HelmDownloadClient): Provider<HelmExtractClient> =
+        downloadClient.enabled.flatMap { enabled ->
+            if (enabled) {
+                downloadClient.version.flatMap { version ->
+                    rootProject.tasks.named(extractClientTaskName(version), HelmExtractClient::class.java)
+                }
+            } else {
+                provider { null }
+            }
+        }
 }

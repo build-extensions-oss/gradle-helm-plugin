@@ -17,7 +17,7 @@ import build.extensions.oss.gradle.pluginutils.withDefault
 /**
  * Check the status for a release. Corresponds to the `helm status` CLI command.
  */
-open class HelmStatus : AbstractHelmServerCommandTask() {
+abstract class HelmStatus : AbstractHelmServerCommandTask() {
 
     /**
      * Name of the release to test the status for.
@@ -93,7 +93,7 @@ open class HelmStatus : AbstractHelmServerCommandTask() {
 
         if (outputFile.isPresent) {
             val output = execHelmCaptureOutput("status", action = helmExecConfig)
-            project.file(outputFile).let { outputFile ->
+            outputFile.get().asFile.let { outputFile ->
                 outputFile.parentFile.mkdirs()
                 outputFile.writeText(output)
             }

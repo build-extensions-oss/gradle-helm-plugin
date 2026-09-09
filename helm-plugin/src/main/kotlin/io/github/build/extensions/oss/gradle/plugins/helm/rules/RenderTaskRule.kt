@@ -63,10 +63,13 @@ internal class RenderTaskRule(
         useReleaseNameInOutputPath.set(innerSource.useReleaseNameInOutputPath)
         outputDir.set(innerSource.outputDir)
 
-        // Library charts will fail on helm template, so disable the rendering task for them
+        // Library charts will fail on helm template, so disable the rendering task for them.
+        // Capture only the descriptor provider here: an onlyIf spec becomes part of the task's state, and
+        // the chart itself must not be reachable from there because it holds on to a TaskContainer.
+        val chartDescriptor = (chart as HelmChartInternal).chartDescriptor
         onlyIf {
-            val chartDescriptor = (chart as HelmChartInternal).chartDescriptor.orNull
-            chartDescriptor == null || chartDescriptor.type != "library"
+            val descriptor = chartDescriptor.orNull
+            descriptor == null || descriptor.type != "library"
         }
     }
 }

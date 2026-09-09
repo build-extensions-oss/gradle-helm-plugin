@@ -3,7 +3,6 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableHelmValueOptions
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsApplier
-import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmValueOptionsHolder
 import java.time.Instant
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
@@ -27,9 +26,7 @@ import build.extensions.oss.gradle.pluginutils.property
  * Runs a series of tests to verify that a chart is well-formed.
  * Corresponds to the `helm lint` CLI command.
  */
-open class HelmLint : AbstractHelmCommandTask(), ConfigurableHelmValueOptions {
-
-    private val valueOptions = HelmValueOptionsHolder(project.objects)
+abstract class HelmLint : AbstractHelmCommandTask(), ConfigurableHelmValueOptions {
 
     /**
      * The directory that contains the sources for the Helm chart.
@@ -54,8 +51,7 @@ open class HelmLint : AbstractHelmCommandTask(), ConfigurableHelmValueOptions {
      * `--set` option (for all other types).
      */
     @get:Input
-    final override val values: MapProperty<String, Any>
-        get() = valueOptions.values
+    abstract override val values: MapProperty<String, Any>
 
 
     /**
@@ -70,8 +66,7 @@ open class HelmLint : AbstractHelmCommandTask(), ConfigurableHelmValueOptions {
      * Not to be confused with [valueFiles], which contains a collection of YAML files that supply multiple values.
      */
     @get:Input
-    final override val fileValues: MapProperty<String, Any>
-        get() = valueOptions.fileValues
+    abstract override val fileValues: MapProperty<String, Any>
 
 
     /**
@@ -82,8 +77,7 @@ open class HelmLint : AbstractHelmCommandTask(), ConfigurableHelmValueOptions {
      * Not to be confused with [fileValues], which contains entries whose values are the contents of files.
      */
     @get:InputFiles
-    final override val valueFiles: ConfigurableFileCollection
-        get() = valueOptions.valueFiles
+    abstract override val valueFiles: ConfigurableFileCollection
 
 
     /**

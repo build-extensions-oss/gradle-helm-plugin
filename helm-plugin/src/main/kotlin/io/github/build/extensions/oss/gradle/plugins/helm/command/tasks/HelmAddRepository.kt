@@ -16,7 +16,7 @@ import java.net.URI
 /**
  * Registers a known repository with Helm. Corresponds to the `helm repo add` CLI command.
  */
-open class HelmAddRepository : AbstractHelmCommandTask() {
+abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
     /**
      * Name of the repository.
@@ -160,8 +160,7 @@ open class HelmAddRepository : AbstractHelmCommandTask() {
     private fun loadRepositoryConfig(): RepositoryConfig? {
 
         val repositoryName = this.repositoryName.get()
-
-        return project.file(this.repositoryConfigFile)
+        return repositoryConfigFile.get().asFile
             .takeIf { it.exists() }
             ?.run {
                 runCatching {

@@ -18,7 +18,7 @@ import java.time.Duration
  *
  * Corresponds to the `helm repo update` CLI command.
  */
-open class HelmUpdateRepositories : AbstractHelmCommandTask() {
+abstract class HelmUpdateRepositories : AbstractHelmCommandTask() {
 
     /**
      * The names of configured repositories.
@@ -84,14 +84,14 @@ open class HelmUpdateRepositories : AbstractHelmCommandTask() {
 
     private fun checkUpToDate(task: Task): Boolean {
 
-        val repositoryConfigFile = project.file(this.repositoryConfigFile)
+        val repositoryConfigFile = this.repositoryConfigFile.get().asFile
         if (!repositoryConfigFile.exists()) {
             // this should usually not happen, but better to check to avoid an exception later
             logger.debug("{} is up-to-date because the repository config file does not exist.", task)
             return true
         }
 
-        val repositoryCacheDir = project.file(this.repositoryCacheDir)
+        val repositoryCacheDir = this.repositoryCacheDir.get().asFile
         if (!repositoryCacheDir.isDirectory) {
             logger.debug("{} is not up-to-date because the repository cache directory does not exist.", task)
             return false

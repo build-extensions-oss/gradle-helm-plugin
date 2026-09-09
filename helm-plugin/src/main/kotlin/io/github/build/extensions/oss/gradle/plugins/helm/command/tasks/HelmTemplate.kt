@@ -1,6 +1,8 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.FileSystemOperations
+import javax.inject.Inject
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
@@ -15,7 +17,7 @@ import build.extensions.oss.gradle.pluginutils.property
 /**
  * Renders chart templates locally.
  */
-open class HelmTemplate : AbstractHelmInstallationCommandTask() {
+abstract class HelmTemplate : AbstractHelmInstallationCommandTask() {
 
     @get:[Input Optional]
     override val releaseName: Property<String>
@@ -92,10 +94,15 @@ open class HelmTemplate : AbstractHelmInstallationCommandTask() {
         project.objects.directoryProperty()
 
 
+    @get:Inject
+    internal open val fileSystemOperations: FileSystemOperations
+        get() = throw UnsupportedOperationException()
+
+
     @TaskAction
     fun renderTemplate() {
 
-        project.delete(outputDir)
+        fileSystemOperations.delete { spec -> spec.delete(outputDir) }
 
         execHelm("template") {
             args(releaseName)
@@ -104,13 +111,9 @@ open class HelmTemplate : AbstractHelmInstallationCommandTask() {
             option("--version", version)
             option("--replace", replace)
             option("--api-versions", apiVersions.map { it.joinToString(",") })
-            option("--show-only", showOnly.flatMap { showOnly ->
-                if (showOnly.isNotEmpty()) {
-                    project.provider { showOnly.joinToString(",") }
-                } else {
-                    project.provider<String> { null }
-                }
-            })
+            showOnly.orNull
+                ?.takeIf { it.isNotEmpty() }
+                ?.let { option("--show-only", it.joinToString(",")) }
             flag("--is-upgrade", isUpgrade)
             flag("--release-name", useReleaseNameInOutputPath)
             flag("--validate", validate)

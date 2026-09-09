@@ -2,6 +2,7 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.ArchiveOperations
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFile
 import org.gradle.api.file.RegularFileProperty
@@ -15,6 +16,8 @@ import org.gradle.api.tasks.TaskAction
 import build.extensions.oss.gradle.pluginutils.SystemUtils
 import build.extensions.oss.gradle.pluginutils.property
 import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
+import javax.inject.Inject
+import org.gradle.api.file.FileSystemOperations
 
 
 /**
@@ -25,6 +28,16 @@ open class HelmExtractClient : DefaultTask() {
     init {
         group = HELM_GROUP
     }
+
+
+    @get:Inject
+    internal open val fileSystemOperations: FileSystemOperations
+        get() = throw UnsupportedOperationException()
+
+
+    @get:Inject
+    internal open val archiveOperations: ArchiveOperations
+        get() = throw UnsupportedOperationException()
 
 
     /**
@@ -93,11 +106,15 @@ open class HelmExtractClient : DefaultTask() {
     @TaskAction
     fun extractClient() {
 
-        val archiveFile = project.file(archiveFile)
+        val archiveFile = this.archiveFile.get().asFile
 
-        project.copy { copy ->
+        fileSystemOperations.copy { copy ->
             copy.from(
-                if (archiveFile.extension == "zip") project.zipTree(archiveFile) else project.tarTree(archiveFile)
+                if (archiveFile.extension == "zip") {
+                    archiveOperations.zipTree(archiveFile)
+                } else {
+                    archiveOperations.tarTree(archiveFile)
+                }
             )
             copy.into(destinationDir)
         }

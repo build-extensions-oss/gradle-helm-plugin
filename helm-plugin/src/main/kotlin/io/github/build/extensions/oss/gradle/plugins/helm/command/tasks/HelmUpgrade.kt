@@ -9,7 +9,7 @@ import build.extensions.oss.gradle.pluginutils.property
 /**
  * Upgrades a release on the cluster. Corresponds to the `helm upgrade` CLI command.
  */
-open class HelmUpgrade : AbstractHelmInstallationCommandTask() {
+abstract class HelmUpgrade : AbstractHelmInstallationCommandTask() {
 
     /**
      * If `true`, run an install if a release by this name doesn't already exist.

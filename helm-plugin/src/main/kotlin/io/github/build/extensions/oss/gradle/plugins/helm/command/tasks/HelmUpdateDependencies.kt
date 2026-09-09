@@ -17,7 +17,7 @@ import build.extensions.oss.gradle.pluginutils.property
  *
  * Corresponds to the `helm dependency update` CLI command.
  */
-open class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
+abstract class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
 
     /**
      * If set to `true`, do not refresh the local repository cache.

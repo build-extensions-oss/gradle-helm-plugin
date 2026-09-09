@@ -242,7 +242,7 @@ private open class DefaultHelmChart
         TaskDependency { task ->
             if (task != null) {
                 setOf(
-                    task.project.tasks.getByName(packageTaskName)
+                    tasks.getByName(packageTaskName)
                 )
             } else {
                 emptySet()

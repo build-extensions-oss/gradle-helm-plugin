@@ -14,7 +14,7 @@ import java.time.Duration
 /**
  * Runs the tests for a release. Corresponds to the `helm test` CLI command.
  */
-open class HelmTest : AbstractHelmServerCommandTask() {
+abstract class HelmTest : AbstractHelmServerCommandTask() {
 
     /**
      * Name of the release to test.

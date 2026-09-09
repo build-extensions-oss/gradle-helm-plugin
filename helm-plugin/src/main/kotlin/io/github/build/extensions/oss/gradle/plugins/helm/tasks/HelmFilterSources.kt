@@ -8,6 +8,8 @@ import org.gradle.api.Action
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.CopySpec
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.FileSystemOperations
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
@@ -19,6 +21,7 @@ import org.gradle.kotlin.dsl.putFrom
 import build.extensions.oss.gradle.pluginutils.io.expand
 import build.extensions.oss.gradle.pluginutils.property
 import build.extensions.oss.gradle.pluginutils.versionProvider
+import javax.inject.Inject
 
 
 /**
@@ -37,6 +40,16 @@ open class HelmFilterSources : DefaultTask() {
     init {
         group = HELM_GROUP
     }
+
+
+    @get:Inject
+    internal open val fileSystemOperations: FileSystemOperations
+        get() = throw UnsupportedOperationException()
+
+
+    @get:Inject
+    internal open val objectFactory: ObjectFactory
+        get() = throw UnsupportedOperationException()
 
 
     /**
@@ -122,7 +135,7 @@ open class HelmFilterSources : DefaultTask() {
 
     @TaskAction
     fun filterSources() {
-        val result = project.sync { spec ->
+        val result = fileSystemOperations.sync { spec ->
             spec.from(sourceDir)
             spec.into(targetDir)
             spec.applyFiltering()
@@ -153,7 +166,7 @@ open class HelmFilterSources : DefaultTask() {
             val values = filtering.values.get()
             val valuesFromFiles = filtering.fileValues.get()
                 .mapValues { (_, value) ->
-                    project.files(value).singleFile.readText()
+                    objectFactory.fileCollection().from(value).singleFile.readText()
                 }
 
             val filePatterns = filtering.filePatterns.get()

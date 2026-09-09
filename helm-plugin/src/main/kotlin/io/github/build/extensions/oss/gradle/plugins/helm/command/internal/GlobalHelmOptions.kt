@@ -12,6 +12,7 @@ import build.extensions.oss.gradle.pluginutils.ifPresent
 
 fun ConfigurableGlobalHelmOptions.conventionsFrom(source: GlobalHelmOptions) = apply {
     executable.convention(source.executable)
+    debug.convention(source.debug)
     extraArgs.addAll(source.extraArgs)
     xdgDataHome.convention(source.xdgDataHome)
     xdgConfigHome.convention(source.xdgConfigHome)
