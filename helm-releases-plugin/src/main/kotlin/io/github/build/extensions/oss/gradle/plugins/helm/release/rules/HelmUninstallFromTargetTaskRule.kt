@@ -39,7 +39,7 @@ internal class HelmUninstallFromTargetTaskRule(
                 .names
                 .mapNotNull { releaseName ->
                     val uninstallReleaseTaskName = releaseTarget.uninstallReleaseTaskName(releaseName)
-                    project.tasks.findByName(uninstallReleaseTaskName)
+                    tasks.findByName(uninstallReleaseTaskName)
                 }
                 .toSet()
         })

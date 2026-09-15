@@ -154,7 +154,7 @@ class HelmReleasesPlugin : Plugin<Project> {
                 val wait = booleanProviderFromProjectProperty("helm.wait")
                 val waitForJobs = booleanProviderFromProjectProperty("helm.waitForJobs")
 
-                releaseTargets.all { releaseTarget ->
+                releaseTargets.configureEach { releaseTarget ->
                     releaseTarget.conventionsFrom(project.helm)
                     releaseTarget.atomic.convention(atomic)
                     releaseTarget.dryRun.convention(dryRun)

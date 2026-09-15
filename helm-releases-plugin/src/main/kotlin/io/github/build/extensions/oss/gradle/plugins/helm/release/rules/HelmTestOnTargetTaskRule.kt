@@ -44,7 +44,7 @@ internal class HelmTestOnTargetTaskRule(
                 .names
                 .mapNotNull { releaseName ->
                     val testReleaseTaskName = releaseTarget.testReleaseTaskName(releaseName)
-                    project.tasks.findByName(testReleaseTaskName)
+                    tasks.findByName(testReleaseTaskName)
                 }
                 .toSet()
         })
