@@ -19,6 +19,13 @@ import build.extensions.oss.gradle.pluginutils.withDefault
  */
 abstract class HelmStatus : AbstractHelmServerCommandTask() {
 
+    init {
+        // A status check queries the live cluster, therefor it should never be "up-to-date"
+        // and should always be executed on invocation.
+        @Suppress("LeakingThis")
+        outputs.upToDateWhen { false }
+    }
+
     /**
      * Name of the release to test the status for.
      */

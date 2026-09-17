@@ -33,6 +33,7 @@ import build.extensions.oss.gradle.pluginutils.combine
 import build.extensions.oss.gradle.pluginutils.listProperty
 import build.extensions.oss.gradle.pluginutils.property
 import build.extensions.oss.gradle.pluginutils.setProperty
+import build.extensions.oss.gradle.pluginutils.withDefault
 
 
 /**
@@ -632,9 +633,10 @@ private open class DefaultHelmRelease
             targetSpecific.mustUninstallAfter.addAll(this.mustUninstallAfter)
 
             with(targetSpecific.test) {
-                setFrom(test.withDefaults(target.test, project.providers))
-                enabled.convention(true)
-                timeout.convention(remoteTimeout)
+                val mergedTestOptions = test.withDefaults(target.test, project.providers)
+                setFrom(mergedTestOptions)
+                enabled.set(mergedTestOptions.enabled.withDefault(true, project.providers))
+                timeout.set(mergedTestOptions.timeout.withDefault(targetSpecific.remoteTimeout, project.providers))
             }
 
             // Merge in the values from all sources

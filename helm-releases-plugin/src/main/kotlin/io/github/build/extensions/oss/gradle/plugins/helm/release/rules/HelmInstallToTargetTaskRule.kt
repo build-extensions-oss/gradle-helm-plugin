@@ -44,7 +44,7 @@ internal class HelmInstallToTargetTaskRule(
                 .names
                 .mapNotNull { releaseName ->
                     val installReleaseTaskName = releaseTarget.installReleaseTaskName(releaseName)
-                    project.tasks.findByName(installReleaseTaskName)
+                    tasks.findByName(installReleaseTaskName)
                 }
                 .toSet()
         })

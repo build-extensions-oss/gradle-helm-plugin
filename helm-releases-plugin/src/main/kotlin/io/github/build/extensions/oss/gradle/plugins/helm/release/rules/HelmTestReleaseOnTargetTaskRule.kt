@@ -7,7 +7,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTest
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmRelease
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseInternal
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleaseTarget
-import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.shouldInclude
+import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.selectTagsExpression
 import build.extensions.oss.gradle.pluginutils.rules.RuleNamePattern2
 
 
@@ -51,11 +51,14 @@ internal class HelmTestReleaseOnTargetTaskRule(
 
         val targetSpecific = (release as HelmReleaseInternal).resolveForTarget(releaseTarget)
 
+        val selectTags = releaseTarget.selectTagsExpression()
+        val releaseTags = release.tags
+        val testEnabled = targetSpecific.test.enabled
         onlyIf {
-            releaseTarget.shouldInclude(release)
+            selectTags.matches(releaseTags)
         }
         onlyIf {
-            targetSpecific.test.enabled.get()
+            testEnabled.get()
         }
 
         mustRunAfter(release.installToTargetTaskName(releaseTarget.name))

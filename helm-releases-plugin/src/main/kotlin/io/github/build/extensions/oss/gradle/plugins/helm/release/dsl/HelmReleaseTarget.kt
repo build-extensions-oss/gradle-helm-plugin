@@ -145,4 +145,15 @@ internal fun Project.helmReleaseTargetContainer(
 
 
 internal fun HelmReleaseTarget.shouldInclude(release: HelmRelease): Boolean =
-    (this as HelmReleaseTargetInternal).selectTagsExpression.matches(release.tags)
+    selectTagsExpression().matches(release.tags)
+
+
+/**
+ * Returns the [TagExpression] that selects releases for this target.
+ *
+ * Prefer this over [shouldInclude] whenever the result has to be captured by something that becomes part of a
+ * task's state (an `onlyIf` spec, for instance): the expression and the release's tags are plain data, whereas
+ * a [HelmRelease] holds on to a [Project] and cannot be serialized by the configuration cache.
+ */
+internal fun HelmReleaseTarget.selectTagsExpression(): TagExpression =
+    (this as HelmReleaseTargetInternal).selectTagsExpression

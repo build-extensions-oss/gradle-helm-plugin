@@ -2,9 +2,10 @@ package io.github.build.extensions.oss.gradle.plugins.helm.release
 
 import assertk.all
 import assertk.assertThat
-import assertk.assertions.isSuccess
+import assertk.assertions.isEqualTo
 import assertk.assertions.prop
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmInstallOrUpgrade
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmStatus
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTest
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUninstall
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
@@ -13,6 +14,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.HelmReleas
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.activeReleaseTarget
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.releaseTargets
 import io.github.build.extensions.oss.gradle.plugins.helm.release.dsl.releases
+import io.github.build.extensions.oss.gradle.plugins.helm.release.rules.statusTaskName
 import io.github.build.extensions.oss.gradle.plugins.helm.release.spek.propertyMappingInfo
 import io.github.build.extensions.oss.gradle.plugins.helm.release.spek.propertyMappingTests
 import java.net.URI
@@ -32,6 +34,8 @@ import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasExtens
 import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasOnlyTaskDependency
 import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasTaskDependency
 import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.hasValueEqualTo
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isNotSkipped
+import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isSkipped
 import build.extensions.oss.gradle.pluginutils.test.evaluate
 import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
 import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
@@ -183,6 +187,33 @@ object HelmReleasesPluginTest : Spek({
         }
 
 
+        it("should create a task to check the status of the release on each target") {
+
+            assertThat(project, name = "project")
+                .containsTask<HelmStatus>("helmStatusAwesomeOnDefault")
+                .all {
+                    prop(HelmStatus::releaseName).hasValueEqualTo("awesome-release")
+                    prop("description") { it.description }
+                        .isEqualTo("Checks the status of the awesome release on the default target.")
+                }
+        }
+
+
+        it("should create a task to check the status of the release on the active target") {
+
+            assertThat(project, name = "project")
+                .containsTask<Task>("helmStatusAwesome")
+                .hasOnlyTaskDependency("helmStatusAwesomeOnDefault")
+        }
+
+
+        it("should expose the name of the status task for the release") {
+
+            assertThat(release.statusTaskName, name = "statusTaskName")
+                .isEqualTo("helmStatusAwesome")
+        }
+
+
         describe("install task should use properties from the release") {
 
             propertyMappingTests<HelmRelease, HelmInstallOrUpgrade>(
@@ -290,6 +321,29 @@ object HelmReleasesPluginTest : Spek({
                 ),
                 propertyMappingInfo(
                     { test.timeout.set(it) }, HelmTest::remoteTimeout, Duration.ofSeconds(42)
+                )
+            )
+        }
+
+
+        describe("status task should use properties from the release") {
+
+            propertyMappingTests<HelmRelease, HelmStatus>(
+                { release },
+                "helmStatusAwesomeOnDefault",
+                // Properties from HelmRelease
+                propertyMappingInfo(
+                    HelmRelease::releaseName, HelmStatus::releaseName, "awesome-release"
+                ),
+                // Properties from HelmServerOptions
+                propertyMappingInfo(
+                    HelmRelease::kubeConfig, HelmStatus::kubeConfig, "local.kubeconfig"
+                ),
+                propertyMappingInfo(
+                    HelmRelease::kubeContext, HelmStatus::kubeContext, "local-kubecontext"
+                ),
+                propertyMappingInfo(
+                    HelmRelease::namespace, HelmStatus::namespace, "custom-namespace"
                 )
             )
         }
@@ -477,6 +531,41 @@ object HelmReleasesPluginTest : Spek({
                 )
             )
         }
+
+
+        describe("status task should use properties from the release target") {
+
+            propertyMappingTests<HelmReleaseTarget, HelmStatus>(
+                { releaseTarget },
+                "helmStatusAwesomeOnLocal",
+                // Properties from HelmServerOptions
+                propertyMappingInfo(
+                    HelmReleaseTarget::kubeConfig, HelmStatus::kubeConfig, "local.kubeconfig"
+                ),
+                propertyMappingInfo(
+                    HelmReleaseTarget::kubeContext, HelmStatus::kubeContext, "local-kubecontext"
+                ),
+                propertyMappingInfo(
+                    HelmReleaseTarget::namespace, HelmStatus::namespace, "custom-namespace"
+                )
+            )
+        }
+
+
+        describe("when the target is active") {
+
+            beforeEachTest {
+                helm.activeReleaseTarget.set("local")
+            }
+
+
+            it("status task for the release should depend on the status-on-target task") {
+
+                assertThat(project, name = "project")
+                    .containsTask<Task>("helmStatusAwesome")
+                    .hasOnlyTaskDependency("helmStatusAwesomeOnLocal")
+            }
+        }
     }
 
 
@@ -545,6 +634,26 @@ object HelmReleasesPluginTest : Spek({
                 assertThat(project, name = "project")
                     .containsTask<Task>("helmInstallToDefault")
                     .hasTaskDependency("helmInstallTaggedToDefault")
+            }
+
+
+            it("status task runs when tag matches") {
+
+                project.extensions.extraProperties.set("helm.release.tags", "awesome")
+
+                assertThat(project, name = "project")
+                    .containsTask<HelmStatus>("helmStatusTaggedOnDefault")
+                    .isNotSkipped()
+            }
+
+
+            it("status task is skipped when tag does not match") {
+
+                project.extensions.extraProperties.set("helm.release.tags", "different")
+
+                assertThat(project, name = "project")
+                    .containsTask<HelmStatus>("helmStatusTaggedOnDefault")
+                    .isSkipped()
             }
 
 
