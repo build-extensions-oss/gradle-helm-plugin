@@ -65,9 +65,9 @@ Due to open source nature of the project, some functionality isn't supported for
 
 | Feature                        | Gradle Version |
 |--------------------------------|----------------|
-| Basic Helm Chart Functionality | 8, 9           |
-| Helm Publish                   | 8, 9           |
-| Helm Releases                  | 8, 9           |
+| Basic Helm Chart Functionality | 8, 9                                                                   |
+| Helm Publish                   | 8, 9                                                                   |
+| Helm Releases                  | 8 , 9           |
 
 The last Gradle Helm Plugin officially supported Gradle 7 was `3.1.2`. All further versions don't have tests for Gradle
 7, however the API isn't rewritten without a necessity.
