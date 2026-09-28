@@ -31,7 +31,7 @@ jobs:
       # Protect from putting custom jar as a gradle wrapper
       # https://github.com/gradle/actions/tree/main/wrapper-validation
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/wrapper-validation@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
 
       # setup JDK - depending on version selected
       # https://github.com/marketplace/actions/setup-java-jdk
@@ -45,7 +45,7 @@ jobs:
       # Optimize Gradle execution
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
 
       # Build the project by simply running the command line
       # No need to use daemon (this is run once container), however we print detailed logs and stacktrace
@@ -96,7 +96,7 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
 
       - name: Download build outputs
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -174,7 +174,7 @@ jobs:
           merge-multiple: false
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
 
       # Merge XML reports - and exclude functional tests (they must be executed on other platforms)
       - name: Merge Kover reports
