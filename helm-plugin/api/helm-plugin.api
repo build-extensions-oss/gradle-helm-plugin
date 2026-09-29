@@ -16,6 +16,7 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/HelmPlugin
 	public static final field HELM_GROUP Ljava/lang/String;
 	public static final field HELM_LINT_EXTENSION_NAME Ljava/lang/String;
 	public static final field HELM_MAIN_CHART_NAME Ljava/lang/String;
+	public static final field HELM_REGISTRIES_EXTENSION_NAME Ljava/lang/String;
 	public static final field HELM_RELEASES_EXTENSION_NAME Ljava/lang/String;
 	public static final field HELM_RELEASE_TARGETS_EXTENSION_NAME Ljava/lang/String;
 	public static final field HELM_REPOSITORIES_EXTENSION_NAME Ljava/lang/String;
@@ -144,6 +145,7 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 	public static synthetic fun flag$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/HelmExecSpec;Ljava/lang/String;ZZILjava/lang/Object;)V
 	public fun option (Ljava/lang/String;Ljava/lang/Object;)V
 	public fun option (Ljava/lang/String;Lorg/gradle/api/provider/Provider;)V
+	public abstract fun standardInput (Lorg/gradle/api/provider/Provider;)V
 }
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/command/HelmExecSpec$DefaultImpls {
@@ -609,6 +611,17 @@ public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command
 	public final fun helmPackage ()V
 }
 
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmRegistryLogin : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
+	public fun <init> ()V
+	public final fun getCaFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public final fun getCertificateFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public final fun getKeyFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public final fun getPassword ()Lorg/gradle/api/provider/Property;
+	public final fun getRegistry ()Lorg/gradle/api/provider/Property;
+	public final fun getUsername ()Lorg/gradle/api/provider/Property;
+	public final fun login ()V
+}
+
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmStatus : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmServerCommandTask {
 	public fun <init> ()V
 	public final fun getOutputFile ()Lorg/gradle/api/file/RegularFileProperty;
@@ -727,6 +740,11 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 
 public final class io/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmExtension$DefaultImpls {
 	public static fun downloadClient (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmExtension;Lorg/gradle/api/Action;)V
+}
+
+public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRegistry : io/github/build/extensions/oss/gradle/plugins/helm/dsl/credentials/CredentialsContainer, org/gradle/api/Named {
+	public abstract fun getCaFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getHost ()Lorg/gradle/api/provider/Property;
 }
 
 public abstract interface class io/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmRendering : io/github/build/extensions/oss/gradle/plugins/helm/command/ConfigurableHelmValueOptions, org/gradle/api/Buildable, org/gradle/api/Named {

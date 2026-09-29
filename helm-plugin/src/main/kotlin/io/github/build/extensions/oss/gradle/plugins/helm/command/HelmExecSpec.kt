@@ -3,6 +3,7 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command
 import org.gradle.api.provider.Provider
 import org.gradle.process.ExecSpec
 import build.extensions.oss.gradle.pluginutils.ifPresent
+import java.io.ByteArrayInputStream
 
 
 /**
@@ -140,6 +141,19 @@ interface HelmExecSpec {
     fun environment(name: String, provider: Provider<out Any>)
 
     /**
+     * Writes a value to the standard input of the process, using a [Provider] to supply it.
+     *
+     * Use it for secrets, together with the matching `--...-stdin` option of the Helm CLI (for example
+     * `--password-stdin`): unlike command line arguments, the standard input is not visible to other
+     * processes on the machine.
+     *
+     * If the provider does not have a value, nothing is written to the standard input.
+     *
+     * @param provider the provider supplying the text to write to the standard input
+     */
+    fun standardInput(provider: Provider<String>)
+
+    /**
      * If true (the default), executing the command will fail with an exception if the process returns
      * a non-zero exit code.
      */
@@ -175,6 +189,13 @@ internal class DefaultHelmExecSpec(
     override fun environment(name: String, provider: Provider<out Any>) {
         provider.ifPresent { value ->
             execSpec.environment(name, value)
+        }
+    }
+
+
+    override fun standardInput(provider: Provider<String>) {
+        provider.ifPresent { value ->
+            execSpec.standardInput = ByteArrayInputStream(value.toByteArray())
         }
     }
 
