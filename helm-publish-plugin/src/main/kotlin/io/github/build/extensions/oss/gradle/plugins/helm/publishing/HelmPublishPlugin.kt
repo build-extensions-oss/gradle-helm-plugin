@@ -40,7 +40,7 @@ class HelmPublishPlugin
         project.plugins.withType(HelmPlugin::class.java) {
 
             val charts = project.helm.charts
-            charts.all { chart ->
+            charts.configureEach { chart ->
                 addChartPublishExtension(chart, project)
             }
 
@@ -86,12 +86,14 @@ class HelmPublishPlugin
      * Create a task that publishes all charts in the project to all publishing repositories.
      */
     private fun createPublishAllTask(project: Project, charts: NamedDomainObjectContainer<HelmChart>) {
-        project.tasks.register("helmPublish") { task ->
+        val tasks = project.tasks
+
+        tasks.register("helmPublish") { task ->
             task.group = HELM_GROUP
             task.description = "Publishes all Helm charts."
 
             task.dependsOn(TaskDependency {
-                charts.map { chart -> project.tasks.getByName(chart.publishTaskName) }
+                charts.map { chart -> tasks.getByName(chart.publishTaskName) }
                     .toSet()
             })
         }

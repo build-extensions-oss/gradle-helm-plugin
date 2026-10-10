@@ -8,6 +8,7 @@ import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.Console
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
@@ -18,6 +19,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.ConfigurableGl
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecProviderSupport
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.RegistryLogin
 import org.gradle.work.DisableCachingByDefault
 import javax.inject.Inject
 
@@ -46,6 +48,11 @@ abstract class AbstractHelmCommandTask
 
     @get:Inject
     internal open val execOperations: ExecOperations
+        get() = throw UnsupportedOperationException()
+
+
+    @get:Inject
+    internal open val providerFactory: ProviderFactory
         get() = throw UnsupportedOperationException()
 
 
@@ -114,6 +121,31 @@ abstract class AbstractHelmCommandTask
         command: String, subcommand: String? = null, action: (HelmExecSpec.() -> Unit)? = null
     ): String =
         execProviderSupport.execHelmCaptureOutput(command, subcommand, action?.let { Action(it) })
+
+
+    /**
+     * Runs `helm registry login` with the given login.
+     *
+     * The password goes to the standard input (`--password-stdin`) rather than to the command line.
+     *
+     * Returns only once the login is done: Helm may run in a worker, and whatever the caller runs next (for
+     * example `helm dependency update`) needs the stored login.
+     */
+    internal fun loginToRegistry(login: RegistryLogin) {
+        logger.info("Logging in to the Helm registry {}", login.host)
+        execHelm("registry", "login") {
+            login.caFile?.let { option("--ca-file", it) }
+            login.certificateFile?.let { option("--cert-file", it) }
+            login.keyFile?.let { option("--key-file", it) }
+            login.username?.let { option("--username", it) }
+            login.password?.let { password ->
+                flag("--password-stdin")
+                standardInput(providerFactory.provider { password })
+            }
+            args(login.host)
+        }
+        workerExecutor.await()
+    }
 
 
     @get:Internal

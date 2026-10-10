@@ -15,8 +15,9 @@ import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.withStat
 /**
  * Uses a [GradleExecMock] for tests that invoke external processes.
  *
- * @param executableFileName the name of the fake executable file. This will be created as an executable shell script
- *        inside the project directory. Exec actions must set their `executable` property to this path.
+ * @param executableFileName the base name of the fake executable file. A wrapper script with this name is
+ *        created inside the project directory (with a `.bat` extension added on Windows), and the `helm`
+ *        extension's `executable` property is pointed at it.
  * @return a [GradleExecMock] as a Spek [MemoizedValue]
  */
 fun LifecycleAware.gradleExecMock(executableFileName: String = "helm"): MemoizedValue<GradleExecMock> {
@@ -33,12 +34,10 @@ fun LifecycleAware.gradleExecMock(executableFileName: String = "helm"): Memoized
 
     beforeEachTest {
         val project: Project by memoized()
-        val scriptFilePath = project.projectDir.resolve(executableFileName)
-
-        executableExecMock.createScriptFile(scriptFilePath)
+        val scriptFile = executableExecMock.createScriptFile(project.projectDir.resolve(executableFileName))
 
         project.plugins.withType(HelmCommandsPlugin::class.java) {
-            project.helm.executable.set(scriptFilePath.absolutePath)
+            project.helm.executable.set(scriptFile.absolutePath)
         }
     }
 

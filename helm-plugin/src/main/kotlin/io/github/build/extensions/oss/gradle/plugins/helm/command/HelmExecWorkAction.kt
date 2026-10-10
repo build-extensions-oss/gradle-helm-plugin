@@ -6,6 +6,7 @@ import org.gradle.process.ExecOperations
 import org.gradle.workers.WorkAction
 import org.slf4j.LoggerFactory
 import build.extensions.oss.gradle.pluginutils.ifPresent
+import java.io.ByteArrayInputStream
 import java.io.OutputStream
 import javax.inject.Inject
 
@@ -28,6 +29,10 @@ internal abstract class HelmExecWorkAction
                 parameters.environment.ifPresent { spec.environment.putAll(it) }
 
                 stdout?.let { spec.standardOutput = it }
+
+                parameters.standardInput.ifPresent { input ->
+                    spec.standardInput = ByteArrayInputStream(input.toByteArray())
+                }
 
                 if (logger.isInfoEnabled) {
                     logger.info("Executing: {}\n  with environment: {}", maskCommandLine(spec.commandLine), spec.environment)

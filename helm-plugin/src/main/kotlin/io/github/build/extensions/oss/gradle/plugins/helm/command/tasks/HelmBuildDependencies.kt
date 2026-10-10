@@ -37,7 +37,7 @@ abstract class HelmBuildDependencies : AbstractHelmDependenciesTask() {
             } else {
                 // helm dep update behavior
                 // skip if the chart has no declared external dependencies
-                modelDependencies.get().dependencies
+                readModelDependencies().dependencies
                     .any { it.repository != null }
             }
         }
@@ -46,6 +46,7 @@ abstract class HelmBuildDependencies : AbstractHelmDependenciesTask() {
 
     @TaskAction
     fun buildDependencies() {
+        loginToDependencyRegistries()
         execHelm("dependency", "build") {
             args(chartDir)
         }
