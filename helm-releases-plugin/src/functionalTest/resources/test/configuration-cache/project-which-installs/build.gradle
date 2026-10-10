@@ -1,0 +1,36 @@
+plugins {
+    id 'io.github.build-extensions-oss.helm-releases'
+}
+
+helm {
+    releaseTargets {
+        // "default" is the active target unless -Phelm.release.target says otherwise. Declaring a second
+        // target keeps the target-specific configuration below meaningful.
+        create('default')
+        create('staging') {
+            selectTags = '*'
+        }
+    }
+
+    releases {
+        create('awesome') {
+            from(chart(project: ':project-with-chart', chart: 'main'))
+
+            // Exercises the tag expression that the install/uninstall/test/status tasks evaluate in onlyIf.
+            tags('smoke')
+
+            // Two notations on purpose: a String is resolved eagerly, anything else (a Path here) goes
+            // through the lazy project.layout.dir(project.provider { ... }) branch of valuesDirs().
+            valuesDir('src/helm/values')
+            valuesDir(file('src/helm/values-lazy').toPath())
+
+            test {
+                showLogs.set(true)
+            }
+
+            forTarget('staging') {
+                values.put('environment', 'staging')
+            }
+        }
+    }
+}

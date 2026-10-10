@@ -50,7 +50,7 @@ abstract class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
         @Suppress("LeakingThis")
         onlyIf {
             // skip if the chart has no declared external dependencies
-            modelDependencies.get().dependencies
+            readModelDependencies().dependencies
                 .any { it.repository != null }
         }
     }
@@ -58,6 +58,7 @@ abstract class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
 
     @TaskAction
     fun updateDependencies() {
+        loginToDependencyRegistries()
         execHelm("dependency", "update") {
             args(chartDir)
             flag("--skip-refresh", skipRefresh)

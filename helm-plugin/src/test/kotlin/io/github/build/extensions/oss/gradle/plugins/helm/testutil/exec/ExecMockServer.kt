@@ -5,6 +5,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 import org.json.JSONObject
+import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.UUID
@@ -19,7 +20,16 @@ interface ExecMockServer {
 
     interface MockRegistration {
 
-        fun getShellScript(): String
+        /**
+         * Writes an executable stand-in for the Helm client at the given location.
+         *
+         * The file actually written may not be [location] itself — on Windows it needs a `.bat` extension,
+         * because that is the only kind of script `CreateProcess` knows how to start.
+         *
+         * @param location the desired location of the fake executable
+         * @return the file that should be used as the `executable`
+         */
+        fun writeLauncherScript(location: File): File
 
         fun unregister()
     }
@@ -32,23 +42,71 @@ interface ExecMockServer {
 }
 
 
+private val isWindows: Boolean =
+    System.getProperty("os.name").orEmpty().startsWith("Windows", ignoreCase = true)
+
+
+private val javaExecutable: String =
+    File(File(System.getProperty("java.home"), "bin"), if (isWindows) "java.exe" else "java").absolutePath
+
+
+/**
+ * Keep JVM startup as cheap as possible: the fake executable is started once per mocked Helm invocation,
+ * and it only ever makes a single HTTP call.
+ */
+private const val LAUNCHER_JVM_OPTIONS = "-XX:TieredStopAtLevel=1 -XX:+UseSerialGC"
+
+
+/**
+ * The classpath for [ExecMockLauncher] — its own output directory plus the Kotlin standard library, and
+ * nothing else. Keeping this to two entries is what allows the wrapper to be a single short command line.
+ */
+private val launcherClasspath: String =
+    listOf(ExecMockLauncher::class.java, Unit::class.java)
+        .mapNotNull { it.protectionDomain?.codeSource?.location }
+        .map { url -> runCatching { File(url.toURI()) }.getOrElse { File(url.path) }.absolutePath }
+        .distinct()
+        .also { check(it.isNotEmpty()) { "Unable to determine the classpath for ${ExecMockLauncher::class.java}" } }
+        .joinToString(File.pathSeparator)
+
+
 private class DefaultExecMockServer : ExecMockServer, AutoCloseable {
 
     private inner class MockRegistrationImpl(
         val id: String
     ) : ExecMockServer.MockRegistration {
 
-        override fun getShellScript(): String =
-            """
-            |#!/bin/bash 
-            |PAYLOAD="{\
-            |\"executable\":\"$0\",\
-            |\"mockId\": \"$id\",\
-            |\"args\":[$(for arg in "$@"; do echo "\"$(echo ${'$'}arg | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g')\""; done | paste -sd ',' -)],\
-            |\"env\":{$(env | awk -F '=' '{print "\"" $1 "\":\"" $2 "\""}' | paste -sd',' -)}}"
-            |
-            |exec curl -fqs http://localhost:${portNumber} --data-ascii "${'$'}PAYLOAD"
-            """.trimMargin()
+        override fun writeLauncherScript(location: File): File {
+
+            val scriptFile = if (isWindows) File(location.parentFile, location.name + ".bat") else location
+
+            scriptFile.parentFile.mkdirs()
+            scriptFile.writeText(if (isWindows) windowsScript() else posixScript())
+            scriptFile.setExecutable(true)
+
+            return scriptFile
+        }
+
+
+        /**
+         * `%~f0` is the full path of the batch file itself, and `%*` forwards the arguments verbatim.
+         *
+         * The latter only holds because the test JVM sets `jdk.lang.Process.allowAmbiguousCommands=false`
+         * (see the `test` task in _build.gradle.kts_). Java has to run a `.bat` through `cmd.exe`, and in
+         * cmd's default mode the shell would eat `^` and split the command on `&` before the batch file
+         * ever sees them.
+         */
+        private fun windowsScript(): String =
+            "@echo off\r\n" +
+                    "\"$javaExecutable\" $LAUNCHER_JVM_OPTIONS -cp \"$launcherClasspath\" " +
+                    "${ExecMockLauncher::class.java.name} $id $portNumber \"%~f0\" %*\r\n"
+
+
+        private fun posixScript(): String =
+            "#!/bin/sh\n" +
+                    "exec \"$javaExecutable\" $LAUNCHER_JVM_OPTIONS -cp \"$launcherClasspath\" " +
+                    "${ExecMockLauncher::class.java.name} $id $portNumber " +
+                    "\"${'$'}0\" \"${'$'}@\"\n"
 
 
         override fun unregister() {
@@ -76,7 +134,8 @@ private class DefaultExecMockServer : ExecMockServer, AutoCloseable {
                 val invocation = DefaultInvocation(
                     executable = body.getString("executable"),
                     args = body.getJSONArray("args").toList().map { it.toString() },
-                    environment = body.getJSONObject("env").toMap().mapValues { (_, v) -> v.toString() }
+                    environment = body.getJSONObject("env").toMap().mapValues { (_, v) -> v.toString() },
+                    stdin = body.optString("stdin", "")
                 )
 
                 val stdoutWriter = StringWriter()

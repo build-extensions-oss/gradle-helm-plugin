@@ -35,7 +35,9 @@ internal class HelmPublishChartTaskRule(
     override fun Task.configureFrom(chart: HelmChart) {
         group = HELM_GROUP
         description = "Publishes the ${chart.name} chart."
-        onlyIf { chart.publishConvention.publish.get() }
+
+        val publish = chart.publishConvention.publish
+        onlyIf { publish.get() }
 
         dependsOn(TaskDependency {
             repositories.map { repository ->

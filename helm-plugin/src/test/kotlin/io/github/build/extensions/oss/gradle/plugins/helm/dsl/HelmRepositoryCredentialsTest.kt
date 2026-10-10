@@ -19,7 +19,6 @@ import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.fileValue
 import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isPresent
 import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
 import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
-import java.io.File
 
 
 object HelmRepositoryCredentialsTest : Spek({
@@ -75,9 +74,9 @@ object HelmRepositoryCredentialsTest : Spek({
                 .isPresent().isInstanceOf(CertificateCredentials::class)
                 .all {
                     prop(CertificateCredentials::certificateFile).fileValue()
-                        .isEqualTo(File("/path/to/certificate"))
+                        .isEqualTo(project.file("/path/to/certificate"))
                     prop(CertificateCredentials::keyFile).fileValue()
-                        .isEqualTo(File("/path/to/key"))
+                        .isEqualTo(project.file("/path/to/key"))
                 }
         }
     }

@@ -26,6 +26,11 @@ interface Invocation {
      * The environment variables.
      */
     val environment: Map<String, String>
+
+    /**
+     * The text written to the standard input of the process; empty if there was none.
+     */
+    val stdin: String
 }
 
 
@@ -39,7 +44,8 @@ abstract class AbstractInvocation : Invocation {
 class DefaultInvocation(
     override val executable: String,
     override val args: List<String>,
-    override val environment: Map<String, String>
+    override val environment: Map<String, String>,
+    override val stdin: String = ""
 ) : AbstractInvocation()
 
 
