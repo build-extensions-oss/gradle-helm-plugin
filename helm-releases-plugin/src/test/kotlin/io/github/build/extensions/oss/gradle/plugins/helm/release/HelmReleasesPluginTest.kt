@@ -1,9 +1,11 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.release
 
+import assertk.Assert
 import assertk.all
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.prop
+import assertk.assertions.support.expected
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmInstallOrUpgrade
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmStatus
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmTest
@@ -39,6 +41,8 @@ import build.extensions.oss.gradle.pluginutils.test.assertions.assertk.isSkipped
 import build.extensions.oss.gradle.pluginutils.test.evaluate
 import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
 import build.extensions.oss.gradle.pluginutils.test.spek.setupGradleProject
+import org.gradle.api.internal.TaskInternal
+import org.gradle.api.specs.CompositeSpec
 
 
 object HelmReleasesPluginTest : Spek({
@@ -657,6 +661,38 @@ object HelmReleasesPluginTest : Spek({
             }
 
 
+            it("uninstall task runs when tag matches") {
+
+                project.extensions.extraProperties.set("helm.release.tags", "awesome")
+
+                assertThat(project, name = "project")
+                    .containsTask<HelmUninstall>("helmUninstallTaggedFromDefault")
+                    .isNotSkippedByRuleSpec()
+            }
+
+
+            it("uninstall task is skipped when tag does not match the global tag expression") {
+
+                project.extensions.extraProperties.set("helm.release.tags", "different")
+
+                assertThat(project, name = "project")
+                    .containsTask<HelmUninstall>("helmUninstallTaggedFromDefault")
+                    .isSkippedByRuleSpec()
+            }
+
+
+            it("uninstall task is skipped when tag does not match the release target tag expression") {
+
+                with(project.helm.releaseTargets) {
+                    named("default") { it.selectTags = "different" }
+                }
+
+                assertThat(project, name = "project")
+                    .containsTask<HelmUninstall>("helmUninstallTaggedFromDefault")
+                    .isSkippedByRuleSpec()
+            }
+
+
             it("tagged release is not included when it does not match global tag expression") {
 
                 project.extensions.extraProperties.set("helm.release.tags", "different")
@@ -731,3 +767,31 @@ object HelmReleasesPluginTest : Spek({
         }
     }
 })
+
+/**
+ * Evaluates only the `onlyIf` spec that a task rule added, which is the last one on the task.
+ *
+ * [HelmUninstall] adds a spec of its own in its constructor - "does the release exist?" - which asks helm,
+ * and a unit test has no helm to ask. Evaluating the task's whole `onlyIf` would run that spec first and
+ * never reach the rule's, so the rule's spec is picked out and evaluated on its own.
+ */
+private fun Task.isSkippedByRuleSpec(): Boolean {
+    this as TaskInternal
+    @Suppress("UNCHECKED_CAST")
+    val specs = (onlyIf as CompositeSpec<TaskInternal>).specs
+    return !specs.last().isSatisfiedBy(this)
+}
+
+
+private fun Assert<Task>.isSkippedByRuleSpec() = given { actual ->
+    if (!actual.isSkippedByRuleSpec()) {
+        expected("to be skipped by the task rule's onlyIf spec, but was not skipped")
+    }
+}
+
+
+private fun Assert<Task>.isNotSkippedByRuleSpec() = given { actual ->
+    if (actual.isSkippedByRuleSpec()) {
+        expected("not to be skipped by the task rule's onlyIf spec, but was skipped")
+    }
+}

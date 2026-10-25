@@ -6,10 +6,12 @@ import io.github.build.extensions.oss.gradle.plugins.helm.HELM_CHARTS_EXTENSION_
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_FILTERING_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_LINT_EXTENSION_NAME
+import io.github.build.extensions.oss.gradle.plugins.helm.HELM_REGISTRIES_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.HELM_REPOSITORIES_EXTENSION_NAME
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Filtering
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmChart
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmExtension
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRegistry
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.HelmRepositoryHandler
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.Linting
 import build.extensions.oss.gradle.pluginutils.requiredExtension
@@ -34,6 +36,13 @@ val HelmExtension.lint: Linting
  */
 val HelmExtension.repositories: HelmRepositoryHandler
     get() = requiredExtension(HELM_REPOSITORIES_EXTENSION_NAME)
+
+
+/**
+ * Gets the `registries` sub-extension.
+ */
+val HelmExtension.registries: NamedDomainObjectContainer<HelmRegistry>
+    get() = requiredExtension(HELM_REGISTRIES_EXTENSION_NAME)
 
 
 /**

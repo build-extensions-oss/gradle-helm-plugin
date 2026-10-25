@@ -1,0 +1,4 @@
+apiVersion: v1
+name: empty-testing
+
+version: 0.1.0

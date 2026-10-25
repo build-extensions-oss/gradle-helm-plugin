@@ -18,6 +18,8 @@ internal interface HelmExecWorkParameters : WorkParameters {
 
     val ignoreExitValue: Property<Boolean>
 
+    val standardInput: Property<String>
+
     val stdoutFile: RegularFileProperty
 }
 
@@ -43,6 +45,11 @@ internal class WorkParametersHelmExecSpec(
         provider.orNull?.let { value ->
             params.environment.put(name, value)
         }
+    }
+
+
+    override fun standardInput(provider: Provider<String>) {
+        params.standardInput.set(provider)
     }
 
 

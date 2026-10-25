@@ -145,7 +145,7 @@ internal fun Project.helmReleaseTargetContainer(
 
 
 internal fun HelmReleaseTarget.shouldInclude(release: HelmRelease): Boolean =
-    selectTagsExpression().matches(release.tags)
+    selectTagsExpression().matches(release.tags.get())
 
 
 /**

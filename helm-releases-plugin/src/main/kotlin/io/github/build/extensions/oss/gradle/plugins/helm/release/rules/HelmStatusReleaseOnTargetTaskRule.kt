@@ -51,7 +51,7 @@ internal class HelmStatusReleaseOnTargetTaskRule(
         val selectTags = releaseTarget.selectTagsExpression()
         val releaseTags = release.tags
         onlyIf {
-            selectTags.matches(releaseTags)
+            selectTags.matches(releaseTags.get())
         }
 
         val targetSpecific = (release as HelmReleaseInternal).resolveForTarget(releaseTarget)

@@ -7,8 +7,8 @@ import java.io.PrintWriter
 
 /**
  * Implementation of [GradleExecMock] based on a script file that is used in place of the "real" helm executable.
- * The script forwards the arguments and environment of the process to a local server, which records them for later
- * verification.
+ * The script starts [ExecMockLauncher], which forwards the arguments and environment of the process to a local
+ * server that records them for later verification.
  *
  * The reason for this roundabout way of checking the exec invocations is that it is next to impossible to inject
  * a mocked version of a service (e.g. `ExecOperations` or `ProcessOperations`) into Gradle's service registry,
@@ -30,8 +30,11 @@ interface ExecutableGradleExecMock : GradleExecMock, AutoCloseable {
 
     /**
      * Creates a script file that can be used instead of the "real" executable.
+     *
+     * @param scriptLocation the desired location of the script
+     * @return the file that was actually created, which is what must be used as the `executable`
      */
-    fun createScriptFile(scriptLocation: File)
+    fun createScriptFile(scriptLocation: File): File
 }
 
 
@@ -79,12 +82,10 @@ class DefaultExecutableGradleExecMock : ExecutableGradleExecMock {
     }
 
 
-    override fun createScriptFile(scriptLocation: File) {
+    override fun createScriptFile(scriptLocation: File): File {
         val reg = checkNotNull(registration) { "ExecMock must be started before the script file is available." }
 
-        scriptLocation.parentFile.mkdirs()
-        scriptLocation.writeText(reg.getShellScript())
-        scriptLocation.setExecutable(true)
+        return reg.writeLauncherScript(scriptLocation)
     }
 
 

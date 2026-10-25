@@ -2,7 +2,9 @@ package io.github.build.extensions.oss.gradle.plugins.helm.releases.tests.functi
 
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.DefaultGradleRunnerParameters
 import io.github.build.extensions.oss.gradle.plugins.helm.plugin.test.utils.GradleRunnerProvider
+import io.kotest.inspectors.forOne
 import io.kotest.matchers.should
+import io.kotest.matchers.string.contain
 import io.kotest.matchers.string.startWith
 import java.io.File
 import java.util.stream.Stream
@@ -77,13 +79,14 @@ internal class FilterReleasesForTargetTest {
         ).build()
 
         // so, the production installation had been scheduled - no database tasks
-        result1.output.normaliseLineEndings() should startWith(
-            expectedDryRunOutput(
-                releaseTask = "helmInstallApplicationToProduction",
-                targetTask = "helmInstallToProduction",
-                commandLineArgs = parameters.productionOnlyCommandLineArgs,
-            )
-        )
+        // depending on Gradle version and warning - we will have multiple options
+        expectedDryRunOutputs(
+            releaseTask = "helmInstallApplicationToProduction",
+            targetTask = "helmInstallToProduction",
+            commandLineArgs = parameters.productionOnlyCommandLineArgs,
+        ).forOne { outputCandidate ->
+            result1.output.normaliseLineEndings() should contain(outputCandidate)
+        }
 
         // Stage 2. We try installing database - and check that the application wasn't selected
         val result2 = GradleRunnerProvider.createRunner(
@@ -92,35 +95,55 @@ internal class FilterReleasesForTargetTest {
             arguments = parameters.databaseOnlyCommandLineArgs + listOf("--dry-run", "--stacktrace"),
         ).build()
 
+
         // only database tasks are here - no production
-        result2.output.normaliseLineEndings() should startWith(
-            expectedDryRunOutput(
-                releaseTask = "helmInstallDatabaseToDatabase",
-                targetTask = "helmInstallToDatabase",
-                commandLineArgs = parameters.databaseOnlyCommandLineArgs,
-            )
-        )
+        // depending on Gradle version and warning - we will have multiple options
+        expectedDryRunOutputs(
+            releaseTask = "helmInstallDatabaseToDatabase",
+            targetTask = "helmInstallToDatabase",
+            commandLineArgs = parameters.databaseOnlyCommandLineArgs,
+        ).forOne { outputCandidate ->
+            result2.output.normaliseLineEndings() should contain(outputCandidate)
+        }
     }
 
     /**
      * Please note - we generate the expected output first, which will be checked with `startsWith`
-     * We finish the expectations with `BUILD SUCCESSFUL`, therefore we check all tasks planned by Gradle.
+     * We finish the expectations with either `BUILD SUCCESSFUL` or `[Incubating] Problems report is available at` - depending on Gradle version, therefore we check all tasks planned by Gradle.
      */
-    private fun expectedDryRunOutput(
+    private fun expectedDryRunOutputs(
         releaseTask: String,
         targetTask: String,
         commandLineArgs: List<String>,
-    ): String = buildString {
-        appendLine(":helmAddRepositories SKIPPED")
-        appendLine(":helmUpdateRepositories SKIPPED")
-        appendLine(":$releaseTask SKIPPED")
-        appendLine(":$targetTask SKIPPED")
-        if (commandLineArgs.first() == "helmInstall") {
-            appendLine(":helmInstall SKIPPED")
+    ): List<String> {
+        val option1 = buildString {
+            appendLine(":helmAddRepositories SKIPPED")
+            appendLine(":helmUpdateRepositories SKIPPED")
+            appendLine(":$releaseTask SKIPPED")
+            appendLine(":$targetTask SKIPPED")
+            if (commandLineArgs.first() == "helmInstall") {
+                appendLine(":helmInstall SKIPPED")
+            }
+            appendLine()
+            append("BUILD SUCCESSFUL")
         }
-        appendLine()
-        append("BUILD SUCCESSFUL")
-    }.normaliseLineEndings()
+
+        val option2 = buildString {
+            appendLine(":helmAddRepositories SKIPPED")
+            appendLine(":helmUpdateRepositories SKIPPED")
+            appendLine(":$releaseTask SKIPPED")
+            appendLine(":$targetTask SKIPPED")
+            if (commandLineArgs.first() == "helmInstall") {
+                appendLine(":helmInstall SKIPPED")
+            }
+            appendLine()
+            append("[Incubating] Problems report is available at")
+        }
+
+        return listOf(option1, option2).map {
+            it.normaliseLineEndings()
+        }
+    }
 
     // I don't understand what line endings are used by Gradle, so let's just use Unix ones always
     private fun String.normaliseLineEndings(): String =

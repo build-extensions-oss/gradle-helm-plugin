@@ -142,3 +142,97 @@ helm {
     }
 }
 ----
+
+
+== OCI Registries
+
+Helm can pull charts from OCI registries (dependency URLs starting with `oci://`). Such a registry has no
+index and cannot be registered with `helm repo add`, but it usually requires a `helm registry login` before
+charts can be pulled from it.
+
+Declare the registry in the `helm.registries` block, with its host and credentials:
+
+[source,groovy,role="primary"]
+.Groovy
+----
+helm {
+    registries {
+        artifactory {
+            host = 'registry.example.com'
+            credentials {
+                username = providers.environmentVariable('REGISTRY_USER')
+                password = providers.environmentVariable('REGISTRY_PASSWORD')
+            }
+        }
+    }
+}
+----
+
+[source,kotlin,role="secondary"]
+.Kotlin
+----
+helm {
+    registries {
+        create("artifactory") {
+            host.set("registry.example.com")
+            credentials {
+                username.set(providers.environmentVariable("REGISTRY_USER"))
+                password.set(providers.environmentVariable("REGISTRY_PASSWORD"))
+            }
+        }
+    }
+}
+----
+
+The `host` is what `helm registry login` expects: the host name, optionally with a port
+(`registry.example.com:5000`), without a scheme or path. Certificate credentials and a `caFile` are supported as
+for repositories.
+
+There is no task to run: the tasks that update or build chart dependencies log in by themselves, right before
+they call Helm. They only log in
+
+* when they actually run - an up-to-date or skipped task does not contact the registry, and
+* to registries that a dependency of their chart is pulled from, i.e. whose `host` matches the
+  `repository: oci://<host>/...` URL of a dependency in `Chart.yaml`.
+
+The password is passed to Helm on the standard input (`--password-stdin`), never on the command line.
+
+A repository in the `helm.repositories` block whose URL uses the `oci` scheme is treated the same way: the
+dependency tasks log in to it with its credentials, and it is left out of `helm repo add` and `helm repo update`.
+Running its `helmAdd<X>Repository` task explicitly logs in to the registry.
+
+NOTE: The plugin points Helm at its own configuration directory (see `helm.xdgConfigHome`), so a
+`helm registry login` done in a shell outside of Gradle is not visible to the Helm tasks of the build.
+
+=== Logging in for other tasks
+
+For anything other than chart dependencies, register a `HelmRegistryLogin` task and wire it with `dependsOn`
+yourself. It logs in every time it runs, and it is not connected to any other task automatically:
+
+[source,groovy,role="primary"]
+.Groovy
+----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmRegistryLogin
+
+def helmRegistryLogin = tasks.register('helmRegistryLogin', HelmRegistryLogin) {
+    registry = 'registry.example.com'
+    username = providers.environmentVariable('REGISTRY_USER')
+    password = providers.environmentVariable('REGISTRY_PASSWORD')
+}
+----
+
+[source,kotlin,role="secondary"]
+.Kotlin
+----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmRegistryLogin
+
+val helmRegistryLogin by tasks.registering(HelmRegistryLogin::class) {
+    registry.set("registry.example.com")
+    username.set(providers.environmentVariable("REGISTRY_USER"))
+    password.set(providers.environmentVariable("REGISTRY_PASSWORD"))
+}
+----
+
+All of this is compatible with the configuration cache. Avoid calling `helm.execHelm("registry", "login")` from a
+`doFirst` block instead: the build script lambda references the `Project`, so Gradle cannot store the task in the
+configuration cache.

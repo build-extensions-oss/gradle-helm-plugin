@@ -1,0 +1,4 @@
+dependencies:
+  - name: from-anonymous-registry
+    version: 1.0.0
+    repository: oci://anonymous.example.com/helm-local

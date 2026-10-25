@@ -1,0 +1,19 @@
+apiVersion: v2
+name: registry-login-options-testing
+
+version: 0.1.0
+
+dependencies:
+  - name: from-anonymous-registry
+    version: 1.0.0
+    repository: oci://anonymous.example.com/helm-local
+  - name: from-certificate-registry
+    version: 1.0.0
+    repository: oci://certificate.example.com/helm-local
+  # neither a repository alias nor a classic repository needs a registry login
+  - name: from-alias
+    version: 1.0.0
+    repository: "@classic"
+  - name: from-classic-repository
+    version: 1.0.0
+    repository: https://charts.example.com

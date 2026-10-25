@@ -1,6 +1,7 @@
 # This is a Gradle generated file for dependency locking.
 # Manual edits can break the build and are not advised.
 # This file is expected to be part of source control.
+# To regenerate this file, run: ./gradlew :helm-publish-plugin:dependencies --write-locks
 com.google.code.findbugs:jsr305:3.0.2=testRuntimeClasspath
 com.squareup.okhttp3:okhttp-jvm:5.5.0=runtimeClasspath,testRuntimeClasspath
 com.squareup.okhttp3:okhttp-tls:5.5.0=runtimeClasspath,testRuntimeClasspath

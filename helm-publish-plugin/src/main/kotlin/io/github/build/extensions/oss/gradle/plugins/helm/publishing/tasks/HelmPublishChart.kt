@@ -15,7 +15,6 @@ import io.github.build.extensions.oss.gradle.plugins.helm.HELM_GROUP
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepository
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl.HelmPublishingRepositoryInternal
 import io.github.build.extensions.oss.gradle.plugins.helm.publishing.publishers.PublisherParams
-import build.extensions.oss.gradle.pluginutils.property
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.work.DisableCachingByDefault
@@ -25,40 +24,38 @@ import org.gradle.work.DisableCachingByDefault
  * Publishes a packaged helm chart to a repository.
  */
 @DisableCachingByDefault(because = "See https://github.com/build-extensions-oss/gradle-helm-plugin/issues/208")
-open class HelmPublishChart
-@Inject constructor(
-    private val workerExecutor: WorkerExecutor
-) : DefaultTask() {
+abstract class HelmPublishChart : DefaultTask() {
+
     init {
         group = HELM_GROUP
     }
+
+
+    @get:Inject
+    internal open val workerExecutor: WorkerExecutor
+        get() = throw UnsupportedOperationException()
 
 
     /**
      * The chart name.
      */
     @get:Input
-    val chartName: Property<String> =
-        project.objects.property()
+    abstract val chartName: Property<String>
 
 
     /**
      * The chart version.
      */
     @get:Input
-    val chartVersion: Property<String> =
-        project.objects.property()
+    abstract val chartVersion: Property<String>
 
 
     /**
      * The chart package file to be published.
      */
     @get:InputFile
-    // let's consider value files are defined in the same repository - and not in the shared file at the computer
-    // Alternatively we will have a cache miss (which is correct)
-    @PathSensitive(PathSensitivity.RELATIVE)
-    val chartFile: RegularFileProperty =
-        project.objects.fileProperty()
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val chartFile: RegularFileProperty
 
 
     /**

@@ -30,7 +30,7 @@ public abstract interface class io/github/build/extensions/oss/gradle/plugins/he
 	public fun forTarget (Ljava/lang/String;Lorg/gradle/api/Action;)V
 	public abstract fun forTargets (Ljava/lang/Iterable;Lorg/gradle/api/Action;)V
 	public fun forTargets ([Ljava/lang/String;Lorg/gradle/api/Action;)V
-	public abstract fun getTags ()Ljava/util/Set;
+	public abstract fun getTags ()Lorg/gradle/api/provider/SetProperty;
 	public abstract fun getValuesDirs ()Lorg/gradle/api/provider/ListProperty;
 	public fun tags (Ljava/lang/Iterable;)V
 	public fun tags ([Ljava/lang/String;)V

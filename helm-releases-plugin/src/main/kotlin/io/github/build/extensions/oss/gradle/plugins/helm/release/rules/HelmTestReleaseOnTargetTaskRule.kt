@@ -55,7 +55,7 @@ internal class HelmTestReleaseOnTargetTaskRule(
         val releaseTags = release.tags
         val testEnabled = targetSpecific.test.enabled
         onlyIf {
-            selectTags.matches(releaseTags)
+            selectTags.matches(releaseTags.get())
         }
         onlyIf {
             testEnabled.get()

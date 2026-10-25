@@ -1,5 +1,7 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.util
 
+import java.util.Locale
+
 /**
  * Formats the given amount of bytes according to its order of magnitude.
  *
@@ -39,6 +41,6 @@ private enum class UnitOfMeasurement(private val unitName: String, val bytesInUn
     fun formatValue(value: Long): String {
         val divided = value / bytesInUnitFloat
 
-        return "${String.format(numberFormat, divided)} $unitName"
+        return "${String.format(Locale.ROOT, numberFormat, divided)} $unitName"
     }
 }
