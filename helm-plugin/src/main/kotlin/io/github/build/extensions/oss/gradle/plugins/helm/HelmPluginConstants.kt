@@ -28,6 +28,12 @@ const val HELM_REPOSITORIES_EXTENSION_NAME = "repositories"
 
 
 /**
+ * The name of the `registries` DSL sub-extension.
+ */
+const val HELM_REGISTRIES_EXTENSION_NAME = "registries"
+
+
+/**
  * The name of the `charts` DSL sub-extension.
  */
 const val HELM_CHARTS_EXTENSION_NAME = "charts"

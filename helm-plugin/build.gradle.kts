@@ -39,7 +39,8 @@ gradlePlugin {
             displayName = "Helm Commands"
             implementationClass = "io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPlugin"
             description = "Wrapper for common helm commands"
-            tags.addAll("helm", "helm commands", "kubernetes", "k8s", "cloud")
+            // please note the error from Helm: "A tag must start with an alphanumeric character, can only contain: dots, hyphens, underscores, alphanumeric (upper or lower cased) characters, and have at most 50 characters."
+            tags.addAll("helm", "helm-commands", "kubernetes", "k8s", "cloud")
         }
         create("helmPlugin") {
             id = project.extra["plugin.prefix"].toString() + ".helm"

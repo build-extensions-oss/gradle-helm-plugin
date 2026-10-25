@@ -41,7 +41,8 @@ internal class HelmPublishChartToRepositoryTaskRule(
 
         description = "Publishes the ${chart.name} chart to the ${repository.name} repository."
 
-        onlyIf { chart.publishConvention.publish.get() }
+        val publish = chart.publishConvention.publish
+        onlyIf { publish.get() }
 
         chartName.set(chart.chartName)
         chartVersion.set(chart.chartVersion)

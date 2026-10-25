@@ -9,15 +9,22 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import build.extensions.oss.gradle.pluginutils.property
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.RegistryLogin
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.work.DisableCachingByDefault
+import io.github.build.extensions.oss.gradle.plugins.helm.util.isOciRegistry
+import io.github.build.extensions.oss.gradle.plugins.helm.util.ociRegistryHost
 import org.yaml.snakeyaml.Yaml
 import java.net.URI
 
 
 /**
  * Registers a known repository with Helm. Corresponds to the `helm repo add` CLI command.
+ *
+ * If the repository [url] is an OCI registry (`oci://...`), the task runs `helm registry login` instead:
+ * OCI registries cannot be added with `helm repo add`, but they need the login before charts can be
+ * pulled from them, for example by `helm dependency update`.
  */
 @DisableCachingByDefault(because = "See https://github.com/build-extensions-oss/gradle-helm-plugin/issues/208")
 abstract class HelmAddRepository : AbstractHelmCommandTask() {
@@ -109,6 +116,30 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
     @TaskAction
     fun addRepository() {
+        val url = this.url.get()
+        if (url.isOciRegistry) {
+            loginToRegistry(url)
+        } else {
+            addClassicRepository()
+        }
+    }
+
+
+    private fun loginToRegistry(url: URI) {
+        loginToRegistry(
+            RegistryLogin(
+                host = url.ociRegistryHost,
+                username = username.orNull,
+                password = password.orNull,
+                caFile = caFile.orNull?.asFile,
+                certificateFile = certificateFile.orNull?.asFile,
+                keyFile = keyFile.orNull?.asFile
+            )
+        )
+    }
+
+
+    private fun addClassicRepository() {
         execHelm("repo", "add") {
             option("--ca-file", caFile)
             option("--cert-file", certificateFile)
@@ -131,6 +162,13 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
 
     private fun checkUpToDate(task: Task): Boolean {
+
+        // A registry login leaves nothing behind that we could compare against (and the credentials may have
+        // expired in the meantime), so always log in again
+        if (url.get().isOciRegistry) {
+            logger.debug("{} is not up-to-date because the repository is an OCI registry.", task)
+            return false
+        }
 
         // If we should fail if the repo exists, let Helm handle it
         if (failIfExists.getOrElse(false)) {

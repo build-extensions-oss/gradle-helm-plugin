@@ -21,6 +21,10 @@ object HelmExecutable {
 
     private val executableFileToCreateTgz = File(helmExecutablesDirectory, "helm-create-tgz.$fileExtension")
 
+    private val noOpExecutableFile = File(helmExecutablesDirectory, "helm-noop.$fileExtension")
+
+    private val recordingExecutableFile = File(helmExecutablesDirectory, "helm-record.$fileExtension")
+
     private val sourceTgzFile = File(helmExecutablesDirectory, "tgz-file-template.txt")
 
     /**
@@ -41,6 +45,43 @@ object HelmExecutable {
                     .replace("%TGZ_DESTINATION%", tgzFileDestination.normalize().absolutePath)
 
                 writer.appendLine(newLine)
+            }
+        }
+
+        destinationExecutableFile.setExecutable(true)
+
+        return HelmExecutableParameter(destinationExecutableFile)
+    }
+
+    /**
+     * Copies a do-nothing helm executable into the given folder, and creates the Gradle parameter which points
+     * the plugin at it.
+     *
+     * The script exits successfully for every command, and answers `helm ls` with an empty JSON array. That is
+     * enough for a build to run to completion without a Kubernetes cluster, which is what tests need when they
+     * care about the build itself rather than about what helm does.
+     */
+    fun getNoOpExecutableParameter(temporaryFolder: File): HelmExecutableParameter {
+        val destinationExecutableFile = File(temporaryFolder, noOpExecutableFile.name)
+
+        noOpExecutableFile.copyTo(destinationExecutableFile, overwrite = true)
+        destinationExecutableFile.setExecutable(true)
+
+        return HelmExecutableParameter(destinationExecutableFile)
+    }
+
+    /**
+     * Creates a helm executable which succeeds for every command and appends each invocation - its arguments,
+     * followed by the `KUBECONFIG` it was given - as one line to [invocationLog].
+     *
+     * Use it when a test needs to know *how* helm was called, not just that the build ran.
+     */
+    fun getRecordingExecutableParameter(temporaryFolder: File, invocationLog: File): HelmExecutableParameter {
+        val destinationExecutableFile = File(temporaryFolder, recordingExecutableFile.name)
+
+        destinationExecutableFile.writer().use { writer ->
+            recordingExecutableFile.forEachLine { line ->
+                writer.appendLine(line.replace("%LOG_FILE%", invocationLog.normalize().absolutePath))
             }
         }
 

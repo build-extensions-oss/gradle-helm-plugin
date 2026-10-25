@@ -75,11 +75,11 @@ public final class io/github/build/extensions/oss/gradle/plugins/helm/publishing
 	public static final fun getPublishTaskName (Lio/github/build/extensions/oss/gradle/plugins/helm/dsl/HelmChart;)Ljava/lang/String;
 }
 
-public class io/github/build/extensions/oss/gradle/plugins/helm/publishing/tasks/HelmPublishChart : org/gradle/api/DefaultTask {
-	public fun <init> (Lorg/gradle/workers/WorkerExecutor;)V
-	public final fun getChartFile ()Lorg/gradle/api/file/RegularFileProperty;
-	public final fun getChartName ()Lorg/gradle/api/provider/Property;
-	public final fun getChartVersion ()Lorg/gradle/api/provider/Property;
+public abstract class io/github/build/extensions/oss/gradle/plugins/helm/publishing/tasks/HelmPublishChart : org/gradle/api/DefaultTask {
+	public fun <init> ()V
+	public abstract fun getChartFile ()Lorg/gradle/api/file/RegularFileProperty;
+	public abstract fun getChartName ()Lorg/gradle/api/provider/Property;
+	public abstract fun getChartVersion ()Lorg/gradle/api/provider/Property;
 	public final fun getTargetRepository ()Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository;
 	public final fun publish ()V
 	public final fun setTargetRepository (Lio/github/build/extensions/oss/gradle/plugins/helm/publishing/dsl/HelmPublishingRepository;)V

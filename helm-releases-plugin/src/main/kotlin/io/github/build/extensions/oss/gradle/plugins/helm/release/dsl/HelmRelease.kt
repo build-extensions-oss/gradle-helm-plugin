@@ -302,7 +302,7 @@ interface HelmRelease : Named, HelmReleaseProperties, ConfigurableHelmInstallFro
      * Tags can be used to filter the set of releases to be installed or uninstalled. Releases that do not have any
      * tags will always be installed.
      */
-    val tags: MutableSet<String>
+    val tags: SetProperty<String>
 
 
     /**
@@ -550,7 +550,8 @@ private open class DefaultHelmRelease
     private val targetSpecificCache: MutableMap<String, HelmReleaseProperties> = ConcurrentHashMap()
 
 
-    override val tags = mutableSetOf<String>()
+    override val tags: SetProperty<String> =
+        project.objects.setProperty()
 
 
     override val valuesDirs: ListProperty<File> =

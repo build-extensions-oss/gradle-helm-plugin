@@ -4,15 +4,16 @@ import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
+import build.extensions.oss.gradle.pluginutils.listProperty
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.RegistryLogin
 import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptor
 import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartDescriptorYaml
 import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartModelDependencies
 import io.github.build.extensions.oss.gradle.plugins.helm.model.ChartRequirementsYaml
-import org.gradle.api.tasks.PathSensitive
-import org.gradle.api.tasks.PathSensitivity
 import org.gradle.work.DisableCachingByDefault
 
 @DisableCachingByDefault(because = "See https://github.com/build-extensions-oss/gradle-helm-plugin/issues/208")
@@ -86,15 +87,48 @@ abstract class AbstractHelmDependenciesTask : AbstractHelmCommandTask() {
         chartDir.file(lockFileName)
 
 
-    @get:Internal
-    internal val modelDependencies: Provider<ChartModelDependencies> =
-        chartDescriptor.flatMap { descriptor ->
-            if (descriptor.apiVersion == "v1") {
-                ChartRequirementsYaml.loading(requirementsYamlFile)
-            } else {
-                chartDescriptor
-            }
+    /**
+     * Reads the chart's dependencies from the `Chart.yaml` (or, for API version v1, the `requirements.yaml`)
+     * file, as it is right now.
+     */
+    internal fun readModelDependencies(): ChartModelDependencies {
+        val descriptor = ChartDescriptorYaml.load(chartYamlFile.get().asFile)
+        if (descriptor.apiVersion != "v1") {
+            return descriptor
         }
+        val requirementsFile = requirementsYamlFile.get().asFile
+        return if (requirementsFile.exists()) {
+            ChartRequirementsYaml.load(requirementsYamlFile.get())
+        } else {
+            ChartModelDependencies.empty
+        }
+    }
+
+
+    /**
+     * The OCI registries that chart dependencies may be pulled from, with their credentials.
+     *
+     * Wired by the `helm` plugin from `helm.registries`, and from `helm.repositories` entries with an
+     * `oci://` URL. Deliberately not a task input: new credentials do not make the dependencies outdated.
+     */
+    @get:Internal
+    internal val registryLogins: ListProperty<RegistryLogin> =
+        project.objects.listProperty()
+
+
+    /**
+     * Logs in to each of the [registryLogins] that a dependency of the chart is pulled from.
+     *
+     * Called from the task action, right before Helm resolves the dependencies: an up-to-date or skipped task
+     * doesn't execute the login.
+     */
+    internal fun loginToDependencyRegistries() {
+        val repositories = readModelDependencies().dependencies.mapNotNull { it.repository }
+        registryLogins.get()
+            .filter { login -> repositories.any(login::servesRepository) }
+            .distinctBy { it.host.lowercase() }
+            .forEach(::loginToRegistry)
+    }
 
 
     /**

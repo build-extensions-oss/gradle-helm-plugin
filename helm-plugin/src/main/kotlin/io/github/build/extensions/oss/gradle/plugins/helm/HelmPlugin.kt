@@ -5,7 +5,10 @@ import build.extensions.oss.gradle.pluginutils.fileProviderFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.providerFromProjectProperty
 import build.extensions.oss.gradle.pluginutils.toUri
 import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmCommandsPlugin
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmDependenciesTask
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.AbstractHelmInstallationCommandTask
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.toRegistryLogin
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.toRegistryLoginOrNull
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateRepositories
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.*
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CertificateCredentials
@@ -17,6 +20,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.lint
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.repositories
 import io.github.build.extensions.oss.gradle.plugins.helm.rules.*
+import io.github.build.extensions.oss.gradle.plugins.helm.util.isOciRegistry
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -51,24 +55,42 @@ class HelmPlugin
      */
     private fun configureRepositories(project: Project) {
         val repositories = project.createRepositoriesExtension()
+        val registries = project.createRegistriesExtension()
 
         project.tasks.addRule(AddRepositoryTaskRule(project.tasks, repositories))
 
         val addRepositoriesTask = project.tasks.register(addRepositoriesTaskName) { task ->
             task.group = HELM_GROUP
             task.description = "Registers all configured Helm repositories."
+            // OCI registries are not added to Helm; the dependency tasks log in to them when they need to
             task.dependsOn(TaskDependency {
-                repositories.map { repository ->
-                    project.tasks.getByName(repository.registerTaskName)
-                }.toSet()
+                repositories
+                    .filterNot { it.url.orNull?.isOciRegistry == true }
+                    .map { repository -> project.tasks.getByName(repository.registerTaskName) }
+                    .toSet()
             })
         }
 
         val updateRepositoriesTask =
             project.tasks.register(updateRepositoriesTaskName, HelmUpdateRepositories::class.java) { task ->
                 task.dependsOn(addRepositoriesTask)
-                task.repositoryNames.set(project.provider { repositories.names })
+                // OCI registries have no index to update
+                task.repositoryNames.set(project.provider {
+                    repositories
+                        .filterNot { it.url.orNull?.isOciRegistry == true }
+                        .map { it.name }
+                })
             }
+
+        // Pulling chart dependencies from an OCI registry needs a login first. The dependency tasks do it
+        // themselves, right before calling Helm, so that an up-to-date task does not log in at all. The logins
+        // are resolved to plain values here, because the DSL objects cannot be stored in the configuration cache.
+        project.tasks.withType(AbstractHelmDependenciesTask::class.java).configureEach { task ->
+            task.registryLogins.set(project.provider {
+                registries.map { it.toRegistryLogin() } +
+                        repositories.mapNotNull { it.toRegistryLoginOrNull() }
+            })
+        }
 
         // helm install/upgrade tasks that reference a symbolic repository name should depend on
         // helmUpdateRepositories
@@ -158,6 +180,17 @@ class HelmPlugin
             .apply {
                 (helm as ExtensionAware)
                     .extensions.add(HELM_REPOSITORIES_EXTENSION_NAME, this)
+            }
+
+
+    /**
+     * Creates and installs the `helm.registries` sub-extension.
+     */
+    private fun Project.createRegistriesExtension() =
+        helmRegistryContainer()
+            .apply {
+                (helm as ExtensionAware)
+                    .extensions.add(HELM_REGISTRIES_EXTENSION_NAME, this)
             }
 
 

@@ -1,6 +1,5 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.publishing.dsl
 
-import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.credentials.CredentialsContainer
@@ -25,9 +24,6 @@ private constructor(
     protected constructor(objects: ObjectFactory, name: String)
             : this(objects, name, DefaultCredentialsFactory(objects))
 
-
-    protected constructor(project: Project, name: String)
-            : this(project.objects, name)
 
 
     final override fun getName(): String =
