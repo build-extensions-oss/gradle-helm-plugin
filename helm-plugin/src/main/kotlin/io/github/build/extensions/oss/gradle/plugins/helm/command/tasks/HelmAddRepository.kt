@@ -108,7 +108,7 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
 
     /**
-     * If set to `true`, the task fails if the repository is already registered, instead of refreshing it.
+     * If set to `true`, the task fails if the repository is already registered, instead of leaving it to Helm.
      *
      * The check reads the Helm repository configuration, so it needs no command line flag of its own; a configuration
      * file that exists but cannot be read fails the task too. It applies to classic repositories only: an OCI registry
@@ -203,7 +203,7 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
         throw GradleException(
             "Repository '$repositoryName' is already registered in ${repositoryConfigFile.get().asFile}; " +
-                "the 'failIfExists' property makes the task fail instead of refreshing it."
+                "the 'failIfExists' property makes the task fail."
         )
     }
 

@@ -131,8 +131,9 @@ tasks.named<HelmUpdateRepositories>("helmUpdateRepositories") {
 
 == Failing When a Repository Is Already Registered
 
-`helmAdd<X>Repository` refreshes a repository that is already registered. Set its `failIfExists` property to fail instead,
-with a message naming the repository:
+`helmAdd<X>Repository` leaves an already-registered repository alone: Helm skips it when its configuration matches, and
+fails when it differs. Set the task's `failIfExists` property to fail whenever the repository is registered, with a
+message naming it:
 
 [source,groovy,role="primary"]
 .Groovy
@@ -154,9 +155,9 @@ tasks.named<HelmAddRepository>("helmAddExampleRepository") {
 }
 ----
 
-The check reads the Helm repository configuration, so it needs no command line flag, and a configuration file that exists
-but cannot be read fails the task too. The property applies to classic repositories: an OCI registry is never added, so
-the task logs in to it either way.
+The check reads the Helm repository configuration, so it needs no command line flag, and a configuration file that
+exists but cannot be read fails the task too. The property applies to classic repositories: an OCI registry is never
+added, so the task logs in to it either way.
 
 == Configuring Repository Credentials
 

@@ -1,6 +1,7 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.string.shouldContain
 import org.gradle.api.GradleException
 import org.spekframework.spek2.style.specification.describe
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
@@ -126,7 +127,7 @@ object HelmAddRepositoryTest : ExecutionResultAwareSpek({
 
                 task.failIfExists.set(true)
 
-                shouldThrow<GradleException> { task.execute() }
+                shouldThrow<GradleException> { task.execute() }.message shouldContain "my-repo"
 
                 execMock.verifyNoInvocations()
             }
@@ -165,7 +166,7 @@ object HelmAddRepositoryTest : ExecutionResultAwareSpek({
 
                 task.failIfExists.set(true)
 
-                shouldThrow<GradleException> { task.execute() }
+                shouldThrow<GradleException> { task.execute() }.message shouldContain "Unable to read"
 
                 execMock.verifyNoInvocations()
             }
