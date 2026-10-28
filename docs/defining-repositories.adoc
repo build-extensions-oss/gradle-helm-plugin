@@ -74,6 +74,8 @@ reports the failure once the attempts are exhausted:
 [source,groovy,role="primary"]
 .Groovy
 ----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+
 tasks.named('helmAddExampleRepository', HelmAddRepository) {
     attempts = 3                          // default 1: no retry
     retryDelay = Duration.ofSeconds(10)   // default 10 seconds
@@ -83,6 +85,8 @@ tasks.named('helmAddExampleRepository', HelmAddRepository) {
 [source,kotlin,role="secondary"]
 .Kotlin
 ----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+
 tasks.named<HelmAddRepository>("helmAddExampleRepository") {
     attempts.set(3)                        // default 1: no retry
     retryDelay.set(Duration.ofSeconds(10)) // default 10 seconds
@@ -98,13 +102,18 @@ NOTE: Helm 3's `helm repo update` reports a repository it could not reach and st
 
 `helm repo update` downloads each repository index within Helm's own two-minute limit, which a large index on a slow
 link can exceed. Set `repoUpdateTimeout` on `helmUpdateRepositories` to raise it for the command. The option needs a
-Helm client whose `repo update` accepts `--timeout` (Helm 3.20 or newer, or Helm 4); without it the task fails with an
-unknown flag. `helm repo add` keeps Helm's own limit — set `timeout` through the task's `extraArgs` if an add needs
-longer:
+Helm client whose `repo update` accepts `--timeout` (Helm 3.19.1 or newer, or Helm 4); without it the task fails with an
+unknown flag.
+
+`helm repo add` keeps Helm's own limit: its `--timeout` (Helm 3.19.1 or newer, or Helm 4) can be set through the task's
+`extraArgs`, and `helm dependency update` has no timeout option, so its download keeps Helm's default. Raise only
+`repoUpdateTimeout` for `helm repo update`:
 
 [source,groovy,role="primary"]
 .Groovy
 ----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateRepositories
+
 tasks.named('helmUpdateRepositories', HelmUpdateRepositories) {
     repoUpdateTimeout = Duration.ofMinutes(15)
 }
@@ -113,6 +122,8 @@ tasks.named('helmUpdateRepositories', HelmUpdateRepositories) {
 [source,kotlin,role="secondary"]
 .Kotlin
 ----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateRepositories
+
 tasks.named<HelmUpdateRepositories>("helmUpdateRepositories") {
     repoUpdateTimeout.set(Duration.ofMinutes(15))
 }

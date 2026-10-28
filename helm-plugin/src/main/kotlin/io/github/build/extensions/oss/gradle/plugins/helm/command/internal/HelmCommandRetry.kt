@@ -6,7 +6,7 @@ import java.time.Duration
 /**
  * Re-runs a Helm CLI invocation that can fail transiently, a bounded number of times.
  *
- * <p>The logic holds no Gradle state, so it is testable without invoking the Helm executable.
+ * The logic holds no Gradle state, so it is testable without invoking the Helm executable.
  */
 internal object HelmCommandRetry {
 
