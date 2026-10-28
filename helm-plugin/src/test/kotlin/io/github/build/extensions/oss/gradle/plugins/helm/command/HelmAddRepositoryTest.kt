@@ -1,10 +1,15 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command
 
+import io.kotest.assertions.throwables.shouldThrow
+import org.gradle.api.GradleException
 import org.spekframework.spek2.style.specification.describe
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
 import io.github.build.extensions.oss.gradle.plugins.helm.spek.ExecutionResultAwareSpek
 import io.github.build.extensions.oss.gradle.plugins.helm.spek.gradleExecMock
 import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.singleInvocation
+import io.github.build.extensions.oss.gradle.plugins.helm.testutil.exec.verifyNoInvocations
+import build.extensions.oss.gradle.pluginutils.test.directory
 import build.extensions.oss.gradle.pluginutils.test.execute
 import build.extensions.oss.gradle.pluginutils.test.spek.applyPlugin
 import build.extensions.oss.gradle.pluginutils.test.spek.gradleTask
@@ -92,7 +97,7 @@ object HelmAddRepositoryTest : ExecutionResultAwareSpek({
             }
 
 
-            it("should use failIfExists property") {
+            it("should not pass a command line flag when failIfExists is set") {
 
                 task.failIfExists.set(true)
 
@@ -100,10 +105,69 @@ object HelmAddRepositoryTest : ExecutionResultAwareSpek({
 
                 execMock.singleInvocation {
                     expectCommand("repo", "add")
-                    expectFlag("--no-update")
                     expectArg("my-repo")
                     expectArg("http://my-repo.example.com")
                 }
+            }
+
+
+            it("should fail if the repository is already registered") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file(
+                        "repositories.yaml",
+                        contents = """
+                            repositories:
+                              - name: my-repo
+                                url: http://my-repo.example.com
+                        """.trimIndent()
+                    )
+                }
+
+                task.failIfExists.set(true)
+
+                shouldThrow<GradleException> { task.execute() }
+
+                execMock.verifyNoInvocations()
+            }
+
+
+            it("should add the repository when a different one is registered") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file(
+                        "repositories.yaml",
+                        contents = """
+                            repositories:
+                              - name: another-repo
+                                url: http://another-repo.example.com
+                        """.trimIndent()
+                    )
+                }
+
+                task.failIfExists.set(true)
+
+                task.execute()
+
+                execMock.singleInvocation {
+                    expectCommand("repo", "add")
+                    expectArg("my-repo")
+                    expectArg("http://my-repo.example.com")
+                }
+            }
+
+
+            it("should fail if the repository configuration cannot be read") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file("repositories.yaml", contents = "repositories: [")
+                }
+
+                task.failIfExists.set(true)
+
+                shouldThrow<GradleException> { task.execute() }
+
+                execMock.verifyNoInvocations()
             }
         }
     }
