@@ -105,10 +105,6 @@ link can exceed. Set `repoUpdateTimeout` on `helmUpdateRepositories` to raise it
 Helm client whose `repo update` accepts `--timeout` (Helm 3.19.1 or newer, or Helm 4); without it the task fails with an
 unknown flag.
 
-`helm repo add` keeps Helm's own limit: its `--timeout` (Helm 3.19.1 or newer, or Helm 4) can be set through the task's
-`extraArgs`, and `helm dependency update` has no timeout option, so its download keeps Helm's default. Raise only
-`repoUpdateTimeout` for `helm repo update`:
-
 [source,groovy,role="primary"]
 .Groovy
 ----
@@ -128,6 +124,11 @@ tasks.named<HelmUpdateRepositories>("helmUpdateRepositories") {
     repoUpdateTimeout.set(Duration.ofMinutes(15))
 }
 ----
+
+`helm repo add` has no such property: its `--timeout` (Helm 3.19.1 or newer, or Helm 4) can be passed through the task's
+`extraArgs`.
+
+`helm dependency update` has no timeout option at all, so its download keeps Helm's default.
 
 == Configuring Repository Credentials
 
