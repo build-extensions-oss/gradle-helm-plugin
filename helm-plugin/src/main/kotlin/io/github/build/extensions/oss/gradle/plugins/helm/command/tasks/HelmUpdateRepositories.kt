@@ -7,6 +7,8 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
+import build.extensions.oss.gradle.pluginutils.toSimpleString
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmCommandRetry
 import io.github.build.extensions.oss.gradle.plugins.helm.util.withLockFile
 import build.extensions.oss.gradle.pluginutils.listProperty
 import build.extensions.oss.gradle.pluginutils.property
@@ -50,6 +52,40 @@ abstract class HelmUpdateRepositories : AbstractHelmCommandTask() {
         project.objects.property<Duration>()
             .convention(Duration.ofHours(1))
 
+    /**
+     * The time limit for downloading a single repository index.
+     *
+     * Corresponds to the `--timeout` command line option of `helm repo update`. When it is not set, Helm's own default
+     * applies (two minutes per index download), which a large index on a slow link can exceed.
+     *
+     * This is not [org.gradle.api.Task.getTimeout], which aborts the task rather than the download.
+     */
+    @get:Internal
+    val repoUpdateTimeout: Property<Duration> =
+        project.objects.property()
+
+
+    /**
+     * The number of attempts `helm repo update` makes before its failure is reported.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_ATTEMPTS], which makes one attempt. Raise it to retry a transient failure.
+     */
+    @get:Internal
+    val attempts: Property<Int> =
+        project.objects.property<Int>()
+            .convention(HelmCommandRetry.DEFAULT_ATTEMPTS)
+
+
+    /**
+     * The pause between attempts of `helm repo update`, after a failed one.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_DELAY].
+     */
+    @get:Internal
+    val retryDelay: Property<Duration> =
+        project.objects.property<Duration>()
+            .convention(HelmCommandRetry.DEFAULT_DELAY)
+
 
     init {
         // skip the task if we don't have any repositories configured in the project
@@ -78,7 +114,9 @@ abstract class HelmUpdateRepositories : AbstractHelmCommandTask() {
                 didWork = false
 
             } else {
-                execHelm("repo", "update")
+                execHelmWithRetry("repo", "update", attempts.get(), retryDelay.get()) {
+                    option("--timeout", repoUpdateTimeout.map { it.toSimpleString() })
+                }
             }
         }
     }

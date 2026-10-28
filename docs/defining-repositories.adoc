@@ -65,6 +65,59 @@ helm {
 ----
 
 
+== Retrying Repository Fetches
+
+`helmAdd<X>Repository`, `helmUpdateRepositories` and `helmUpdate<X>Dependencies` download a repository index, so a
+transient network failure fails the task. Each of them retries the failed Helm command a bounded number of times, and
+reports the failure once the attempts are exhausted:
+
+[source,groovy,role="primary"]
+.Groovy
+----
+tasks.named('helmAddExampleRepository', HelmAddRepository) {
+    attempts = 3                          // default 1: no retry
+    retryDelay = Duration.ofSeconds(10)   // default 10 seconds
+}
+----
+
+[source,kotlin,role="secondary"]
+.Kotlin
+----
+tasks.named<HelmAddRepository>("helmAddExampleRepository") {
+    attempts.set(3)                        // default 1: no retry
+    retryDelay.set(Duration.ofSeconds(10)) // default 10 seconds
+}
+----
+
+The retry carries a task past a failure that clears, and a command that keeps failing is still reported. Each attempt
+waits for the Helm command to finish, so the command a task runs next sees the previous one's effect.
+
+NOTE: Helm 3's `helm repo update` reports a repository it could not reach and still exits successfully, unless
+`--fail-on-repo-update-fail` is passed; Helm 4 fails by default. On Helm 3 the retry therefore covers
+`helm repo add` and `helm dependency update`, whose fetch failures do fail the command.
+
+`helm repo update` downloads each repository index within Helm's own two-minute limit, which a large index on a slow
+link can exceed. Set `repoUpdateTimeout` on `helmUpdateRepositories` to raise it for the command. The option needs a
+Helm client whose `repo update` accepts `--timeout` (Helm 3.20 or newer, or Helm 4); without it the task fails with an
+unknown flag. `helm repo add` keeps Helm's own limit — set `timeout` through the task's `extraArgs` if an add needs
+longer:
+
+[source,groovy,role="primary"]
+.Groovy
+----
+tasks.named('helmUpdateRepositories', HelmUpdateRepositories) {
+    repoUpdateTimeout = Duration.ofMinutes(15)
+}
+----
+
+[source,kotlin,role="secondary"]
+.Kotlin
+----
+tasks.named<HelmUpdateRepositories>("helmUpdateRepositories") {
+    repoUpdateTimeout.set(Duration.ofMinutes(15))
+}
+----
+
 == Configuring Repository Credentials
 
 If a chart repository requires authentication, you can configure credentials using the `credentials`

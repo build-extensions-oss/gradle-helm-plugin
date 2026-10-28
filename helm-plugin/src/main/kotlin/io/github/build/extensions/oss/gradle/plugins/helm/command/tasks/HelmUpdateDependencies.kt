@@ -9,9 +9,11 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import build.extensions.oss.gradle.pluginutils.property
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmCommandRetry
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.work.DisableCachingByDefault
+import java.time.Duration
 
 
 /**
@@ -31,6 +33,28 @@ abstract class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
     @Internal
     val skipRefresh: Property<Boolean> =
         project.objects.property()
+
+
+    /**
+     * The number of attempts `helm dependency update` makes before its failure is reported.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_ATTEMPTS], which makes one attempt. Raise it to retry a transient failure.
+     */
+    @get:Internal
+    val attempts: Property<Int> =
+        project.objects.property<Int>()
+            .convention(HelmCommandRetry.DEFAULT_ATTEMPTS)
+
+
+    /**
+     * The pause between attempts of `helm dependency update`, after a failed one.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_DELAY].
+     */
+    @get:Internal
+    val retryDelay: Property<Duration> =
+        project.objects.property<Duration>()
+            .convention(HelmCommandRetry.DEFAULT_DELAY)
 
 
     @get:[InputFile Optional]
@@ -59,7 +83,7 @@ abstract class HelmUpdateDependencies : AbstractHelmDependenciesTask() {
     @TaskAction
     fun updateDependencies() {
         loginToDependencyRegistries()
-        execHelm("dependency", "update") {
+        execHelmWithRetry("dependency", "update", attempts.get(), retryDelay.get()) {
             args(chartDir)
             flag("--skip-refresh", skipRefresh)
         }

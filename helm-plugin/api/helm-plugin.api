@@ -441,6 +441,8 @@ public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command
 	public static synthetic fun execHelm$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 	protected final fun execHelmCaptureOutput (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Ljava/lang/String;
 	public static synthetic fun execHelmCaptureOutput$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/String;
+	protected final fun execHelmWithRetry (Ljava/lang/String;Ljava/lang/String;ILjava/time/Duration;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun execHelmWithRetry$default (Lio/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask;Ljava/lang/String;Ljava/lang/String;ILjava/time/Duration;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 	public abstract fun getDebug ()Lorg/gradle/api/provider/Property;
 	public synthetic fun getDebug ()Lorg/gradle/api/provider/Provider;
 	public abstract fun getExecutable ()Lorg/gradle/api/provider/Property;
@@ -526,12 +528,14 @@ public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmAddRepository : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
 	public fun <init> ()V
 	public final fun addRepository ()V
+	public final fun getAttempts ()Lorg/gradle/api/provider/Property;
 	public final fun getCaFile ()Lorg/gradle/api/file/RegularFileProperty;
 	public final fun getCertificateFile ()Lorg/gradle/api/file/RegularFileProperty;
 	public final fun getFailIfExists ()Lorg/gradle/api/provider/Property;
 	public final fun getKeyFile ()Lorg/gradle/api/file/RegularFileProperty;
 	public final fun getPassword ()Lorg/gradle/api/provider/Property;
 	public final fun getRepositoryName ()Lorg/gradle/api/provider/Property;
+	public final fun getRetryDelay ()Lorg/gradle/api/provider/Property;
 	public final fun getUrl ()Lorg/gradle/api/provider/Property;
 	public final fun getUsername ()Lorg/gradle/api/provider/Property;
 }
@@ -662,14 +666,19 @@ public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command
 
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateDependencies : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmDependenciesTask {
 	public fun <init> ()V
+	public final fun getAttempts ()Lorg/gradle/api/provider/Property;
+	public final fun getRetryDelay ()Lorg/gradle/api/provider/Property;
 	public final fun getSkipRefresh ()Lorg/gradle/api/provider/Property;
 	public final fun updateDependencies ()V
 }
 
 public abstract class io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/HelmUpdateRepositories : io/github/build/extensions/oss/gradle/plugins/helm/command/tasks/AbstractHelmCommandTask {
 	public fun <init> ()V
+	public final fun getAttempts ()Lorg/gradle/api/provider/Property;
+	public final fun getRepoUpdateTimeout ()Lorg/gradle/api/provider/Property;
 	public final fun getRepositoryCacheTtl ()Lorg/gradle/api/provider/Property;
 	public final fun getRepositoryNames ()Lorg/gradle/api/provider/ListProperty;
+	public final fun getRetryDelay ()Lorg/gradle/api/provider/Property;
 	public final fun updateRepositories ()V
 }
 

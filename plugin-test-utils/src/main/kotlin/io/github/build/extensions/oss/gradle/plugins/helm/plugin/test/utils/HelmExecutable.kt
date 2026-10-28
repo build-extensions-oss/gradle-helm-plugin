@@ -25,6 +25,8 @@ object HelmExecutable {
 
     private val recordingExecutableFile = File(helmExecutablesDirectory, "helm-record.$fileExtension")
 
+    private val failingExecutableFile = File(helmExecutablesDirectory, "helm-fail-n-times.$fileExtension")
+
     private val sourceTgzFile = File(helmExecutablesDirectory, "tgz-file-template.txt")
 
     /**
@@ -89,6 +91,36 @@ object HelmExecutable {
 
         return HelmExecutableParameter(destinationExecutableFile)
     }
+
+    /**
+     * Creates a helm executable which fails its first [failures] invocations and succeeds afterwards, so that a test
+     * can check that a task retries a transient failure. It appends each invocation to [invocationLog], and counts its
+     * invocations in [attemptCounter].
+     */
+    fun getFailingExecutableParameter(
+        temporaryFolder: File,
+        invocationLog: File,
+        attemptCounter: File,
+        failures: Int
+    ): HelmExecutableParameter {
+        val destinationExecutableFile = File(temporaryFolder, failingExecutableFile.name)
+
+        destinationExecutableFile.writer().use { writer ->
+            failingExecutableFile.forEachLine { line ->
+                val newLine = line
+                    .replace("%LOG_FILE%", getAbsoluteNormalizedPath(invocationLog))
+                    .replace("%COUNTER_FILE%", getAbsoluteNormalizedPath(attemptCounter))
+                    .replace("%FAILURES%", failures.toString())
+
+                writer.appendLine(newLine)
+            }
+        }
+
+        destinationExecutableFile.setExecutable(true)
+
+        return HelmExecutableParameter(destinationExecutableFile)
+    }
+
 
     private fun getAbsoluteNormalizedPath(file: File): String {
         return file
