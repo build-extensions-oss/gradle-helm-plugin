@@ -1,5 +1,6 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command.tasks
 
+import org.gradle.api.GradleException
 import org.gradle.api.Task
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -105,9 +106,11 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
 
     /**
-     * If set to `true`, fails if the repository is already registered.
+     * If set to `true`, the task fails if the repository is already registered, instead of leaving it to Helm.
      *
-     * Corresponds to the `--no-update` command line flag.
+     * The check reads the Helm repository configuration, so it needs no command line flag of its own; a configuration
+     * file that exists but cannot be read fails the task too. It applies to classic repositories only: an OCI registry
+     * is never added, so the task logs in to it either way.
      */
     @get:Internal
     val failIfExists: Property<Boolean> =
@@ -140,15 +143,63 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
 
     private fun addClassicRepository() {
+        failIfAlreadyRegistered()
+
         execHelm("repo", "add") {
             option("--ca-file", caFile)
             option("--cert-file", certificateFile)
             option("--key-file", keyFile)
             option("--username", username)
             option("--password", password)
-            flag("--no-update", failIfExists)
             args(repositoryName)
             args(url)
+        }
+    }
+
+
+    private fun failIfAlreadyRegistered() {
+        if (!failIfExists.getOrElse(false)) {
+            return
+        }
+
+        val repositoryName = this.repositoryName.get()
+        val registered = try {
+            registeredRepositories()
+        } catch (e: Exception) {
+            throw GradleException(
+                "Unable to read the Helm repository configuration ${repositoryConfigFile.get().asFile} to check " +
+                    "the 'failIfExists' property.",
+                e
+            )
+        }
+
+        if (registered.none { it["name"] == repositoryName }) {
+            return
+        }
+
+        throw GradleException(
+            "Repository '$repositoryName' is already registered in ${repositoryConfigFile.get().asFile}; " +
+                "the 'failIfExists' property makes the task fail."
+        )
+    }
+
+
+    /**
+     * The repositories Helm has registered, read from the repository configuration file.
+     *
+     * A missing file registers nothing. A file that exists but cannot be read throws, so each caller decides what a
+     * damaged configuration means for it.
+     */
+    @Suppress("UNCHECKED_CAST")
+    private fun registeredRepositories(): List<Map<String, String?>> {
+        val configFile = repositoryConfigFile.get().asFile
+        if (!configFile.exists()) {
+            return emptyList()
+        }
+
+        return configFile.inputStream().use { input ->
+            val map = Yaml().loadAs(input, Map::class.java) ?: emptyMap<String, Any>()
+            map["repositories"] as? List<Map<String, String?>> ?: emptyList()
         }
     }
 
@@ -170,7 +221,7 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
             return false
         }
 
-        // If we should fail if the repo exists, let Helm handle it
+        // The check runs in the task action, so the task is never up to date when it is set
         if (failIfExists.getOrElse(false)) {
             logger.debug("{} is not up-to-date because the \"failIfExists\" flag is set.", task)
             return false
@@ -207,25 +258,12 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
     }
 
 
-    @Suppress("UNCHECKED_CAST")
-    private fun loadRepositoryConfig(): RepositoryConfig? {
-
-        val repositoryName = this.repositoryName.get()
-        return repositoryConfigFile.get().asFile
-            .takeIf { it.exists() }
-            ?.run {
-                runCatching {
-                    inputStream().use { input ->
-                        val map = Yaml().loadAs(input, Map::class.java)
-                        val repositories = map["repositories"] as List<Map<String, String>>
-                        repositories.asSequence()
-                            .filter { it["name"] == repositoryName }
-                            .map { RepositoryConfig.fromMap(it) }
-                            .firstOrNull()
-                    }
-                }.getOrNull()
-            }
-    }
+    private fun loadRepositoryConfig(): RepositoryConfig? =
+        runCatching {
+            registeredRepositories()
+                .firstOrNull { it["name"] == repositoryName.get() }
+                ?.let { RepositoryConfig.fromMap(it) }
+        }.getOrNull()
 
 
     private data class RepositoryConfig(

@@ -1,0 +1,19 @@
+plugins {
+    id 'io.github.build-extensions-oss.helm' version '0.0.1'
+}
+
+helm {
+    // the test supplies its own fake executable, so no client is downloaded
+    downloadClient {
+        enabled = false
+    }
+    repositories {
+        example {
+            url 'http://127.0.0.1:9/repository'
+        }
+    }
+}
+
+tasks.named('helmAddExampleRepository') {
+    failIfExists = true
+}

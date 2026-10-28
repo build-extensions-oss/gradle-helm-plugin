@@ -65,6 +65,36 @@ helm {
 ----
 
 
+== Failing When a Repository Is Already Registered
+
+`helmAdd<X>Repository` leaves an already-registered repository alone: Helm skips it when its configuration matches, and
+fails when it differs. Set the task's `failIfExists` property to fail whenever the repository is registered, with a
+message naming it:
+
+[source,groovy,role="primary"]
+.Groovy
+----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+
+tasks.named('helmAddExampleRepository', HelmAddRepository) {
+    failIfExists = true
+}
+----
+
+[source,kotlin,role="secondary"]
+.Kotlin
+----
+import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmAddRepository
+
+tasks.named<HelmAddRepository>("helmAddExampleRepository") {
+    failIfExists.set(true)
+}
+----
+
+The check reads the Helm repository configuration, so it needs no command line flag, and a configuration file that
+exists but cannot be read fails the task too. The property applies to classic repositories: an OCI registry is never
+added, so the task logs in to it either way.
+
 == Configuring Repository Credentials
 
 If a chart repository requires authentication, you can configure credentials using the `credentials`
