@@ -170,6 +170,70 @@ object HelmAddRepositoryTest : ExecutionResultAwareSpek({
 
                 execMock.verifyNoInvocations()
             }
+
+
+            it("should add the repository when the repository configuration is empty") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file("repositories.yaml", contents = "")
+                }
+
+                task.failIfExists.set(true)
+
+                task.execute()
+
+                execMock.singleInvocation {
+                    expectCommand("repo", "add")
+                    expectArg("my-repo")
+                    expectArg("http://my-repo.example.com")
+                }
+            }
+
+
+            it("should add the repository when the repository configuration has no repositories") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file(
+                        "repositories.yaml",
+                        contents = """
+                            apiVersion: v1
+                        """.trimIndent()
+                    )
+                }
+
+                task.failIfExists.set(true)
+
+                task.execute()
+
+                execMock.singleInvocation {
+                    expectCommand("repo", "add")
+                    expectArg("my-repo")
+                    expectArg("http://my-repo.example.com")
+                }
+            }
+
+
+            it("should add the repository when no repository is registered") {
+
+                directory(project.file(project.helm.xdgConfigHome.dir("helm"))) {
+                    file(
+                        "repositories.yaml",
+                        contents = """
+                            repositories: []
+                        """.trimIndent()
+                    )
+                }
+
+                task.failIfExists.set(true)
+
+                task.execute()
+
+                execMock.singleInvocation {
+                    expectCommand("repo", "add")
+                    expectArg("my-repo")
+                    expectArg("http://my-repo.example.com")
+                }
+            }
         }
     }
 })
