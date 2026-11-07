@@ -21,6 +21,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.command.HelmExecSpec
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.GlobalHelmOptionsApplier
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.RegistryLogin
 import org.gradle.work.DisableCachingByDefault
+import java.time.Duration
 import javax.inject.Inject
 
 
@@ -121,6 +122,26 @@ abstract class AbstractHelmCommandTask
         command: String, subcommand: String? = null, action: (HelmExecSpec.() -> Unit)? = null
     ): String =
         execProviderSupport.execHelmCaptureOutput(command, subcommand, action?.let { Action(it) })
+
+
+    /**
+     * Runs a Helm CLI command that performs a network fetch, re-running it a bounded number of times when it fails.
+     *
+     * Each attempt waits for the command to finish, so the commands a task runs next observe this one's effect and a
+     * failed attempt reports its own failure.
+     *
+     * @param command the name of the command (e.g. `"repo"`)
+     * @param subcommand optionally, the name of the subcommand (e.g. `"update"`)
+     * @param attempts the number of attempts, at least one
+     * @param delay the pause between attempts
+     * @param action an optional action that further customizes the CLI invocation
+     */
+    protected fun execHelmWithRetry(
+        command: String, subcommand: String? = null, attempts: Int, delay: Duration,
+        action: (HelmExecSpec.() -> Unit)? = null
+    ) {
+        execProviderSupport.execHelmWithRetry(command, subcommand, attempts, delay, action?.let { Action(it) })
+    }
 
 
     /**

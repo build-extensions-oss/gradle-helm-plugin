@@ -9,6 +9,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import build.extensions.oss.gradle.pluginutils.property
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmCommandRetry
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.RegistryLogin
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
@@ -17,6 +18,7 @@ import io.github.build.extensions.oss.gradle.plugins.helm.util.isOciRegistry
 import io.github.build.extensions.oss.gradle.plugins.helm.util.ociRegistryHost
 import org.yaml.snakeyaml.Yaml
 import java.net.URI
+import java.time.Duration
 
 
 /**
@@ -114,6 +116,28 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
         project.objects.property()
 
 
+    /**
+     * The number of attempts `helm repo add` makes before its failure is reported.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_ATTEMPTS], which makes one attempt. Raise it to retry a transient failure.
+     */
+    @get:Internal
+    val attempts: Property<Int> =
+        project.objects.property<Int>()
+            .convention(HelmCommandRetry.DEFAULT_ATTEMPTS)
+
+
+    /**
+     * The pause between attempts of `helm repo add`, after a failed one.
+     *
+     * Defaults to [HelmCommandRetry.DEFAULT_DELAY].
+     */
+    @get:Internal
+    val retryDelay: Property<Duration> =
+        project.objects.property<Duration>()
+            .convention(HelmCommandRetry.DEFAULT_DELAY)
+
+
     @TaskAction
     fun addRepository() {
         val url = this.url.get()
@@ -140,7 +164,7 @@ abstract class HelmAddRepository : AbstractHelmCommandTask() {
 
 
     private fun addClassicRepository() {
-        execHelm("repo", "add") {
+        execHelmWithRetry("repo", "add", attempts.get(), retryDelay.get()) {
             option("--ca-file", caFile)
             option("--cert-file", certificateFile)
             option("--key-file", keyFile)

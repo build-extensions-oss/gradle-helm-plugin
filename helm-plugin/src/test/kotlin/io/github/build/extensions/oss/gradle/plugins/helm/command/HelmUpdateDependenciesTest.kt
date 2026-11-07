@@ -2,6 +2,7 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import java.time.Duration
 import org.spekframework.spek2.style.specification.describe
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateDependencies
 import io.github.build.extensions.oss.gradle.plugins.helm.spek.ExecutionResultAwareSpek
@@ -38,6 +39,13 @@ object HelmUpdateDependenciesTest : ExecutionResultAwareSpek({
                     expectCommand("dependency", "update")
                     expectArg("${project.projectDir}/src")
                 }
+            }
+
+
+            it("should make one attempt, ten seconds apart, by default") {
+
+                assertThat(task.attempts.get()).isEqualTo(1)
+                assertThat(task.retryDelay.get()).isEqualTo(Duration.ofSeconds(10))
             }
         }
     }

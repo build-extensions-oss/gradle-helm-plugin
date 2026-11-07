@@ -1,5 +1,6 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.command
 
+import java.time.Duration
 import org.spekframework.spek2.style.specification.describe
 import io.github.build.extensions.oss.gradle.plugins.helm.command.tasks.HelmUpdateRepositories
 import io.github.build.extensions.oss.gradle.plugins.helm.dsl.internal.helm
@@ -60,6 +61,19 @@ object HelmUpdateRepositoriesTest : ExecutionResultAwareSpek({
 
                 execMock.singleInvocation {
                     expectCommand("repo", "update")
+                }
+            }
+
+
+            it("should use repoUpdateTimeout property") {
+
+                task.repoUpdateTimeout.set(Duration.ofMinutes(15))
+
+                task.execute()
+
+                execMock.singleInvocation {
+                    expectCommand("repo", "update")
+                    expectOption("--timeout", "15m")
                 }
             }
         }

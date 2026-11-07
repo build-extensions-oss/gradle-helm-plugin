@@ -2,12 +2,14 @@ package io.github.build.extensions.oss.gradle.plugins.helm.command
 
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.time.Duration
 import java.util.UUID
 import org.gradle.api.Action
 import org.gradle.process.ExecOperations
 import org.gradle.process.ExecSpec
 import org.gradle.workers.WorkerExecutor
 import org.slf4j.LoggerFactory
+import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmCommandRetry
 import io.github.build.extensions.oss.gradle.plugins.helm.command.internal.HelmOptionsApplier
 import org.gradle.process.ExecResult
 
@@ -97,6 +99,46 @@ internal class HelmExecProviderSupport(
     }
 
 
+    /**
+     * Executes a Helm CLI command, re-running it a bounded number of times when it fails.
+     *
+     * Each attempt waits for the command to finish, so a failed attempt's exception is the attempt's own failure,
+     * rather than a later [WorkerExecutor.await] reporting every command submitted so far.
+     *
+     * @param command the name of the command
+     * @param subcommand optionally, the name of the subcommand
+     * @param attempts the number of attempts, at least one
+     * @param delay the pause between attempts
+     * @param action an [Action] that further customizes the CLI invocation
+     */
+    fun execHelmWithRetry(
+        command: String, subcommand: String?, attempts: Int, delay: Duration, action: Action<HelmExecSpec>?
+    ) {
+        HelmCommandRetry.execute(
+            attempts = attempts,
+            delay = delay,
+            onRetry = { attempt, failure ->
+                logger.warn(
+                    "Helm command '{}' failed on attempt {} of {}; retrying in {}: {}",
+                    listOfNotNull(command, subcommand).joinToString(" "), attempt, attempts, delay,
+                    failure.message
+                )
+            },
+        ) {
+            execHelmAwaiting(command, subcommand, action)
+        }
+    }
+
+
+    private fun execHelmAwaiting(command: String, subcommand: String?, action: Action<HelmExecSpec>?) {
+        if (shouldExecInWorker()) {
+            execHelmInWorker(command, subcommand, action, await = true)
+        } else {
+            execHelmSync(command, subcommand, action)
+        }
+    }
+
+
     private fun shouldExecInWorker(): Boolean =
         // workerExecutor might not exist when Gradle Daemon is disabled: https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:disabling_the_daemon
         workerExecutor != null
@@ -151,7 +193,8 @@ internal class HelmExecProviderSupport(
 
     private fun execHelmInWorker(
         command: String, subcommand: String?, action: Action<HelmExecSpec>?,
-        stdoutFile: File? = null
+        stdoutFile: File? = null,
+        await: Boolean = stdoutFile != null
     ) {
 
         val workQueue = checkNotNull(workerExecutor).noIsolation()
@@ -170,8 +213,9 @@ internal class HelmExecProviderSupport(
             stdoutFile?.let { params.stdoutFile.set(it) }
         }
 
-        // If a stdoutFile was passed, we need to wait for the worker action to finish
-        if (stdoutFile != null) {
+        // If a stdoutFile was passed, we need to wait for the worker action to finish. A retrying caller always waits,
+        // so that it observes this command's own failure and the command it runs next sees this one's effect.
+        if (await) {
             workQueue.await()
         }
     }
