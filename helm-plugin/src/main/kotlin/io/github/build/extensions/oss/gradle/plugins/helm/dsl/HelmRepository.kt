@@ -87,6 +87,6 @@ private constructor(
  * @return the container for `HelmRepository` objects
  */
 internal fun Project.helmRepositoryContainer(): NamedDomainObjectContainer<HelmRepository> =
-    container(HelmRepository::class.java) { name ->
+    objects.domainObjectContainer(HelmRepository::class.java) { name ->
         objects.newInstance(DefaultHelmRepository::class.java, project, name)
     }

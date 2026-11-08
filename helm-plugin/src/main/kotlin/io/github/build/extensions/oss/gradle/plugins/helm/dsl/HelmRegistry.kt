@@ -69,6 +69,6 @@ private constructor(
  * @return the container for `HelmRegistry` objects
  */
 internal fun Project.helmRegistryContainer(): NamedDomainObjectContainer<HelmRegistry> =
-    container(HelmRegistry::class.java) { name ->
+    objects.domainObjectContainer(HelmRegistry::class.java) { name ->
         objects.newInstance(DefaultHelmRegistry::class.java, project, name)
     }

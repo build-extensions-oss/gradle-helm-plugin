@@ -682,6 +682,6 @@ private open class DefaultHelmRelease
  * @return the container for `HelmRelease`s
  */
 internal fun Project.helmReleaseContainer(): NamedDomainObjectContainer<HelmRelease> =
-    container(HelmRelease::class.java) { name ->
+    objects.domainObjectContainer(HelmRelease::class.java) { name ->
         objects.newInstance(DefaultHelmRelease::class.java, name, this)
     }

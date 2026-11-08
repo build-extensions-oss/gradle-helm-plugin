@@ -139,7 +139,7 @@ private open class DefaultHelmReleaseTarget
 internal fun Project.helmReleaseTargetContainer(
     globalSelectTagsExpression: TagExpression
 ): NamedDomainObjectContainer<HelmReleaseTarget> =
-    container(HelmReleaseTarget::class.java) { name ->
+    objects.domainObjectContainer(HelmReleaseTarget::class.java) { name ->
         objects.newInstance(DefaultHelmReleaseTarget::class.java, name, globalSelectTagsExpression)
     }
 

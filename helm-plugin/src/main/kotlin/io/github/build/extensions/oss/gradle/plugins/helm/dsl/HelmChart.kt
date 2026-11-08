@@ -311,7 +311,7 @@ internal fun Project.helmChartContainer(
     filteredSourcesBaseDir: Provider<Directory>,
     dependenciesBaseDir: Provider<Directory>
 ): NamedDomainObjectContainer<HelmChart> =
-    container(HelmChart::class.java) { name ->
+    objects.domainObjectContainer(HelmChart::class.java) { name ->
         objects.newInstance<HelmChart>(
             DefaultHelmChart::class.java, name,
             this, baseOutputDir, globalRenderBaseOutputDir, filteredSourcesBaseDir,
