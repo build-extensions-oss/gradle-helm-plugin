@@ -28,7 +28,7 @@ internal class DownloadClientPackageTaskRule(
         val matchResult = regex.matchEntire(domainObjectName) ?: return
         val helmClientVersion = matchResult.groupValues[1]
 
-        project.tasks.create(domainObjectName, HelmDownloadClientPackage::class.java) { task ->
+        project.tasks.register(domainObjectName, HelmDownloadClientPackage::class.java) { task ->
             task.version.set(helmClientVersion)
             task.baseUrl.set(baseUrl)
             task.destinationDir.set(downloadDir)
