@@ -1,6 +1,7 @@
 package io.github.build.extensions.oss.gradle.plugins.helm.dsl.dependencies
 
 import org.gradle.api.artifacts.Configuration
+import java.util.Locale.getDefault
 
 
 /**
@@ -9,6 +10,14 @@ import org.gradle.api.artifacts.Configuration
  * @param name the chart name
  * @return the name of the chart's dependencies configuration
  */
-internal fun chartDependenciesConfigurationName(name: String) =
-    "helm${name.capitalize()}Dependencies"
+internal fun chartDependenciesConfigurationName(name: String): String {
+    // make chart Aaa from aaa
+    val updatedChartName = name.replaceFirstChar {
+        if (it.isLowerCase()) {
+            it.titlecase(getDefault())
+        } else it.toString()
+    }
+
+    return "helm${updatedChartName}Dependencies"
+}
 

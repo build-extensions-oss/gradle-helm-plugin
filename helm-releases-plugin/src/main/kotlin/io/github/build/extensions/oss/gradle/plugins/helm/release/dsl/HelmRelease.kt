@@ -490,8 +490,6 @@ private abstract class AbstractHelmRelease(
 
         } else {
             this.project.configurations.maybeCreate("helmRelease${name.capitalizeWords()}").let { configuration ->
-                configuration.isVisible = false
-
                 configuration.dependencies.clear()
 
                 val dependency = this.project.dependencies.project(
@@ -682,6 +680,6 @@ private open class DefaultHelmRelease
  * @return the container for `HelmRelease`s
  */
 internal fun Project.helmReleaseContainer(): NamedDomainObjectContainer<HelmRelease> =
-    container(HelmRelease::class.java) { name ->
+    objects.domainObjectContainer(HelmRelease::class.java) { name ->
         objects.newInstance(DefaultHelmRelease::class.java, name, this)
     }
