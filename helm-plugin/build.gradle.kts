@@ -15,8 +15,6 @@ dependencies {
     implementation(libs.io.github.build.extensions.oss.gradle.plugin.utils)
 
     testImplementation(libs.jsonPath)
-    testImplementation(libs.jacksonDataBind)
-    testImplementation(libs.jacksonDataFormatYaml)
 
     testImplementation(project(":unit-test-utils"))
     testImplementation(libs.okHttpMockWebServer)
