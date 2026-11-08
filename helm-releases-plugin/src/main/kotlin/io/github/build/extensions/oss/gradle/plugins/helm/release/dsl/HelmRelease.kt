@@ -490,8 +490,6 @@ private abstract class AbstractHelmRelease(
 
         } else {
             this.project.configurations.maybeCreate("helmRelease${name.capitalizeWords()}").let { configuration ->
-                configuration.isVisible = false
-
                 configuration.dependencies.clear()
 
                 val dependency = this.project.dependencies.project(
