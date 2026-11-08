@@ -35,7 +35,6 @@ internal class ChartDependenciesConfigurationRule(
 ) {
 
     override fun Configuration.configureFrom(source: HelmChart) {
-        isVisible = false
         isCanBeConsumed = false
         isCanBeResolved = true
     }
