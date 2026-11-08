@@ -298,8 +298,10 @@ class HelmPlugin
      * @receiver the current Gradle [Project]
      */
     private fun Project.createRepositoriesFromProjectProperties() {
-        properties.keys
-            .filter { it.startsWith("helm.repositories.") }
+        providers
+            .gradlePropertiesPrefixedBy("helm.repositories.")
+            .get()
+            .keys
             .mapNotNull { it.split('.').drop(2).firstOrNull() }
             .distinct()
             .forEach { repositoryName ->
