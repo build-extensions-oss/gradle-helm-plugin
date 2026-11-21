@@ -31,7 +31,7 @@ internal class ExtractClientTaskRule(
             downloadClientTaskName(helmClientVersion), HelmDownloadClientPackage::class.java
         )
 
-        project.tasks.create(domainObjectName, HelmExtractClient::class.java) { task ->
+        project.tasks.register(domainObjectName, HelmExtractClient::class.java) { task ->
             task.dependsOn(downloadTask)
             task.version.set(helmClientVersion)
             task.archiveFile.set(
